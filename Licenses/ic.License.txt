@@ -1,0 +1,9 @@
+IMPROVED CONSOLE 5.0 LICENCSE
+=============================
+
+To say it in the words of the original author:
+
+Use it how you want - private or commercial, anything allowed. But no warranty
+for function and errors of this peace of code. And don't say you built it if
+you're a student at a school or university ... instead say "I found it in the
+web" ;-]

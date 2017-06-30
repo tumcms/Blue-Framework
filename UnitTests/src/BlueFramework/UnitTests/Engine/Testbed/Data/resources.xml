@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources -->
+<resources>
+  <resource>
+    <uri>http://vertexwahn.de/DrawTexturedTriangle/ps.png</uri>
+    <localPath>Data/ps.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://orig07.deviantart.net/1519/f/2013/164/2/8/rock_texture_by_kaledine-d68y9i6.png</uri>
+    <localPath>Data/testtexture.png</localPath>
+  </resource>
+</resources>

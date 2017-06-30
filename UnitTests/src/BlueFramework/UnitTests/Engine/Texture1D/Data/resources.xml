@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources -->
+<resources>
+  <resource>
+    <uri>http://vertexwahn.de/DrawTexturedTriangle/ps.png</uri>
+    <localPath>Data/ps.png</localPath>
+  </resource>
+</resources>

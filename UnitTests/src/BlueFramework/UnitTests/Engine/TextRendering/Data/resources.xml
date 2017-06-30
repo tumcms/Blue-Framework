@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources -->
+<resources>
+  <resource>
+    <uri>http://vertexwahn.de/DrawTexturedTriangle/ps.png</uri>
+    <localPath>Data/ps.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://orig07.deviantart.net/1519/f/2013/164/2/8/rock_texture_by_kaledine-d68y9i6.png</uri>
+    <localPath>Data/testtexture.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/back.png</uri>
+    <localPath>Data/back.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/top.png</uri>
+    <localPath>Data/top.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/front.png</uri>
+    <localPath>Data/front.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/bottom.png</uri>
+    <localPath>Data/bottom.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/left.png</uri>
+    <localPath>Data/left.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/right.png</uri>
+    <localPath>Data/right.png</localPath>
+  </resource>
+  <resource>
+    <uri>http://home.in.tum.de/hechth/ViewCube.json</uri>
+    <localPath>Data/ViewCube.json</localPath>
+  </resource>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resources -->
+<resources>
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/back.png</uri>
+    <localPath>Data/back.png</localPath>
+  </resource>
+  
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/bottom.png</uri>
+    <localPath>Data/bottom.png</localPath>
+  </resource>
+  
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/front.png</uri>
+    <localPath>Data/front.png</localPath>
+  </resource>
+  
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/left.png</uri>
+    <localPath>Data/left.png</localPath>
+  </resource>
+  
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/right.png</uri>
+    <localPath>Data/right.png</localPath>
+  </resource>
+  
+  <resource>
+    <uri>http://vertexwahn.de/BlueFramework3Resources/sky/top.png</uri>
+    <localPath>Data/top.png</localPath>
+  </resource>
+
+</resources>

@@ -1,0 +1,6 @@
+syntax: glob
+lib/*
+make.bat
+Tools/updateVersion.pyo
+build/*
+BlueFramework3Config.cmake
