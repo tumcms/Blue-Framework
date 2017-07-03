@@ -30,13 +30,17 @@ int Version::getPatch() {
 	return int(BLUEFRAMEWORK_API_PATCH);
 }
 
+int Version::getTweak() {
+	return int(BLUEFRAMEWORK_API_TWEAK);
+}
+
 std::string Version::getVersion() {
 	static std::string version("");
 
 	if (version.empty()) {
 		// cache the version string
 		std::ostringstream stream;
-		stream << BLUEFRAMEWORK_API_MAJOR << "." << BLUEFRAMEWORK_API_MINOR << "." << BLUEFRAMEWORK_API_PATCH;
+		stream << BLUEFRAMEWORK_API_MAJOR << "." << BLUEFRAMEWORK_API_MINOR << "." << BLUEFRAMEWORK_API_PATCH << "." << BLUEFRAMEWORK_API_TWEAK;
 		version = stream.str();
 	}
 
