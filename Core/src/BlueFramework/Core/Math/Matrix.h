@@ -84,6 +84,11 @@ Matrix<T, 4, 4> createTranslationMatrix(const Matrix<T, 3, 1> &translation) {
 }
 
 template <typename T>
+T det(Matrix<T, 2, 2> const& m) {
+	return m(0, 0) * m(1, 1) - m(0, 1) * m(1, 0);
+}
+
+template <typename T>
 Matrix<T, 2, 2> createRotationMatrix(const T &angle) {
 	T s = sin(angle);
 	T c = cos(angle);
@@ -93,6 +98,20 @@ Matrix<T, 2, 2> createRotationMatrix(const T &angle) {
 	m.row(1) = Eigen::Matrix<T, 2, 1>(s, c);
 
 	return m;
+}
+
+// Creates efficiently a 2D rotation matrix, that is defined by rotating by the angle enclosed
+// between (1,0) and targetDirection or in other words by rotating (1,0) until targetDirection.
+template <typename T>
+Matrix<T, 2, 2> createRotationMatrix(Matrix<T, 2, 1> const& targetDirection) {
+	T const cosAlpha = Matrix<T, 2, 1>(1, 0).dot(targetDirection.normalized());
+	T const sinAlpha = sqrt(1 - cosAlpha*cosAlpha);
+	Matrix<T, 2, 2> rotation;
+	auto& row0 = rotation.row(0), row1 = rotation.row(1);
+	row0[0] = row1[1] = cosAlpha;
+	row0[1] = -sinAlpha;
+	row1[0] = sinAlpha;
+	return rotation;
 }
 
 template <typename T>
@@ -224,6 +243,7 @@ BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(Matrix22f);
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(Matrix22d);
 
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(createTranslationMatrix);
+BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(det);
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(createRotationMatrix);
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(createRotationMatrixX);
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(createRotationMatrixY);

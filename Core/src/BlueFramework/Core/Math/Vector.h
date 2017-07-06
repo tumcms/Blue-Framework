@@ -24,6 +24,8 @@
 #include <BlueFramework/Core/namespace.h>
 #include <Eigen/Dense>
 
+#include <utility>
+
 namespace Eigen {
 #define EIGEN_MAKE_TYPEDEFS(Type, TypeSuffix, Size, SizeSuffix)   \
 /** \ingroup matrixtypedefs */                                    \
@@ -158,6 +160,20 @@ Scalar distance(const Vector<Scalar, RowsAtCompileTime>& v1, const Vector<Scalar
 	return (v1 - v2).norm();
 }
 
+// Gets the vector rotated by 90 degrees CCW or CW. Fast and numerically stable.
+template <typename Scalar>
+Vector<Scalar, 2> orthogonal(Vector<Scalar, 2> v, bool const bCCW) {
+	// Swap coordinates.
+	std::swap(v[0], v[1]);
+
+	// Flip the respective sign.
+	bool bFlip = (v[0] < 0.0) ^ (v[1] < 0.0);
+	if (bCCW) bFlip = !bFlip;
+	v[int(bFlip)] = -v[int(bFlip)];
+
+	return v;
+}
+
 BLUEFRAMEWORK_CORE_MATH_NAMESPACE_END
 
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(Vector)
@@ -178,5 +194,6 @@ BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(calculateAngleBetweenVectors)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(distance)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(maximizedVector)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(minimizedVector)
+BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(orthogonal)
 
 #endif // end define BlueFramework_Core_Math_vector_3459a866_f342_45fc_909e_d6464f71a9e7_h
