@@ -1,3 +1,20 @@
+#
+#   This file is part of BlueFramework, a simple 3D engine.
+#	Copyright (c) 2016-2017 Technical University of Munich
+#	Chair of Computational Modeling and Simulation.
+#
+#   BlueFramework is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License Version 3
+#   as published by the Free Software Foundation.
+#
+#   BlueFramework is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
 # This module defines the following variables:
 #
 # ::
@@ -5,6 +22,7 @@
 #   GLEW_INCLUDE_DIRS - include directories for GLEW
 #   GLEW_LIBRARIES - libraries to link against GLEW
 #   GLEW_FOUND - true if GLEW has been found and can be used
+#
 
 if(NOT GLEW_ROOT)
 	set(CMAKE_MODULE_PATH ${CMAKE_ROOT}/Modules)
@@ -61,7 +79,7 @@ if(NOT GLEW_FOUND AND GLEW_ROOT)
 endif()
 
 if(GLEW_LIBRARY_DEBUG AND GLEW_LIBRARY_RELEASE)
-	set(GLEW_LIBRARY "debug ${GLEW_LIBRARY_DEBUG} optimized ${GLEW_LIBRARY_RELEASE}")
+	set(GLEW_LIBRARY debug "${GLEW_LIBRARY_DEBUG}" optimized "${GLEW_LIBRARY_RELEASE}")
 	set(GLEW_LIBRARIES ${GLEW_LIBRARY})
 	message(STATUS "Found GLEW_LIBRARIES: ${GLEW_LIBRARIES}")
 else()
