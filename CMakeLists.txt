@@ -262,7 +262,7 @@ set(CPACK_WIX_CMAKE_PACKAGE_REGISTRY "${PROJECT_NAME}")
 
 include(CPackComponent)
 
-set(CPACK_COMPONENTS_ALL "cmake;library;include;source;library_debug;library_release;library_relwithdebinfo")
+set(CPACK_COMPONENTS_ALL "cmake;include;source;library_release;library_debug;library_relwithdebinfo")
 
 cpack_add_install_type(default DISPLAY_NAME "Default")
 
@@ -309,13 +309,13 @@ install(DIRECTORY include/ DESTINATION include
 		COMPONENT include
         FILES_MATCHING PATTERN "*.h"		
 )
-file(GLOB BLUEFRAMEWORK_CONFIG cmake/FindBlueFramework.cmake)
-file(GLOB BLUEFRAMEWORK_MAKROS cmake/BlueFramework-makros.cmake)
+file(GLOB BLUEFRAMEWORK_CONFIG ${PROJECT_SOURCE_DIR}/CMake/FindBlueFramework.cmake)
+file(GLOB BLUEFRAMEWORK_MACROS ${PROJECT_SOURCE_DIR}/CMake/BlueFrameworkMacros.cmake)
 file(WRITE ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake "set(PACKAGE_VERSION \"${CPACK_PACKAGE_VERSION}\") \nset(PACKAGE_VERSION_EXACT True) \nset(PACKAGE_VERSION_COMPATIBLE True) \nset(PACKAGE_VERSION_UNSUITABLE False)")
 file(COPY ${BLUEFRAMEWORK_CONFIG} DESTINATION ${PROJECT_SOURCE_DIR})
 file(RENAME "FindBlueFramework.cmake" "BlueFrameworkConfig.cmake")
-install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFramework-config.cmake")
-install(FILES ${BLUEFRAMEWORK_MAKROS} DESTINATION CMake COMPONENT cmake)
+install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFrameworkConfig.cmake")
+install(FILES ${BLUEFRAMEWORK_MACROS} DESTINATION CMake COMPONENT cmake)
 install(FILES ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake DESTINATION / COMPONENT cmake)
 
 include(CPack)
