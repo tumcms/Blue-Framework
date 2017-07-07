@@ -22,7 +22,8 @@
 #include <thread>
 
 #pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "DXGI.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+#pragma comment(lib, "dxgi.lib")
 
 BLUEFRAMEWORK_D3D12RENDERSYSTEM_NAMESPACE_BEGIN
 

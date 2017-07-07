@@ -27,10 +27,9 @@ add_executable(Logging
 	${BlueFramework_UnitTests_Core_Logging}
 )
 
-link_against_gtest(Logging)
-
 target_link_libraries(Logging
 	BlueFramework.Core
+	${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(

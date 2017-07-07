@@ -26,26 +26,17 @@ add_library(BlueFramework.D3D12RenderSystem SHARED
     ${BlueFramework_D3D12RenderSystem_Source}
 )
 
-include_directories(
-	${DirectX12_INCLUDE_DIR}
-	${DirectX12_INCLUDE_DIR_SHARED}
-)
-include_directories(
-${TINYXML2_INCLUDE_DIR})
-
-# link_directories (
-	# ${DirectX12_LibDirX64}
-# )
+include_directories(${TINYXML2_INCLUDE_DIR})
 
 target_link_libraries(BlueFramework.D3D12RenderSystem
 	BlueFramework.Core
 	BlueFramework.Rasterizer
-	${DirectX_D3D12_LIBRARIES}
-	${TINYXML2_LIB}
+	${TINYXML2_LIBRARIES}
+	#DirectX12 libs linked in source.
 )
 
-install(TARGETS BlueFramework.D3D12RenderSystem   
-   ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+install(TARGETS BlueFramework.D3D12RenderSystem
+   ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT library_files
 )
 

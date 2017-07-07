@@ -38,14 +38,14 @@ source_group(BlueFramework\\Rasterizer                             FILES ${BlueF
 
 target_link_libraries(BlueFramework.Rasterizer
 	BlueFramework.Core
-	${TINYXML2_LIB}
+	${TINYXML2_LIBRARIES}
 )
 
 
 install(TARGETS BlueFramework.Rasterizer
-   RUNTIME DESTINATION bin/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+   RUNTIME DESTINATION bin/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT binaries
-   ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+   ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT library_files
 )
 

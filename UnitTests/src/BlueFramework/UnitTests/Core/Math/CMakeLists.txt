@@ -27,10 +27,9 @@ add_executable(Math
 	${BlueFramework_UnitTests_Core_Math}
 )
 
-link_against_gtest(Math)
-
 target_link_libraries(Math 
 	BlueFramework.Core
+	${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(

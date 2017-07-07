@@ -25,11 +25,10 @@ add_executable(RandomHeightmapGeneration
 	${BlueFramework_UnitTests_ImageProcessing_RandomHeightmapGeneration}
 )
 
-link_against_gtest(RandomHeightmapGeneration)
-
 target_link_libraries(RandomHeightmapGeneration 
 	BlueFramework.Core
 	BlueFramework.ImageProcessing
+	${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(

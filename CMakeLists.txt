@@ -118,35 +118,12 @@ endif (WIN32)
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.64.0
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
-find_package(DirectX12 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
 find_package(gtest REQUIRED)
-#find_package(Tinyxml2 REQUIRED)
+find_package(TinyXML2 REQUIRED)
 
 # find_package(Vulkan REQUIRED)
-
-# if(NOT glew AND NOT GLEW_ROOT)
-	# include(external/cmake/InstallGLEW.cmake)
-# endif()
-# if(NOT glew)
-	# include(external/cmake/FindGLEW.cmake)	
-# endif()
-
-#Tinyxml2
-if(NOT TINYXML2_ROOT)
-	include(external/cmake/InstallTinyxml2.cmake)
-endif()
-include(external/cmake/FindTinyxml2.cmake)
-
-
-#Gtest
-if(NOT gtest AND NOT GTEST_ROOT)
-	include(external/cmake/InstallGTest.cmake)
-endif()
-if(NOT gtest)
-	include(external/cmake/FindGTest.cmake)
-endif()
 
 GTEST_COPY_BINARIES(${CMAKE_BINARY_DIR})
 
@@ -182,17 +159,12 @@ include_directories(
   Engine/src
   Rasterizer/src
   ImageProcessing/src
-  ${GTEST_INCLUDE_DIR}
+  ${GTEST_INCLUDE_DIRS}
 )
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
 )
-
-macro (link_against_gtest target)
-  target_link_libraries (${target} ${GTEST_LIBRARIES})
-  target_link_libraries (${target} ${GTEST_MAIN_LIBRARIES})
-endmacro ()
 
 add_subdirectory(Application)
 add_subdirectory(Core)
@@ -219,7 +191,6 @@ set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "Bl
 
 include(QtCopyBinaries)
 set_target_properties(Qt5CopyBinaries                 	 PROPERTIES FOLDER "Copy")
-
 set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
@@ -339,12 +310,12 @@ install(DIRECTORY include/ DESTINATION include
         FILES_MATCHING PATTERN "*.h"		
 )
 file(GLOB BLUEFRAMEWORK_CONFIG cmake/FindBlueFramework.cmake)
-file(GLOB BLUEFRAMEWORK_MARKOS cmake/BlueFramework-makros.cmake)
+file(GLOB BLUEFRAMEWORK_MAKROS cmake/BlueFramework-makros.cmake)
 file(WRITE ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake "set(PACKAGE_VERSION \"${CPACK_PACKAGE_VERSION}\") \nset(PACKAGE_VERSION_EXACT True) \nset(PACKAGE_VERSION_COMPATIBLE True) \nset(PACKAGE_VERSION_UNSUITABLE False)")
 file(COPY ${BLUEFRAMEWORK_CONFIG} DESTINATION ${PROJECT_SOURCE_DIR})
 file(RENAME "FindBlueFramework.cmake" "BlueFrameworkConfig.cmake")
 install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFramework-config.cmake")
-install(FILES ${BLUEFRAMEWORK_MARKOS} DESTINATION CMake COMPONENT cmake)
+install(FILES ${BLUEFRAMEWORK_MAKROS} DESTINATION CMake COMPONENT cmake)
 install(FILES ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake DESTINATION / COMPONENT cmake)
 
 include(CPack)

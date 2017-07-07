@@ -41,9 +41,9 @@ source_group(BlueFramework\\Core                             FILES ${BlueFramewo
 qt5_use_modules(BlueFramework.Core Widgets)
 
 install(TARGETS BlueFramework.Core
-	RUNTIME DESTINATION bin/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+	RUNTIME DESTINATION bin/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
 	COMPONENT binaries
-	ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+	ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
 	COMPONENT library_files
 )
 

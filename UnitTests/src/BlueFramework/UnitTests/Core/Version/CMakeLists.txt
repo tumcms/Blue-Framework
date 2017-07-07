@@ -27,10 +27,9 @@ add_executable(Version
 	${BlueFramework_UnitTests_Core_Version}
 )
 
-link_against_gtest(Version)
-
 target_link_libraries(Version
 	BlueFramework.Core
+	${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(
