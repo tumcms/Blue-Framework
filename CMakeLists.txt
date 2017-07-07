@@ -19,7 +19,7 @@
 cmake_minimum_required(VERSION 3.8) # Kittens will die if you switch to an earlier version of CMake.
 cmake_policy(VERSION 3.8)
  
-project(BlueFramework3)
+project(BlueFramework)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
@@ -274,14 +274,14 @@ set(CPACK_GENERATOR WIX)
 set(CPACK_WIX_UPGRADE_GUID "F9D5D0DC-9801-4EC5-A72F-98A21CD8A436")
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "https://www.cms.bgu.tum.de/en/")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BlueFramework3")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BlueFramework")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}.${PROJECT_VERSION_TWEAK}")
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_VERSION_TEWAK "${PROJECT_VERSION_TWEAK}}")
 
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "BlueFramework3")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "BlueFramework")
 #SET(CPACK_NSIS_MODIFY_PATH ON)
 #set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
@@ -318,7 +318,7 @@ cpack_add_component(source DISPLAY_NAME "Source Files"
   INSTALL_TYPES default source
 )
 
-cpack_add_component(cmake DISPLAY_NAME "CMake Integration" DESCRIPTION "Allow applications to find BlueFramework3 using 'find_package' command." INSTALL_TYPES default)
+cpack_add_component(cmake DISPLAY_NAME "CMake Integration" DESCRIPTION "Allow applications to find BlueFramework using 'find_package' command." INSTALL_TYPES default)
 
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/Debug/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/Debug
@@ -338,13 +338,13 @@ install(DIRECTORY include/ DESTINATION include
 		COMPONENT include
         FILES_MATCHING PATTERN "*.h"		
 )
-file(GLOB BLUEFRAMEWORK3_CONFIG cmake/FindBlueFramework3.cmake)
-file(GLOB BLUEFRAMEWORK3_MARKOS cmake/BlueFramework3-makros.cmake)
-file(WRITE ${CMAKE_BINARY_DIR}/BlueFramework3-config-version.cmake "set(PACKAGE_VERSION \"${CPACK_PACKAGE_VERSION}\") \nset(PACKAGE_VERSION_EXACT True) \nset(PACKAGE_VERSION_COMPATIBLE True) \nset(PACKAGE_VERSION_UNSUITABLE False)")
-file(COPY ${BLUEFRAMEWORK3_CONFIG} DESTINATION ${PROJECT_SOURCE_DIR})
-file(RENAME "FindBlueFramework3.cmake" "BlueFramework3Config.cmake")
-install(FILES ${BLUEFRAMEWORK3_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFramework3-config.cmake")
-install(FILES ${BLUEFRAMEWORK3_MARKOS} DESTINATION CMake COMPONENT cmake)
-install(FILES ${CMAKE_BINARY_DIR}/BlueFramework3-config-version.cmake DESTINATION / COMPONENT cmake)
+file(GLOB BLUEFRAMEWORK_CONFIG cmake/FindBlueFramework.cmake)
+file(GLOB BLUEFRAMEWORK_MARKOS cmake/BlueFramework-makros.cmake)
+file(WRITE ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake "set(PACKAGE_VERSION \"${CPACK_PACKAGE_VERSION}\") \nset(PACKAGE_VERSION_EXACT True) \nset(PACKAGE_VERSION_COMPATIBLE True) \nset(PACKAGE_VERSION_UNSUITABLE False)")
+file(COPY ${BLUEFRAMEWORK_CONFIG} DESTINATION ${PROJECT_SOURCE_DIR})
+file(RENAME "FindBlueFramework.cmake" "BlueFrameworkConfig.cmake")
+install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFramework-config.cmake")
+install(FILES ${BLUEFRAMEWORK_MARKOS} DESTINATION CMake COMPONENT cmake)
+install(FILES ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake DESTINATION / COMPONENT cmake)
 
 include(CPack)
