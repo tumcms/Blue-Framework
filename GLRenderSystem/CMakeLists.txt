@@ -18,9 +18,6 @@
 
 set(CMAKE_PREFIX_PATH ${GLEW_ROOT};${CMAKE_PREFIX_PATH})
 set(CMAKE_LIBRARY_PATH ${GLEW_ROOT}/lib/Release/x64;${CMAKE_LIBRARY_PATH})
-find_package(GLEW 2.0.0 MODULE REQUIRED)
-
-find_package(OpenGL REQUIRED)
 
 file(GLOB_RECURSE
 	BlueFramework_GLRenderSystem_Source

@@ -47,7 +47,7 @@ std::string Version::getVersion() {
 	return version;
 }
 
-bool Version::isAtLeast(const int major, const int minor, const int patch) {
+bool Version::isAtLeast(const int major, const int minor, const int patch, const int tweak) {
 	if (BLUEFRAMEWORK_API_MAJOR < major)
 		return false;
 	if (BLUEFRAMEWORK_API_MAJOR > major)
@@ -57,6 +57,10 @@ bool Version::isAtLeast(const int major, const int minor, const int patch) {
 	if (BLUEFRAMEWORK_API_MINOR > minor)
 		return true;
 	if (BLUEFRAMEWORK_API_PATCH < patch)
+		return false;
+	if (BLUEFRAMEWORK_API_PATCH > patch)
+		return true;
+	if (BLUEFRAMEWORK_API_TWEAK < tweak)
 		return false;
 	return true;
 }

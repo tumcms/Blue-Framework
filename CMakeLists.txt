@@ -32,6 +32,28 @@ endif()
 enable_testing()
 
 #------------------------------------------------------------------------------
+# Check for Microsoft VisualStudio version and processor architecture.
+#------------------------------------------------------------------------------
+
+if(MSVC_VERSION EQUAL 1900)
+	set(MSVC_VERSION_STRING "vs2015")
+	set(MSVC_VERSION_YEAR "2015")
+	message("Welcome to Visual Studio 14 2015.")
+elseif(MSVC_VERSION EQUAL 1910)
+	set(MSVC_VERSION_STRING "vs2017")
+	set(MSVC_VERSION_YEAR "2017")
+	message("Welcome to Visual Studio 15 2017.")
+else()
+	message("Please switch to Visual Studio 14 2015 or Visual Studio 15 2017.")
+	return()
+endif()
+
+if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message("Please switch to x64 build.")
+	return()
+endif()
+
+#------------------------------------------------------------------------------
 # Create folders for different build configurations (if they do not exist) to 
 # prevent problems with Copy*** scripts
 #------------------------------------------------------------------------------
@@ -56,48 +78,16 @@ else()
   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/MinSizeRel)
 endif()
 
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# Some checks to ensure that the prerequisites are ok
-#------------------------------------------------------------------------------
-
-if(MSVC_VERSION EQUAL 1910)
-	message("Welcome to Visual Studio 2017.")
-else()
-	if(NOT MSVC14)
-		message("Please switch to Visual Studio 2015.")
-		return()
-	endif()
-endif()
-
-if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
-    message("Please switch to x64 build.")
-	return()
-endif()
-
-#------------------------------------------------------------------------------
-
 option(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH "Set to ON to set boost, Eigen and Qt path" ON)
 
 if(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH)
-	if(MSVC_VERSION EQUAL 1910)
 		# Try to find Boost, Eigen3, Qt5 and other dependencies without user input
-		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\vs2017\\x64\\boost_1_64_0")
-		find_path(EIGEN3_INCLUDE_DIR NAMES Eigen/Core HINTS "C:\\thirdparty\\vs2017\\x64\\Eigen_3.3.4")
-		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.0\\5.9\\msvc2017_64")
-		find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\vs2017\\x64\\glew-2.0.0")
-		find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h HINTS "C:\\thirdparty\\vs2017\\x64\\googletest-release-1.8.0" "C:\\thirdparty\\vs2015\\x64\\googletest-1.8.0")
-		find_path(TINYXML2_ROOT NAMES tinyxml2.h HINTS "C:\\thirdparty\\vs2017\\x64\\tinyxml2-master")
-	else()
-		# Try to find Boost, Eigen3, Qt5 and other dependencies without user input
-		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\vs2015\\x64\\boost_1_64_0" "C:\\thirdparty\\vs2015\\x64\\boost_1_63_0")
-		find_path(EIGEN3_INCLUDE_DIR NAMES Eigen/Core HINTS "C:\\thirdparty\\vs2015\\x64\\Eigen_3.3.4" "C:\\thirdparty\\vs2015\\x64\\Eigen_3.3.3" "C:\\thirdparty\\vs2015\\x64\\Eigen_3.3.2")
-		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.1\\5.9.1\\msvc2015_64" "C:\\Qt\\Qt5.9.0\\5.9\\msvc2015_64")
-		find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\vs2015\\x64\\glew-2.0.0")
-		find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h HINTS "C:\\thirdparty\\vs2015\\x64\\googletest-release-1.8.0" "C:\\thirdparty\\vs2015\\x64\\googletest-1.8.0")
-		find_path(TINYXML2_ROOT NAMES tinyxml2.h HINTS "C:\\thirdparty\\vs2015\\x64\\tinyxml2-master")
-	endif()
+		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_64_0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_63_0")
+		find_path(EIGEN3_INCLUDE_DIR NAMES Eigen/Core HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\Eigen_3.3.4")
+		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.0\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\5.9\\msvc${MSVC_VERSION_YEAR}_64")
+		find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\glew-2.0.0")
+		find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-release-1.8.0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-1.8.0")
+		find_path(TINYXML2_ROOT NAMES tinyxml2.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\tinyxml2-master")
 endif()
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -129,16 +119,19 @@ set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.64.0
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
 find_package(DirectX12 REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
 find_package(gtest REQUIRED)
+#find_package(Tinyxml2 REQUIRED)
+
 # find_package(Vulkan REQUIRED)
 
-if(NOT glew AND NOT GLEW_ROOT)
-	include(external/cmake/InstallGLEW.cmake)
-endif()
-if(NOT glew)
-	include(external/cmake/FindGLEW.cmake)	
-endif()
+# if(NOT glew AND NOT GLEW_ROOT)
+	# include(external/cmake/InstallGLEW.cmake)
+# endif()
+# if(NOT glew)
+	# include(external/cmake/FindGLEW.cmake)	
+# endif()
 
 #Tinyxml2
 if(NOT TINYXML2_ROOT)
@@ -212,6 +205,7 @@ add_subdirectory(ImageProcessing)
 add_subdirectory(Rasterizer)
 add_subdirectory(UnitTests)
 
+
 # Development
 set_target_properties(BlueFramework.Application            PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.Core                   PROPERTIES FOLDER "BlueFramework")
@@ -264,7 +258,7 @@ add_custom_target(UpdateLibsAndDLLsForCurrentBuildConfiguration
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
   )
 
-AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SOURCE_DIR}/lib/vs2015/x64/")
+AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
 
 add_custom_target(DEPLOY  
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
@@ -326,20 +320,16 @@ cpack_add_component(source DISPLAY_NAME "Source Files"
 
 cpack_add_component(cmake DISPLAY_NAME "CMake Integration" DESCRIPTION "Allow applications to find BlueFramework3 using 'find_package' command." INSTALL_TYPES default)
 
-if("${MSVC_VERSION}" STREQUAL "1900")
-	set(MSVC_VERSION_STRING "vs2015")
-else()
-	MESSAGE("Unsupported MSVC Version detected.")
-endif()
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/vs2015/x64/Debug/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/Debug
+
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/Debug/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/Debug
     COMPONENT library_debug
     FILES_MATCHING PATTERN "*.dll" PATTERN "*.lib" PATTERN "*.pdb")
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/vs2015/x64/Release/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/Release
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/Release/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/Release
     COMPONENT library_release
     FILES_MATCHING PATTERN "*.dll" PATTERN "*.lib")
 	
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/vs2015/x64/RelWithDebInfo/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/RelWithDebInfo
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/RelWithDebInfo/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/RelWithDebInfo
     COMPONENT library_relwithdebinfo
     FILES_MATCHING PATTERN "*.dll" PATTERN "*.lib" PATTERN "*.pdb")
 
