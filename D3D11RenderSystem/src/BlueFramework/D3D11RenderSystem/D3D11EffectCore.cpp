@@ -16,11 +16,13 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "BlueFramework/Core/string.h"
 #include "BlueFramework/D3D11RenderSystem/D3D11EffectCore.h"
 #include "BlueFramework/D3D11RenderSystem/D3D11RenderSystem.h"
 #include <boost/filesystem.hpp>
 
 #include <tinyxml2.h>
+// #include <fstream>
 BLUEFRAMEWORK_D3D11RENDERSYSTEM_NAMESPACE_BEGIN
 
 
@@ -69,7 +71,7 @@ std::vector<D3D11_INPUT_ELEMENT_DESC> getD3D11InputLayoutDesc(const buw::VertexL
 D3D11_PRIMITIVE_TOPOLOGY getD3D11PrimitiveTopologyType(const buw::ePrimitiveTopology primitiveTopology, bool adjacency) {
 	switch (primitiveTopology) {
 	case (buw::ePrimitiveTopology::LineStrip): return (adjacency) ? D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ : D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
-	case (buw::ePrimitiveTopology::LineList): return (adjacency) ?  D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ : D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+	case (buw::ePrimitiveTopology::LineList): return (adjacency) ? D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ : D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
 	case (buw::ePrimitiveTopology::PointList): return D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
 	case (buw::ePrimitiveTopology::TriangleStrip): return (adjacency) ? D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ : D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 	case (buw::ePrimitiveTopology::TriangleList): return (adjacency) ? D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ : D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -95,19 +97,22 @@ D3D11_CULL_MODE getD3D11CullMode(const buw::eCullMode cullMode) {
 	}
 }
 
+
+// std::ofstream outfile("precompile.cmd");
+
 void loadEffectFile(const std::string& filename, const std::string& pipelineStateName,
-	std::string& vsFilename, std::string& vsEntry, 
-	std::string& gsFilename, std::string& gsEntry, 
+	std::string& vsFilename, std::string& vsEntry,
+	std::string& gsFilename, std::string& gsEntry,
 	std::string& psFilename, std::string& psEntry)
 {
-	if(!boost::filesystem::exists(filename.c_str()))
+	if (!boost::filesystem::exists(filename.c_str()))
 		throw buw::Exception("Cannot find effect file");
 
 	std::string dir = boost::filesystem::path(filename.c_str()).parent_path().string();
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(filename.c_str());
-	
+
 	auto xmlEffect = doc.FirstChildElement("effect");
 	if (xmlEffect == nullptr)
 		throw buw::Exception("Invalid effect file");
@@ -115,7 +120,7 @@ void loadEffectFile(const std::string& filename, const std::string& pipelineStat
 	auto xmlPipelineState = xmlEffect->FirstChildElement("pipelinestate");
 	if (pipelineStateName != "")
 	{
-		for (; xmlPipelineState != nullptr;	xmlPipelineState = xmlPipelineState->NextSiblingElement("pipelinestate"))		
+		for (; xmlPipelineState != nullptr; xmlPipelineState = xmlPipelineState->NextSiblingElement("pipelinestate"))
 		{
 			const auto name = ((const tinyxml2::XMLElement*)(xmlPipelineState))->FindAttribute("name");
 			if (name != nullptr && name->Value() == pipelineStateName)
@@ -151,6 +156,21 @@ void loadEffectFile(const std::string& filename, const std::string& pipelineStat
 		psFilename = dir + "/" + xmlD3D11PixelShader->Attribute("filename");
 		psEntry = xmlD3D11PixelShader->Attribute("entry");
 	}
+
+	/*boost::filesystem::path vsPath(vsFilename);
+	boost::filesystem::path gsPath(gsFilename);
+	boost::filesystem::path psPath(psFilename);
+
+	std::string vsPreFilename = vsPath.parent_path().string() + "/" + vsPath.stem().string() + "_" + vsEntry + ".cso";
+	std::string gsPreFilename = gsPath.parent_path().string() + "/" + gsPath.stem().string() + "_" + gsEntry + ".cso";
+	std::string psPreFilename = psPath.parent_path().string() + "/" + psPath.stem().string() + "_" + psEntry + ".cso";
+
+	if (vsFilename != "" && vsEntry != "")
+		outfile << "fxc /T vs_5_0 /E " + vsEntry + " /Fo " + vsPreFilename + " " + vsFilename << std::endl;
+	if (gsFilename != "" && gsEntry != "")
+		outfile << "fxc /T gs_5_0 /E " + gsEntry + " /Fo " + gsPreFilename + " " + gsFilename << std::endl;
+	if (psFilename != "" && psEntry != "")
+		outfile << "fxc /T ps_5_0 /E " + psEntry + " /Fo " + psPreFilename + " " + psFilename << std::endl;*/
 }
 
 
@@ -172,9 +192,9 @@ D3D11PipelineState::D3D11PipelineState(D3D11RenderSystem* renderSystem, const bu
 
 	BLUE_LOG(trace) << "Before compiling shaders.";
 	loadEffectFile(
-		psd.effectFilename, psd.pipelineStateName, 
-		vsFilename, vsEntry, 
-		gsFilename, gsEntry, 
+		psd.effectFilename, psd.pipelineStateName,
+		vsFilename, vsEntry,
+		gsFilename, gsEntry,
 		psFilename, psEntry);
 
 	if (vsFilename != "" && vsEntry != "")
@@ -191,7 +211,7 @@ D3D11PipelineState::D3D11PipelineState(D3D11RenderSystem* renderSystem, const bu
 	fillBindings(gsReflection, 1);
 	fillBindings(psReflection, 2);
 
-	if(vsCompiled)
+	if (vsCompiled)
 		renderSystem_->getDevice()->CreateVertexShader(vsCompiled->GetBufferPointer(), vsCompiled->GetBufferSize(), nullptr, vertexShader_.GetAddressOf());
 	if (gsCompiled)
 		renderSystem_->getDevice()->CreateGeometryShader(gsCompiled->GetBufferPointer(), gsCompiled->GetBufferSize(), nullptr, geometryShader_.GetAddressOf());
@@ -231,7 +251,7 @@ void D3D11PipelineState::fillBindings(ID3D11ShaderReflection* reflection, int ty
 			case 2: bindings_[desc.Name].psBindPoint = desc.BindPoint; bindings_[desc.Name].psBindCount = desc.BindCount; break;
 			default:
 				break;
-			}			
+			}
 		}
 	}
 }
@@ -256,7 +276,7 @@ void D3D11EffectCore::setPipelineState(buw::ReferenceCounted<buw::IPipelineState
 
 	renderSystem_->getDeviceContext()->IASetInputLayout(current_->inputLayout_.Get());
 	renderSystem_->getDeviceContext()->IASetPrimitiveTopology(getD3D11PrimitiveTopologyType(current_->primitiveTopology_, current_->useAdjacency()));
-	
+
 	renderSystem_->getDeviceContext()->RSSetState(current_->rasterizerState_.Get());
 
 	if (current_->vertexShader_)
@@ -366,7 +386,7 @@ void D3D11EffectCore::setViewport(buw::ReferenceCounted<buw::IViewport> viewport
 void D3D11EffectCore::setRenderTarget(buw::ReferenceCounted<buw::ITexture2D> renderTarget, buw::ReferenceCounted<buw::ITexture2D> depthStencil) const {
 	ID3D11RenderTargetView* rt = nullptr;
 	ID3D11DepthStencilView* ds = nullptr;
-	
+
 	if (renderTarget)
 		rt = std::static_pointer_cast<D3D11Texture2D>(renderTarget)->getRenderTargetView().Get();
 	if (depthStencil)
@@ -420,31 +440,42 @@ HRESULT compileShader(const std::string& filename,
 	ID3DBlob** compiledShader,
 	ID3D11ShaderReflection** reflection)
 {
-	if (!boost::filesystem::exists(filename))
-	{
-		BLUE_LOG(error) << "File " << filename << " does not exist.";
-		throw buw::Exception("File %s does not exist.", filename.c_str());
-	}
+	HRESULT hr = S_FALSE;
 
-	UINT flag = 0;
+	boost::filesystem::path path(filename);
+	std::string precompiledFilename = path.parent_path().string() + "/" + path.stem().string() + "_" + entry + ".cso";
+	if (boost::filesystem::exists(precompiledFilename))
+	{
+		BLUE_LOG(trace) << "Found precompiled shader.";
+		hr = D3DReadFileToBlob(buw::String(precompiledFilename).toWStdString().c_str(), compiledShader);
+	}
+	else
+	{
+		if (!boost::filesystem::exists(filename))
+		{
+			BLUE_LOG(error) << "File " << filename << " does not exist.";
+			throw buw::Exception("File %s does not exist.", filename.c_str());
+		}
+
+		UINT flag = 0;
 #if _DEBUG
-	flag |= D3DCOMPILE_DEBUG;
+		flag |= D3DCOMPILE_DEBUG;
 #endif // _DEBUG
 
-	std::string sourceCode = getFileAsString(filename);
-	ID3DBlob* errorBlob = nullptr;
+		std::string sourceCode = getFileAsString(filename);
+		ID3DBlob* errorBlob = nullptr;
 
-	HRESULT hr = S_FALSE;
-	hr = D3DCompile(sourceCode.c_str(), sourceCode.size(), filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entry.c_str(), shadermodel.c_str(), flag, 0, compiledShader,
-		&errorBlob);
+		hr = D3DCompile(sourceCode.c_str(), sourceCode.size(), filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entry.c_str(), shadermodel.c_str(), flag, 0, compiledShader,
+			&errorBlob);
 
-	if (errorBlob) {
-		if (errorBlob->GetBufferSize() > 0) {
-			BLUE_LOG(warning) << static_cast<char*>(errorBlob->GetBufferPointer());
-			OutputDebugStringA(static_cast<char*>(errorBlob->GetBufferPointer()));
-		}
-		else {
-			BLUE_LOG(error) << "D3DCompile: Strange error blob. Error in shader " << filename.c_str();
+		if (errorBlob) {
+			if (errorBlob->GetBufferSize() > 0) {
+				BLUE_LOG(warning) << static_cast<char*>(errorBlob->GetBufferPointer());
+				OutputDebugStringA(static_cast<char*>(errorBlob->GetBufferPointer()));
+			}
+			else {
+				BLUE_LOG(error) << "D3DCompile: Strange error blob. Error in shader " << filename.c_str();
+			}
 		}
 	}
 
