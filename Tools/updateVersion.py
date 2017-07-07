@@ -23,14 +23,14 @@ import filecmp
 
 def DetermineCurrentRevision():
 	text = os.popen('hg log -l 1').read()
-	revision = text[13:16] # extract revision number
+	revision = text[13:17].split(':')[0] # extract revision number
 	irev = int(revision)
 	return str(irev)
 	
 def DetermineNextRevision():
 	text = os.popen('hg log -l 1').read()
-	revision = text[13:16] # extract revision number
-	irev = int(revision) + 1 - 1 # minus one because hg hook needs this...
+	revision = text[13:17].split(':')[0] # extract revision number
+	irev = int(revision) + 1 # minus one because hg hook needs this...
 	return str(irev)
 	
 def HookUpdateVersionHeaderFile():
@@ -48,8 +48,8 @@ def HookUpdateVersionHeaderFile():
 		line_number = line_number + 1
 		#print(str(line_number) + ": " + line)
 		
-		if line_number == 19:
-			out_file.write("#define BLUEFRAMEWORK_API_PATCH " + DetermineNextRevision() + "\n")
+		if line_number == 20:
+			out_file.write("#define BLUEFRAMEWORK_API_TWEAK " + DetermineNextRevision() + "\n")
 		else:
 			out_file.write(line)
 	
@@ -77,7 +77,7 @@ def HookUpdateVersionCMakeLists():
 		#print(str(line_number) + ": " + line)
 		
 		if line_number == 1:
-			out_file.write("set(PROJECT_VERSION_PATCH \"" + DetermineNextRevision() + "\")\n")
+			out_file.write("set(PROJECT_VERSION_TWEAK \"" + DetermineNextRevision() + "\")\n")
 		else:
 			out_file.write(line)
 	
