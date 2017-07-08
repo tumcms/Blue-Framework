@@ -125,8 +125,6 @@ find_package(TinyXML2 REQUIRED)
 
 # find_package(Vulkan REQUIRED)
 
-GTEST_COPY_BINARIES(${CMAKE_BINARY_DIR})
-
 if(${EIGEN3_VERSION} VERSION_LESS "3.3.3")
 	message("Please switch to Eigen 3.3.3.")
 endif()
