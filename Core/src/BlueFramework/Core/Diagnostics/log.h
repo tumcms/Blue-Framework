@@ -30,6 +30,8 @@ WARN_BOOST_INLINE_DISABLE
 #include <sstream>
 #include <string>
 
+#include <QString>
+
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
 
 class BlueLogger {
@@ -42,6 +44,11 @@ public:
 	template <typename T>
 	BlueLogger& operator<<(const T& val) {
 		stream_ << val;
+		return *this;
+	}
+
+	BlueLogger& operator<<(const QString& val) {
+		stream_ << val.toStdString();
 		return *this;
 	}
 
