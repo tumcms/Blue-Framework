@@ -390,6 +390,24 @@ public:
 	}
 };
 
+struct VertexPosition3Normal3 {
+	VertexPosition3Normal3() {}
+
+	VertexPosition3Normal3(buw::Vector3f const& position, buw::Vector3f const& normal)
+		: position(position), normal(normal) {}
+
+	Unaligned::Float3 position;
+	Unaligned::Float3 normal;
+
+public:
+	static VertexLayout getVertexLayout() {
+		buw::VertexLayout vertexLayout;
+		vertexLayout.add(buw::eVertexAttributeSemantic::Position, buw::eVertexAttributeFormat::Float3);
+		vertexLayout.add(buw::eVertexAttributeSemantic::Normal, buw::eVertexAttributeFormat::Float3);
+		return vertexLayout;
+	}
+};
+
 //---------------------------------------------------------------------------//
 // Compare
 //---------------------------------------------------------------------------//
@@ -412,6 +430,7 @@ BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Color4)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Id3)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Id3Texture2)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Normal3Id3Texture2)
+BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Normal3)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Normal3Texture2)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture2)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture3)
