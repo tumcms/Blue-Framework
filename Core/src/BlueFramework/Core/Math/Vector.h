@@ -163,13 +163,11 @@ Scalar distance(const Vector<Scalar, RowsAtCompileTime>& v1, const Vector<Scalar
 // Gets the vector rotated by 90 degrees CCW or CW. Fast and numerically stable.
 template <typename Scalar>
 Vector<Scalar, 2> orthogonal(Vector<Scalar, 2> v, bool const bCCW) {
+	// Flip the respective sign.
+	v[int(bCCW)] = -v[int(bCCW)];
+
 	// Swap coordinates.
 	std::swap(v[0], v[1]);
-
-	// Flip the respective sign.
-	bool bFlip = (v[0] < 0.0) ^ (v[1] < 0.0);
-	if (bCCW) bFlip = !bFlip;
-	v[int(bFlip)] = -v[int(bFlip)];
 
 	return v;
 }
