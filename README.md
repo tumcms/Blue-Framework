@@ -28,8 +28,9 @@ BlueFramework version 3.0.0.0 and up uses several software libraries. The corres
 * Eigen 3.3.3 (http://eigen.tuxfamily.org/) (*MPL2*) ({root_dir}/Licenses/Eigen.COPYING.MPL2)
 * Google Test 1.8.0 (https://github.com/google/googletest) (*BSD 3-Clause License*) ({root_dir}/Licenses/GoogleTest.LICENSE)
 * TinyXML-2 (https://github.com/leethomason/tinyxml2) (zlib license) ({root_dir}/Licenses/TinyXML-2.txt)
-* Qt 5.9.0 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
+* Qt 5.9.1 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
 * OGRE3D (http://www.ogre3d.org/) (MIT License) ({root_dir}/Licenses/OGRE3D.MIT.txt)
+* glew 2.0.0 (http://glew.sourceforge.net/) (*Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)*) ({root_dir}/Licenses/glew.LICENSE.txt)
 
 Some code has also been copied from the following projects:
 
