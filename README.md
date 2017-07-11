@@ -1,8 +1,8 @@
-# BlueFramework3
+# BlueFramework
 
 ## Info
 
-BlueFramework3 compiles with Visual Studio 2015 x64 Update 3. Currently, we are not aiming at supporting any other compilers.
+BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2015 x64 Update 3. Currently, we are not aiming at supporting any other compilers.
 
 ## License
 
@@ -22,15 +22,14 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ## Copyright notes
-BlueFramework3 uses several software libraries. The corresponding licenses can be found in the Licenses folder distributed with this source code:
+BlueFramework version 3.0.0.0 and up uses several software libraries. The corresponding licenses can be found in the Licenses folder distributed with this source code:
 
-* boost 1.62.0 (http://www.boost.org/) (*Boost Software License*) ({root_dir}/Licenses/boost.LICENSE_1_0.txt)
-* Eigen 3.3.0 (http://eigen.tuxfamily.org/) (*MPL2*) ({root_dir}/Licenses/Eigen.COPYING.MPL2)
-* Google Test 1.7.0 (https://github.com/google/googletest) (*BSD 3-Clause License*) ({root_dir}/Licenses/GoogleTest.LICENSE)
+* boost 1.63.0 (http://www.boost.org/) (*Boost Software License*) ({root_dir}/Licenses/boost.LICENSE_1_0.txt)
+* Eigen 3.3.3 (http://eigen.tuxfamily.org/) (*MPL2*) ({root_dir}/Licenses/Eigen.COPYING.MPL2)
+* Google Test 1.8.0 (https://github.com/google/googletest) (*BSD 3-Clause License*) ({root_dir}/Licenses/GoogleTest.LICENSE)
 * TinyXML-2 (https://github.com/leethomason/tinyxml2) (zlib license) ({root_dir}/Licenses/TinyXML-2.txt)
-* Qt 5.7.0 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
+* Qt 5.9.0 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
 * OGRE3D (http://www.ogre3d.org/) (MIT License) ({root_dir}/Licenses/OGRE3D.MIT.txt)
-* json_spirit 4.08 (http://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented) (MIT License)({root_dir}/Licenses/json_spirit.LICENSE.txt)
 
 Some code has also been copied from the following projects:
 
@@ -51,14 +50,14 @@ Where appropriate the source code documents the original source.
 
 > **Note**
 
-> - BlueFramwork versions 0.4.1845 to 2.4.1077 where developed by Julian Amann and used code derived from niven that was not licensed in a correct way. The Copyright of niven belongs to Matthäus G. Chajdas. Those copyright issues have been fixed in this version (version 3.0.0 and up).
-> - BlueFramework3 is developed by the Chair of Computational Modeling and Simulation of the Technical University of Munich. It is a complete rewrite.
+> - BlueFramwork versions 0.4.1845.* to 2.4.1077.* were developed by Julian Amann and used code derived from niven that was not licensed in a correct way. The Copyright of niven belongs to Matthäus G. Chajdas. Those copyright issues have been fixed in this version (version 3.0.0.0 and up).
+> - BlueFramework version 3.0.0.0 and up is developed by the Chair of Computational Modeling and Simulation of the Technical University of Munich. It is a complete rewrite.
 
 ## Documentation
 
 ### Coding
 
-The code of BlueFramework3 should compile ~~compiles~~ with 0 ("zero") warnings at warning level 4 using Visual Studio 2015 x64 Update 3. Warnings form third party libraries are ignored.
+The code of BlueFramework version 3.0.0.0 and up should compile ~~compiles~~ with 0 ("zero") warnings at warning level 4 using Visual Studio 2015 x64 Update 3. Warnings form third party libraries are ignored.
 
 ### More
 [Deployment](Docs/Deployment.md)
