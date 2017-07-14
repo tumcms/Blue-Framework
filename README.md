@@ -22,7 +22,6 @@ The **Engine** module over functionality to download resources such as textures 
 ### Ether.DebugVisualizer
 ![OIP](Docs/images/Ether.DebugVisualizer.png)
 
-
 ## Documentation
 
 [Building](Docs/Building.md)
