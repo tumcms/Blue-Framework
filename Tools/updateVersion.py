@@ -22,14 +22,21 @@ import io
 import filecmp 
 
 def DetermineCurrentRevision():
+	os.environ['PATH'] = "%PATH;C:\Program Files\TortoiseHg"
+	os.environ["LANGUAGE"] = "en_US.UTF-8"
+
 	text = os.popen('hg log -l 1').read()
-	revision = text[13:17].split(':')[0] # extract revision number
+	print(text)
+	revision = text[13:15].split(':')[0] # extract revision number
 	irev = int(revision)
 	return str(irev)
 	
 def DetermineNextRevision():
+	os.environ['PATH'] = "%PATH;C:\Program Files\TortoiseHg"
+	os.environ["LANGUAGE"] = "en_US.UTF-8"
+	
 	text = os.popen('hg log -l 1').read()
-	revision = text[13:17].split(':')[0] # extract revision number
+	revision = text[13:15].split(':')[0] # extract revision number
 	irev = int(revision) + 1 # minus one because hg hook needs this...
 	return str(irev)
 	

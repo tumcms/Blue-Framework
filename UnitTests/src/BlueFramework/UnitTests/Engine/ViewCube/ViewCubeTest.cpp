@@ -329,9 +329,9 @@ void runViewCubeUnitTest(const buw::eRenderAPI renderAPI)
 	app.exec();
 }
 
-TEST(Engine, ViewCube_Direct3D11) {
-	runViewCubeUnitTest(buw::eRenderAPI::Direct3D11);
-}
+// TEST(Engine, ViewCube_Direct3D11) {
+// 	runViewCubeUnitTest(buw::eRenderAPI::Direct3D11);
+// }
 
 TEST(Engine, ViewCube_Direct3D12) {
 	runViewCubeUnitTest(buw::eRenderAPI::Direct3D12);

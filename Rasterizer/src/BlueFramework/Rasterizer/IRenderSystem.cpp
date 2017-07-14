@@ -24,39 +24,25 @@ BLUEFRAMEWORK_RASTERIZER_NAMESPACE_BEGIN
 buw::ReferenceCounted<IRenderSystem> createRenderSystem(const buw::renderSystemDescription& rsd) {
 	wchar_t* filename = nullptr;
 
-	switch(rsd.renderAPI)
-	{
+	switch (rsd.renderAPI) {
 #ifdef _DEBUG
 	case eRenderAPI::Direct3D11:
 		filename = L"BlueFramework.D3D11RenderSystemd.dll";
 		BLUE_LOG(trace) << "Try to load BlueFramework.D3D11RenderSystemd.dll";
 		break;
-	case eRenderAPI::Direct3D12:
-		filename = L"BlueFramework.D3D12RenderSystemd.dll";
-		break;
-	case eRenderAPI::OpenGL:
-		filename = L"BlueFramework.GLRenderSystemd.dll";
-		break;
-	case eRenderAPI::Vulkan:
-		filename = L"BlueFramework.VulkanRenderSystemd.dll";
-		break;
+	case eRenderAPI::Direct3D12: filename = L"BlueFramework.D3D12RenderSystemd.dll"; break;
+	case eRenderAPI::OpenGL: filename = L"BlueFramework.GLRenderSystemd.dll"; break;
+	case eRenderAPI::Vulkan: filename = L"BlueFramework.VulkanRenderSystemd.dll"; break;
 #else
 	case eRenderAPI::Direct3D11:
 		filename = L"BlueFramework.D3D11RenderSystem.dll";
 		BLUE_LOG(trace) << "Try to load BlueFramework.D3D11RenderSystem.dll";
 		break;
-	case eRenderAPI::Direct3D12:
-		filename = L"BlueFramework.D3D12RenderSystem.dll";
-		break;
-	case eRenderAPI::OpenGL:
-		filename = L"BlueFramework.GLRenderSystem.dll";
-		break;
-	case eRenderAPI::Vulkan:
-		filename = L"BlueFramework.VulkanRenderSystem.dll";
-		break;
+	case eRenderAPI::Direct3D12: filename = L"BlueFramework.D3D12RenderSystem.dll"; break;
+	case eRenderAPI::OpenGL: filename = L"BlueFramework.GLRenderSystem.dll"; break;
+	case eRenderAPI::Vulkan: filename = L"BlueFramework.VulkanRenderSystem.dll"; break;
 #endif
-	default:
-		throw buw::Exception("Render system is not supported.");
+	default: throw buw::Exception("Render system is not supported.");
 	}
 
 	HMODULE hDLL = nullptr;

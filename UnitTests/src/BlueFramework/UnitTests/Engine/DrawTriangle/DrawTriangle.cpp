@@ -85,7 +85,7 @@ public:
 		setAttribute(Qt::WA_PaintOnScreen);
 		setAttribute(Qt::WA_MSWindowsUseDirect3D, true);
 		setFocusPolicy(Qt::StrongFocus);
-
+		
 		buw::renderSystemDescription rsd;
 		rsd.width = width();
 		rsd.height = height();
@@ -109,7 +109,7 @@ public:
 	~Viewport() {
         effect_ = nullptr;
         viewport_ = nullptr;
-		renderSystem_ = nullptr; // Rendersystem always last, s.t. the other modules can still access it on destruction.
+		renderSystem_ = nullptr; // render system always last, s.t. the other modules can still access it on destruction.
 	}
 
 	void paintEvent(QPaintEvent*) {
