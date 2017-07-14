@@ -45,7 +45,20 @@ public:
 			data_[i] = src.data_[i];
 		}
 	}
-	
+
+	Image& operator= (Image const& src) {
+		width_ = src.width_;
+		height_ = src.height_;
+		int size = width_ * height_;
+		data_ = new ColorType[size];
+
+		for (int i = 0; i < size; ++i) {
+			data_[i] = src.data_[i];
+		}
+
+		return *this;
+	}
+
 	virtual ~Image() {
 		delete[] data_;
 	}
@@ -112,8 +125,6 @@ public:
         BLUE_ASSERT(checkBounds(x, y));
         return data_[x + y*width_];
 	}
-
-
 
 private:
 	int width_;

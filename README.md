@@ -14,7 +14,14 @@ The **Engine** module over functionality to download resources such as textures 
 
 ## Who is using it?
 
+### TUM Open Infra Platform
 [TUM Open Infra Platform](https://www.cms.bgu.tum.de/en/research/projects/oip)
+
+![OIP](Docs/images/OIP.png)
+
+### Ether.DebugVisualizer
+![OIP](Docs/images/Ether.DebugVisualizer.png)
+
 
 ## Documentation
 
@@ -25,6 +32,8 @@ The **Engine** module over functionality to download resources such as textures 
 [Versioning](Docs/Versioning.md)
 
 [UnitTests](Docs/UnitTests.md)
+
+[Rasterizer](Docs/Rasterizer.md)
 
 ## License
 

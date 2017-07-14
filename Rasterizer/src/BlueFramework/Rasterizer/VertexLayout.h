@@ -148,6 +148,7 @@ public:
 	/// clear the vertex layout, chainable
 	VertexLayout& clear() {
 		components.clear();
+		return *this;
 	}
 	/// return true if layout is empty
 	bool empty() const {
@@ -157,6 +158,7 @@ public:
 	/// add a component
 	VertexLayout& add(const VertexAttribute& comp) {
 		components.push_back(comp);
+		return *this;
 	}
 	/// add component by name and format
 	VertexLayout& add(const eVertexAttributeSemantic semantic, const eVertexAttributeFormat format) {
