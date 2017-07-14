@@ -21,6 +21,7 @@ The **Engine** module over functionality to download resources such as textures 
 
 ### Ether.DebugVisualizer
 ![OIP](Docs/images/Ether.DebugVisualizer.png)
+[Country Kitchen](https://www.blendswap.com/blends/view/42851) scene by [Jay-Artist](https://www.blendswap.com/user/Jay-Artist)
 
 ## Documentation
 
