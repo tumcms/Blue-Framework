@@ -1,8 +1,30 @@
 # BlueFramework
 
-## Info
+## Short overview
 
-BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2015 x64 Update 3. Currently, we are not aiming at supporting any other compilers.
+BlueFramework is divided into different parts e.g. Core, ImageProcessing, Rasterizer, and Engine. 
+
+The **Core** contains basic functionality for logging, vector and matrix algebra, string handling and some basic diagnostic functionality.
+
+The **ImageProcessing** module offers basic functionality for image manipulation and loading and storing image files.
+
+The **Rasterizer** is a thin abstract layer for graphic APIs such as Direct3D 11, Direct3D 12, OpenGL 3.x and up and Vulkan. Currently, there is a feature complete Direct3D 11 and Direct3D 12 implementation available (BlueFramework.D3D11RenderSystem, BlueFramework.D3D12RenderSystem). The OpenGL backend currently supports only a subset of the complete feature set of the Rasterizer module. The Vulkan implementation is still work in progress. As a user of the BlueFramework library, or more specifically as a user of the BlueFramework.Rasterizer module you program to an abstract interface that is internally mapped to the different render systems. This gives your application the advantage to use different graphic APIs by only writing code once.
+
+The **Engine** module over functionality to download resources such as textures from URLs, a basic camera for first person and model view orientation, a view cube and basic resource management.
+
+## Who is using it?
+
+[TUM Open Infra Platform](https://www.cms.bgu.tum.de/en/research/projects/oip)
+
+## Documentation
+
+[Building](Docs/Building.md)
+
+[Deployment](Docs/Deployment.md)
+
+[Versioning](Docs/Versioning.md)
+
+[UnitTests](Docs/UnitTests.md)
 
 ## License
 
@@ -49,22 +71,7 @@ Some code has also been copied from the following projects:
 
 Where appropriate the source code documents the original source.
 
-> **Note**
+> **Notes**
 
 > - BlueFramwork versions 0.4.1845.* to 2.4.1077.* were developed by Julian Amann and used code derived from niven that was not licensed in a correct way. The Copyright of niven belongs to Matthäus G. Chajdas. Those copyright issues have been fixed in this version (version 3.0.0.0 and up).
 > - BlueFramework version 3.0.0.0 and up is developed by the Chair of Computational Modeling and Simulation of the Technical University of Munich. It is a complete rewrite.
-
-## Documentation
-
-### Coding
-
-The code of BlueFramework version 3.0.0.0 and up should compile ~~compiles~~ with 0 ("zero") warnings at warning level 4 using Visual Studio 2015 x64 Update 3. Warnings form third party libraries are ignored.
-
-### More
-[Deployment](Docs/Deployment.md)
-
-[Building](Docs/Building.md)
-
-[Versioning](Docs/Versioning.md)
-
-[UnitTests](Docs/UnitTests.md)
