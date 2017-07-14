@@ -28,7 +28,7 @@ def DetermineCurrentRevision():
 	text = os.popen('hg log -l 1').read()
 	print(text)
 	revision = text[13:15].split(':')[0] # extract revision number
-	irev = int(revision)
+	irev = int(revision) - 1
 	return str(irev)
 	
 def DetermineNextRevision():
@@ -37,7 +37,7 @@ def DetermineNextRevision():
 	
 	text = os.popen('hg log -l 1').read()
 	revision = text[13:15].split(':')[0] # extract revision number
-	irev = int(revision) + 1 # minus one because hg hook needs this...
+	irev = int(revision)
 	return str(irev)
 	
 def HookUpdateVersionHeaderFile():
