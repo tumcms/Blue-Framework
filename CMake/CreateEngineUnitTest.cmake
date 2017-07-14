@@ -50,15 +50,14 @@ function(CreateEngineUnitTest UnitTestName)
 		${BlueFramework_UnitTests_Engine_UnitTest_Shader_OGL}
 		${BlueFramework_UnitTests_Engine_UnitTest_ReferenceImages}
 	)
-	
-	link_against_gtest(${UnitTestName})
-	
+		
 	target_link_libraries(${UnitTestName}
 		BlueFramework.Core
 		BlueFramework.Rasterizer
 		BlueFramework.Engine
 		BlueFramework.D3D11RenderSystem # force this to be rebuild, because it is needed by the unit test
 		BlueFramework.D3D12RenderSystem # force this to be rebuild, because it is needed by the unit test
+		${GTEST_BOTH_LIBRARIES}
 	)
 	
 	add_test(

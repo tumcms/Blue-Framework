@@ -16,6 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#pragma comment (lib, "dxguid.lib")
+
 #include "BlueFramework/D3D12RenderSystem/D3D12EffectCore.h"
 #include "BlueFramework/D3D12RenderSystem/D3D12RenderSystem.h"
 #include <fstream>

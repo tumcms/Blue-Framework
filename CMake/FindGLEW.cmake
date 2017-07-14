@@ -15,9 +15,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-# This module defines the following variables:
-#
-# ::
+# 	This module defines the following variables:
 #
 #   GLEW_INCLUDE_DIRS - include directories for GLEW
 #   GLEW_LIBRARIES - libraries to link against GLEW

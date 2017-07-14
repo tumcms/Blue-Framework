@@ -39,4 +39,7 @@ Building Boost can take some time and consumes a lot of disk space. To build it 
 - Start CMake (https://cmake.org/) and select as source folder the previous checked out BlueFramework3 folder
 
 ## How to build BlueFramework with CMake Step by Step
+
+BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2015 x64 Update 3. Currently, we are not aiming at supporting any other compilers.
+
 Start CMake select where the source code is located and where to build the binaries:

@@ -16,9 +16,14 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+// link D3D libraries with linker
+#pragma comment(lib, "dxguid.lib")
+
 #include "BlueFramework/Core/string.h"
+
 #include "BlueFramework/D3D11RenderSystem/D3D11EffectCore.h"
 #include "BlueFramework/D3D11RenderSystem/D3D11RenderSystem.h"
+
 #include <boost/filesystem.hpp>
 
 #include <tinyxml2.h>

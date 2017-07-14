@@ -25,11 +25,10 @@ add_executable(Color
 	${BlueFramework_UnitTests_ImageProcessing_Color}
 )
 
-link_against_gtest(Color)
-
 target_link_libraries(Color 
 	BlueFramework.Core
 	BlueFramework.ImageProcessing
+	${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(

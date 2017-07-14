@@ -3,6 +3,9 @@ import sys, getopt
 import xml.etree.ElementTree
 from subprocess import call
 
+
+fxc = "C:/Program Files (x86)/Windows Kits/10/bin/x64/fxc.exe"
+
 def compileEffect(effectFile, dir):
 	effect = xml.etree.ElementTree.parse(effectFile).getroot()
 	shader = {}
@@ -30,7 +33,8 @@ def compileEffect(effectFile, dir):
 			
 	for name in shader:
 		args = shader[name]
-		call("fxc /T " + args[0] + " /E " + args[2] + " /Fo " + dir + "/" + name + ".cso " + dir + "/" + args[1])
+		
+		call(fxc + " /T " + args[0] + " /E " + args[2] + " /Fo " + dir + "/" + name + ".cso " + dir + "/" + args[1])
 	
 
 def main(argv):

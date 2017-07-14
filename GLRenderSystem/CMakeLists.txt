@@ -49,7 +49,7 @@ target_link_libraries(BlueFramework.GLRenderSystem
 )
 
 install(TARGETS BlueFramework.GLRenderSystem   
-   ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+   ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT library_files
 )
 

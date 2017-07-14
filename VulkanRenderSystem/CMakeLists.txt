@@ -26,24 +26,14 @@ add_library(BlueFramework.VulkanRenderSystem SHARED
     ${BlueFramework_VulkanRenderSystem_Source}
 )
 
-include_directories(
-	${DirectX12_INCLUDE_DIR}
-	${DirectX12_INCLUDE_DIR_SHARED}
-)
-
-# link_directories (
-	# ${DirectX12_LibDirX64}
-# )
 
 target_link_libraries(BlueFramework.VulkanRenderSystem
 	BlueFramework.Core
-	BlueFramework.Rasterizer
-	${DirectX_D3D12_LIBRARIES}
-	${Vulkan_LIBRARY}
+	BlueFramework.Rasterizer	
 )
 
 install(TARGETS BlueFramework.VulkanRenderSystem   
-   ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+   ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT library_files
 )
 

@@ -38,11 +38,9 @@ enable_testing()
 if(MSVC_VERSION EQUAL 1900)
 	set(MSVC_VERSION_STRING "vs2015")
 	set(MSVC_VERSION_YEAR "2015")
-	message("Welcome to Visual Studio 14 2015.")
 elseif(MSVC_VERSION EQUAL 1910)
 	set(MSVC_VERSION_STRING "vs2017")
 	set(MSVC_VERSION_YEAR "2017")
-	message("Welcome to Visual Studio 15 2017.")
 else()
 	message("Please switch to Visual Studio 14 2015 or Visual Studio 15 2017.")
 	return()
@@ -84,7 +82,7 @@ if(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH)
 		# Try to find Boost, Eigen3, Qt5 and other dependencies without user input
 		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_64_0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_63_0")
 		find_path(EIGEN3_INCLUDE_DIR NAMES Eigen/Core HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\Eigen_3.3.4")
-		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.0\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\5.9\\msvc${MSVC_VERSION_YEAR}_64")
+		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.0\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\Qt5.9.1\\5.9.1\\msvc${MSVC_VERSION_YEAR}_64")
 		find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\glew-2.0.0")
 		find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-release-1.8.0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-1.8.0")
 		find_path(TINYXML2_ROOT NAMES tinyxml2.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\tinyxml2-master")
@@ -118,37 +116,12 @@ endif (WIN32)
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.64.0
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
-find_package(DirectX12 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
 find_package(gtest REQUIRED)
-#find_package(Tinyxml2 REQUIRED)
+find_package(TinyXML2 REQUIRED)
 
 # find_package(Vulkan REQUIRED)
-
-# if(NOT glew AND NOT GLEW_ROOT)
-	# include(external/cmake/InstallGLEW.cmake)
-# endif()
-# if(NOT glew)
-	# include(external/cmake/FindGLEW.cmake)	
-# endif()
-
-#Tinyxml2
-if(NOT TINYXML2_ROOT)
-	include(external/cmake/InstallTinyxml2.cmake)
-endif()
-include(external/cmake/FindTinyxml2.cmake)
-
-
-#Gtest
-if(NOT gtest AND NOT GTEST_ROOT)
-	include(external/cmake/InstallGTest.cmake)
-endif()
-if(NOT gtest)
-	include(external/cmake/FindGTest.cmake)
-endif()
-
-GTEST_COPY_BINARIES(${CMAKE_BINARY_DIR})
 
 if(${EIGEN3_VERSION} VERSION_LESS "3.3.3")
 	message("Please switch to Eigen 3.3.3.")
@@ -182,17 +155,12 @@ include_directories(
   Engine/src
   Rasterizer/src
   ImageProcessing/src
-  ${GTEST_INCLUDE_DIR}
+  ${GTEST_INCLUDE_DIRS}
 )
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
 )
-
-macro (link_against_gtest target)
-  target_link_libraries (${target} ${GTEST_LIBRARIES})
-  target_link_libraries (${target} ${GTEST_MAIN_LIBRARIES})
-endmacro ()
 
 add_subdirectory(Application)
 add_subdirectory(Core)
@@ -219,7 +187,6 @@ set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "Bl
 
 include(QtCopyBinaries)
 set_target_properties(Qt5CopyBinaries                 	 PROPERTIES FOLDER "Copy")
-
 set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
@@ -291,7 +258,7 @@ set(CPACK_WIX_CMAKE_PACKAGE_REGISTRY "${PROJECT_NAME}")
 
 include(CPackComponent)
 
-set(CPACK_COMPONENTS_ALL "cmake;library;include;source;library_debug;library_release;library_relwithdebinfo")
+set(CPACK_COMPONENTS_ALL "cmake;include;source;library_release;library_debug;library_relwithdebinfo")
 
 cpack_add_install_type(default DISPLAY_NAME "Default")
 
@@ -338,13 +305,13 @@ install(DIRECTORY include/ DESTINATION include
 		COMPONENT include
         FILES_MATCHING PATTERN "*.h"		
 )
-file(GLOB BLUEFRAMEWORK_CONFIG cmake/FindBlueFramework.cmake)
-file(GLOB BLUEFRAMEWORK_MARKOS cmake/BlueFramework-makros.cmake)
+file(GLOB BLUEFRAMEWORK_CONFIG ${PROJECT_SOURCE_DIR}/CMake/FindBlueFramework.cmake)
+file(GLOB BLUEFRAMEWORK_MACROS ${PROJECT_SOURCE_DIR}/CMake/BlueFrameworkMacros.cmake)
 file(WRITE ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake "set(PACKAGE_VERSION \"${CPACK_PACKAGE_VERSION}\") \nset(PACKAGE_VERSION_EXACT True) \nset(PACKAGE_VERSION_COMPATIBLE True) \nset(PACKAGE_VERSION_UNSUITABLE False)")
 file(COPY ${BLUEFRAMEWORK_CONFIG} DESTINATION ${PROJECT_SOURCE_DIR})
 file(RENAME "FindBlueFramework.cmake" "BlueFrameworkConfig.cmake")
-install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFramework-config.cmake")
-install(FILES ${BLUEFRAMEWORK_MARKOS} DESTINATION CMake COMPONENT cmake)
+install(FILES ${BLUEFRAMEWORK_CONFIG} DESTINATION / COMPONENT cmake RENAME "BlueFrameworkConfig.cmake")
+install(FILES ${BLUEFRAMEWORK_MACROS} DESTINATION CMake COMPONENT cmake)
 install(FILES ${CMAKE_BINARY_DIR}/BlueFramework-config-version.cmake DESTINATION / COMPONENT cmake)
 
 include(CPack)

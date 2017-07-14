@@ -26,23 +26,19 @@ add_library(BlueFramework.D3D11RenderSystem SHARED
     ${BlueFramework_D3D11RenderSystem_Source}
 )
 
-include_directories(
-	${DirectX12_INCLUDE_DIR}
-	${DirectX12_INCLUDE_DIR_SHARED}
-	${TINYXML2_INCLUDE_DIR}
-)
+include_directories(${TINYXML2_INCLUDE_DIR})
 
 
 target_link_libraries(BlueFramework.D3D11RenderSystem
 	BlueFramework.Core
 	BlueFramework.Rasterizer
 	BlueFramework.ImageProcessing
-	${DirectX_D3D12_LIBRARIES}
-	${TINYXML2_LIB}
+	${TINYXML2_LIBRARIES}
+	#DirectX11 libs linked in source.
 )
 
 install(TARGETS BlueFramework.D3D11RenderSystem   
-   ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
+   ARCHIVE DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
    COMPONENT library_files
 )
 

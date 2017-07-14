@@ -26,7 +26,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-set(CMAKE_MODULE_PATH ${PROJECT_Source_DIR}/build/)
+#set(CMAKE_MODULE_PATH ${PROJECT_Source_DIR}/build/)
 
 set(CMAKE_DEBUG_POSTFIX  "d")
 

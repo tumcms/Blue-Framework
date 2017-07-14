@@ -3,4 +3,5 @@ lib/*
 make.bat
 Tools/updateVersion.pyo
 build/*
-BlueFramework3Config.cmake
+external/log_install_*
+BlueFrameworkConfig.cmake
