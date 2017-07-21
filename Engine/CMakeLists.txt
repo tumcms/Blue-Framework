@@ -16,6 +16,8 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+set(CMAKE_AUTOMOC ON)
+
 file(GLOB BlueFramework_Engine_Camera_Source                   src/BlueFramework/Engine/Camera/*.*)
 file(GLOB BlueFramework_Engine_Mesh_Source                     src/BlueFramework/Engine/Mesh/*.*)
 file(GLOB BlueFramework_Engine_ResourceManagment_Source        src/BlueFramework/Engine/ResourceManagment/*.*)

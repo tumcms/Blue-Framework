@@ -25,8 +25,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
 
 # Suggest to use CMake 3.8.2
-if(${CMAKE_VERSION} VERSION_LESS "3.8.2")
-    message("Please consider to switch to CMake 3.8.2")
+if(${CMAKE_VERSION} VERSION_LESS "3.9.0")
+    message("Please consider to switch to CMake 3.9.0")
 endif()
 
 enable_testing()
@@ -140,7 +140,7 @@ find_package(Qt5XmlPatterns   5.9.0 REQUIRED)
 find_package(Qt5Widgets       5.9.0 REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC OFF)
 
 include_directories(
   ${Boost_INCLUDE_DIR}

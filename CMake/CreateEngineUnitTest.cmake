@@ -17,7 +17,7 @@
 #
 
 function(CreateEngineUnitTest UnitTestName)
-	set(CMAKE_AUTOMOC ON)
+	set(CMAKE_AUTOMOC OFF)
 
 	file(GLOB BlueFramework_UnitTests_Engine_UnitTest					*.cpp *.h)
 	file(GLOB BlueFramework_UnitTests_Engine_UnitTest_Shader			Shader/*.*)
