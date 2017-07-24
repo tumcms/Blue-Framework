@@ -20,12 +20,15 @@
 #include <BlueFramework/ImageProcessing/io.h>
 #include <BlueFramework/ImageProcessing/proceduralTextureGeneration.h>
 #include <BlueFramework/ImageProcessing/ImageFilter.h>
+#include <BlueFramework/ImageProcessing/captureScreen.h>
 
 #include <gtest/gtest.h>
 #include <string>
 #include <iostream>
 
 TEST(ImageProcessing, RandomHeightmapGeneration) {
+	//buw::captureScreen("C:/temp/test2.bmp");
+
     buw::Image4b heightmap = buw::generateRandomHeightmap(10, 0.5f, 0.0f, 1.0f);
 
     buw::Image4b filtered = buw::applyGaussian<uint8_t, 4Ui64, buw::eFilterSize::Medium>(heightmap, buw::Matrix22f::Identity());

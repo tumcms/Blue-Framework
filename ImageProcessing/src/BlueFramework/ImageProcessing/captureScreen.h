@@ -24,7 +24,7 @@
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
 
-void captureScreen();
+void captureScreen(const char* filename);
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
 
