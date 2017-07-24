@@ -26,6 +26,7 @@
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
 
+Image3b loadImage3b(const std::string& filename);
 Image4b loadImage4b(const std::string& filename);
 
 void storeImage(const std::string& filename, const Image3b& img);
@@ -33,6 +34,7 @@ void storeImage(const std::string& filename, const Image4b& img);
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
 
+BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(loadImage3b)
 BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(loadImage4b)
 BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(storeImage)
 

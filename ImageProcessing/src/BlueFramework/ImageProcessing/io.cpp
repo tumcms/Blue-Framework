@@ -52,6 +52,26 @@ Image4b loadImage4b(const std::string& filename) {
 	return img;
 }
 
+Image3b loadImage3b(const std::string& filename) {
+	if (!boost::filesystem::exists(filename)) {
+		throw buw::Exception("Image file %s does not exist.", filename.c_str());
+	}
+
+	QImage qimg(filename.c_str());
+	Image3b img(qimg.width(), qimg.height());
+
+	for (int y = 0; y < qimg.height(); ++y)
+		for (int x = 0; x < qimg.width(); ++x) {
+			auto c = qimg.pixelColor(x, y);
+			img.setPixelColor(x, y, Color3b(
+				static_cast<unsigned char>(c.red()),
+				static_cast<unsigned char>(c.green()),
+				static_cast<unsigned char>(c.blue())));
+		}
+
+	return img;
+}
+
 void storeImage(const std::string& filename, const Image3b& img) {
 	QImage image((const uchar *)img.getData(), img.getWidth(), img.getHeight(), QImage::Format_RGB888);
 	image.save(filename.c_str());
