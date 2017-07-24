@@ -61,15 +61,14 @@ def main(argv):
 	
 	print(textHeader)
 	
-	print("")
 	print("#pragma once")
 	print("#ifndef BlueFramework_" + moduleName + "_" + className + "_" + strUuid + "_h")
 	print("#define BlueFramework_" + moduleName + "_" + className + "_" + strUuid + "_h")
 	print("")
-	print("BLUE_NAMESPACE_BLUEFRAMEWORK_" + moduleName.upper() + "_BEGIN")
-	print("")
 	print("#include \"BlueFramework/" + moduleName + "/namespace.h\"")
 	print("")
+	print("BLUEFRAMEWORK_" + moduleName.upper() + "_NAMESPACE_BEGIN")
+	
 	print("class " + className + "{");
 	print("public:")
 	
@@ -82,7 +81,7 @@ def main(argv):
 	print("};")
 	print("")
 	
-	print("BLUE_NAMESPACE_BLUEFRAMEWORK_" + moduleName.upper() + "_END")
+	print("BLUEFRAMEWORK_" + moduleName.upper() + "_NAMESPACE_END")
 	print("")
 	
 	print("#endif // end define BlueFramework_" + moduleName + "_" + className + "_" + strUuid + "_h")

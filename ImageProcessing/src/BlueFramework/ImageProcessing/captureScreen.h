@@ -1,6 +1,6 @@
 /*
     This file is part of BlueFramework, a simple 3D engine.
-	Copyright (c) 2016-2017 Technical University of Munich
+	Copyright (c) 2016 Technical University of Munich
 	Chair of Computational Modeling and Simulation.
 
     BlueFramework is free software; you can redistribute it and/or modify
@@ -17,22 +17,17 @@
 */
 
 #pragma once
-#ifndef BlueFramework_ImageProcessing_proceduralTextureGeneration_fb971c8e_c331_4e5d_b444_a1e6fc789732_h
-#define BlueFramework_ImageProcessing_proceduralTextureGeneration_fb971c8e_c331_4e5d_b444_a1e6fc789732_h
+#ifndef BlueFramework_ImageProcessing_captureScreen_9e8a5485_df06_42f6_b96f_0fc986cf0d7b_h
+#define BlueFramework_ImageProcessing_captureScreen_9e8a5485_df06_42f6_b96f_0fc986cf0d7b_h
 
 #include "BlueFramework/ImageProcessing/namespace.h"
-#include "BlueFramework/ImageProcessing/proceduralTextureGeneration.h"
-#include "BlueFramework/ImageProcessing/Image.h"
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
 
-Image4b generateCheckerboardImage(const int width, const int height);
-
-Image4b generateRandomHeightmap(const int lod, float roughness, float mean, float sigma);
+void captureScreen();
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
 
-BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(generateCheckerboardImage)
-BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(generateRandomHeightmap)
+BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(captureScreen)
 
-#endif // end define BlueFramework_ImageProcessing_proceduralTextureGeneration_fb971c8e_c331_4e5d_b444_a1e6fc789732_h
+#endif // end define BlueFramework_ImageProcessing_captureScreen_9e8a5485_df06_42f6_b96f_0fc986cf0d7b_h
