@@ -27,8 +27,12 @@ BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
 
 bool areEqual(const Image4f& a, const Image4f& b);
 Image3b highlightDifferences(const Image3b& a, const Image3b& b, const Color3b color);
+
 Image4f createDifferenceImage(const Image4f& a, const Image4f& b, const float Color[4]);
+Image3b createDifferenceImage(const Image3b& a, const Image3b& b, const Color3b& color);
 Image3b createDifferenceImage(const Image3b& a, const Image3b& b, const std::uint8_t color[3]);
+Image4b createDifferenceImage(const Image4b& a, const Image4b& b, const Color4b& color);
+Image4b createDifferenceImage(const Image4b& a, const Image4b& b, const std::uint8_t color[4]);
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
 
