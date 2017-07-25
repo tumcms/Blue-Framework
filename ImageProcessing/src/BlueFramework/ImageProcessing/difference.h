@@ -20,16 +20,15 @@
 #ifndef BlueFramework_ImageProcessing_difference_91e49169_661c_4f4c_9c07_6588d56c1f01_h
 #define BlueFramework_ImageProcessing_difference_91e49169_661c_4f4c_9c07_6588d56c1f01_h
 
-#include "BlueFramework/Core/memory.h"
 #include "BlueFramework/ImageProcessing/Image.h"
 #include "BlueFramework/ImageProcessing/namespace.h"
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
 
-bool areEqual(buw::ReferenceCounted<Image4f> a, buw::ReferenceCounted<Image4f> b);
-buw::ReferenceCounted<Image3b> highlightDifferences(buw::ReferenceCounted<Image3b> a, buw::ReferenceCounted<Image3b> b, const Color3b color);
-buw::ReferenceCounted<Image4f> createDifferenceImage(buw::ReferenceCounted<Image4f> a, buw::ReferenceCounted<Image4f> b, const float Color[4]);
-buw::ReferenceCounted<Image3b> createDifferenceImage(buw::ReferenceCounted<Image3b> a, buw::ReferenceCounted<Image3b> b, const std::uint8_t color[3]);
+bool areEqual(const Image4f& a, const Image4f& b);
+Image3b highlightDifferences(const Image3b& a, const Image3b& b, const Color3b color);
+Image4f createDifferenceImage(const Image4f& a, const Image4f& b, const float Color[4]);
+Image3b createDifferenceImage(const Image3b& a, const Image3b& b, const std::uint8_t color[3]);
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
 

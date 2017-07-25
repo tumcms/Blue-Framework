@@ -19,5 +19,10 @@
 // Canonical include file - idea taken from https://anteru.net/blog/2012/03/16/1871/index.html
 #pragma once
 
+#include <BlueFramework/ImageProcessing/captureScreen.h>
+#include <BlueFramework/ImageProcessing/difference.h>
+#include <BlueFramework/ImageProcessing/findSubimage.h>
 #include <BlueFramework/ImageProcessing/Image.h>
+#include <BlueFramework/ImageProcessing/ImageFilter.h>
 #include <BlueFramework/ImageProcessing/io.h>
+#include <BlueFramework/ImageProcessing/proceduralTextureGeneration.h>
