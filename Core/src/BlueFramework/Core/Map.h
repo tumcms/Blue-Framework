@@ -37,6 +37,10 @@ public:
 	void insert(const Key& k, const Value& v) {
 		(*this)[k] = v;
 	}
+
+	Value getValue(const Key& k) {
+		return (*this)[k];
+	}
 };
 
 BLUEFRAMEWORK_CORE_NAMESPACE_END
