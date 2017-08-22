@@ -24,9 +24,9 @@ project(BlueFramework)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
 
-# Suggest to use CMake 3.8.2
-if(${CMAKE_VERSION} VERSION_LESS "3.9.0")
-    message("Please consider to switch to CMake 3.9.0")
+# Suggest new version of CMake
+if(${CMAKE_VERSION} VERSION_LESS "3.9.1")
+    message("Please consider to switch to CMake 3.9.1")
 endif()
 
 enable_testing()
@@ -50,6 +50,8 @@ if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message("Please switch to x64 build.")
 	return()
 endif()
+
+set(Boost_ADDITIONAL_VERSIONS "1.64.0")
 
 #------------------------------------------------------------------------------
 # Create folders for different build configurations (if they do not exist) to 
@@ -80,7 +82,7 @@ option(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH "Set to ON to set boost, Eig
 
 if(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH)
 		# Try to find Boost, Eigen3, Qt5 and other dependencies without user input
-		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_64_0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_63_0")
+		find_path(BOOST_ROOT NAMES boost/version.hpp HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_65_0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_64_0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\boost_1_63_0")
 		find_path(EIGEN3_INCLUDE_DIR NAMES Eigen/Core HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\Eigen_3.3.4")
 		find_path(CMAKE_PREFIX_PATH NAMES include/QtCore/QObject HINTS "C:\\Qt\\Qt5.9.0\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\5.9\\msvc${MSVC_VERSION_YEAR}_64" "C:\\Qt\\Qt5.9.1\\5.9.1\\msvc${MSVC_VERSION_YEAR}_64")
 		find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\glew-2.0.0")
@@ -115,7 +117,7 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.64.0
+find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.65.0
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
