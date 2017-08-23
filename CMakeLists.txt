@@ -117,7 +117,11 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
+if(MSVC_VERSION EQUAL 1910)
+find_package(Boost 1.63.0 COMPONENTS signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.0
+else()
 find_package(Boost 1.63.0 COMPONENTS signals system filesystem python REQUIRED) # we suggest Boost 1.65.0
+endif()
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
