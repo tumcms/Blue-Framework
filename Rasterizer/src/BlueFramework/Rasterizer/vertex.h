@@ -408,6 +408,25 @@ public:
 	}
 };
 
+struct VertexPosition4 {
+public:
+	VertexPosition4() {
+	}
+
+	VertexPosition4(const buw::Vector4f& position) : position(position) {
+	}
+
+	Unaligned::Float4 position;
+
+public:
+	static VertexLayout getVertexLayout() {
+		buw::VertexLayout vertexLayout;
+		vertexLayout.add(buw::eVertexAttributeSemantic::Position, buw::eVertexAttributeFormat::Float4);
+
+		return vertexLayout;
+	}
+};
+
 //---------------------------------------------------------------------------//
 // Compare
 //---------------------------------------------------------------------------//
@@ -435,6 +454,7 @@ BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Normal3Tex
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture2)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture3)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture2PickId1FaceId1RegionId1)
+BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition4)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition4Texture2)
 
 #endif // end define BlueFramework_Rasterizer_vertex_96687421_3eaf_4769_80fe_fb2fc11c93da_h

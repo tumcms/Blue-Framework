@@ -83,24 +83,22 @@ Scalar minimalComponent(const Vector<Scalar, 3>& v) {
 	return std::min(std::min(v.x(), v.y()), v.z());
 }
 
-template <typename Scalar>
-Vector<Scalar, 3> minimizedVector(const Vector<Scalar, 3>& a, const Vector<Scalar, 3>& b) {
-	Vector<Scalar, 3> r;
+template <typename Scalar, int N>
+Vector<Scalar, N> minimizedVector(const Vector<Scalar, N>& a, const Vector<Scalar, N>& b) {
+	Vector<Scalar, N> r;
 
-	r.x() = std::min(a.x(), b.x());
-	r.y() = std::min(a.y(), b.y());
-	r.z() = std::min(a.z(), b.z());
+	for(int i=0; i<N; i++)
+		r(i) = std::min(a(i), b(i));
 
 	return r;
 }
 
-template <typename Scalar>
-Vector<Scalar, 3> maximizedVector(const Vector<Scalar, 3>& a, const Vector<Scalar, 3>& b) {
-	Vector<Scalar, 3> r;
+template <typename Scalar, int N>
+Vector<Scalar, N> maximizedVector(const Vector<Scalar, N>& a, const Vector<Scalar, N>& b) {
+	Vector<Scalar, N> r;
 
-	r.x() = std::max(a.x(), b.x());
-	r.y() = std::max(a.y(), b.y());
-	r.z() = std::max(a.z(), b.z());
+	for (int i = 0; i<N; i++)
+		r(i) = std::max(a(i), b(i));
 
 	return r;
 }
