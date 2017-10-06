@@ -40,7 +40,17 @@ class ViewCube : public QObject {
 	Q_OBJECT;
 
 public:
-	enum class eFaceId : int { Front = 0, Back = 1, Left = 2, Right = 3, Top = 4, Bottom = 5 };
+	enum class eFaceId : int {
+		Front = 0,
+		Back = 1,
+		Left = 2,
+		Right = 3,
+		Top = 4,
+		Bottom = 5,
+		SouthWest = 6,
+		NorthWest = 7,
+		SouthEast = 8,
+		NorthEast = 9};
 
 	enum eViewCubeOrientation : const short {
 		Unselected = 0b00000000,

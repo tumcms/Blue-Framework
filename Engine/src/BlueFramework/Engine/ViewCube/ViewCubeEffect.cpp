@@ -24,6 +24,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 BLUEFRAMEWORK_ENGINE_NAMESPACE_BEGIN
 
+const int viewportSize = 180;
+
 ViewCubeEffect::ViewCubeEffect(buw::IRenderSystem* renderSystem,
 
                                                       buw::ReferenceCounted<buw::ITexture2D> pickBuffer)
@@ -65,13 +67,16 @@ ViewCubeEffect::~ViewCubeEffect() {
 	backTexture_ = nullptr;
 }
 
+/*Create the vertex and index buffers for the compass on the GPU.*/
 void ViewCubeEffect::createCubeBuffers(std::vector<CubeVertexType>& vertices, std::vector<IndexType>& indices) {
 	buw::vertexBufferDescription vbd;
 	vbd.data = &vertices[0];
 	vbd.vertexCount = static_cast<int>(vertices.size());
 	vbd.vertexLayout = CubeVertexType::getVertexLayout();
 
-    if(vertexBufferCube_) vertexBufferCube_.reset();
+	/*If vertex buffer exists, reset it.*/
+    if(vertexBufferCube_)
+		vertexBufferCube_.reset();
 	vertexBufferCube_ = renderSystem()->createVertexBuffer(vbd);
 
 	buw::indexBufferDescription ibd;
@@ -79,10 +84,37 @@ void ViewCubeEffect::createCubeBuffers(std::vector<CubeVertexType>& vertices, st
 	ibd.indexCount = static_cast<int>(indices.size());
 	ibd.data = &indices[0];
 
-    if(indexBufferCube_) indexBufferCube_.reset();
+	/*If index buffer exists, reset it.*/
+    if(indexBufferCube_)
+		indexBufferCube_.reset();
 	indexBufferCube_ = renderSystem()->createIndexBuffer(ibd);
 }
 
+/*Create the vertex and index buffers for the compass on the GPU.*/
+void ViewCubeEffect::createCompassBuffers(std::vector<CompassVertexType>& vertices, std::vector<IndexType>& indices)
+{
+	buw::vertexBufferDescription vbd;
+	vbd.data = &vertices[0];
+	vbd.vertexCount = static_cast<int>(vertices.size());
+	vbd.vertexLayout = CompassVertexType::getVertexLayout();
+
+	/*If vertex buffer exists, reset it.*/
+	if(vertexBufferCompass_)
+		vertexBufferCompass_.reset();
+	vertexBufferCompass_ = renderSystem()->createVertexBuffer(vbd);
+
+	buw::indexBufferDescription ibd;
+	ibd.format = buw::eIndexBufferFormat::UnsignedInt32;
+	ibd.indexCount = static_cast<int>(indices.size());
+	ibd.data = &indices[0];
+
+	/*If index buffer exists, reset it.*/
+	if(indexBufferCompass_)
+		indexBufferCompass_.reset();
+	indexBufferCompass_ = renderSystem()->createIndexBuffer(ibd);
+}
+
+/*Update the descriptionBuffer on the GPU with new data.*/
 void ViewCubeEffect::updateDescriptionBuffer(DescriptionBuffer& buffer) {
 	buw::constantBufferDescription cbd;
 	cbd.sizeInBytes = sizeof(DescriptionBuffer);
@@ -90,6 +122,7 @@ void ViewCubeEffect::updateDescriptionBuffer(DescriptionBuffer& buffer) {
 	descriptionBuffer_->uploadData(cbd);
 }
 
+/*Update pickId buffer on the GPU side.*/
 void ViewCubeEffect::updatePickId(unsigned int pickId) {
 	lastPickId_ = pickId;
 	buw::constantBufferDescription cbd;
@@ -102,6 +135,7 @@ void ViewCubeEffect::setDepthStencil(buw::ReferenceCounted<buw::ITexture2D> dsv)
 	depthStencilMSAA_ = dsv;
 }
 
+/*On mouse move, copy the pickBuffer at the mouse position and update the new pickId with the read value.*/
 void ViewCubeEffect::mouseMove(const int x, const int y) {
 	renderSystem()->downloadTexture(pickBuffer_, pickBufferImage_, x, y);
 	unsigned int* id = (unsigned int*)&pickBufferImage_.getPixelColor(0, 0)[0];
@@ -117,7 +151,7 @@ void ViewCubeEffect::v_init() {
 	int width = renderSystem()->getBackBufferTarget()->width();
 	int height = renderSystem()->getBackBufferTarget()->height();
 
-	buw::viewportDescription vpd(std::min(width, 130), std::min(height, 130), std::max(width - 130, 0));
+	buw::viewportDescription vpd(std::min(width, viewportSize), std::min(height, viewportSize), std::max(width - viewportSize, 0));
 	viewport_ = renderSystem()->createViewport(vpd);
 
 	std::string filename = "Shader/ViewCubeEffect.be";
@@ -128,20 +162,7 @@ void ViewCubeEffect::v_init() {
 		throw buw::Exception("ViewCube shader (%s) does not exist.", filename);
 	}
 
-	buw::renderTargetBlendDescription rtbd;
-	rtbd.blendEnable = true;
-	rtbd.blendOp = buw::eBlendOperation::Add;
-	rtbd.srcBlend = buw::eBlendValue::SrcAlpha;
-	rtbd.destBlend = buw::eBlendValue::InvSrcAlpha;
-	rtbd.destBlendAlpha = buw::eBlendValue::Zero;
-	rtbd.srcBlendAlpha = buw::eBlendValue::Zero;
-	rtbd.blendOpAlpha = buw::eBlendOperation::Add;
-
-	buw::blendStateDescription bsd;
-	bsd.alphaToCoverageEnable = true;
-	bsd.independentBlendEnable = false;
-	bsd.renderTarget[0] = rtbd;
-
+	/*Create pipeline state for cube rendering.*/
 	buw::pipelineStateDescription cubePSD;
 	cubePSD.effectFilename = filename;
 	cubePSD.pipelineStateName = "cube";
@@ -150,9 +171,21 @@ void ViewCubeEffect::v_init() {
 	cubePSD.renderTargetFormats = {buw::eTextureFormat::R8G8B8A8_UnsignedNormalizedInt_SRGB};
 	cubePSD.useDepth = true;
 	cubePSD.useMSAA = renderSystem()->getMSAAEnabled();
-	//cubePSD.blendStateDesc = bsd;
 	cubeState_ = createPipelineState(cubePSD);
 
+	/*Create pipeline state for compass rendering, currently identical to cubeState.
+	But still create a seperate state to be open for changes without effecting the original cube state.*/
+	buw::pipelineStateDescription compassPSD;
+	compassPSD.effectFilename = filename;
+	compassPSD.pipelineStateName = "compass";
+	compassPSD.primitiveTopology = buw::ePrimitiveTopology::TriangleList;
+	compassPSD.vertexLayout = CubeVertexType::getVertexLayout();
+	compassPSD.renderTargetFormats = { buw::eTextureFormat::R8G8B8A8_UnsignedNormalizedInt_SRGB };
+	compassPSD.useDepth = true;
+	compassPSD.useMSAA = renderSystem()->getMSAAEnabled();
+	compassState_ = createPipelineState(compassPSD);
+
+	/*Create the pipeline state for rendering of the pick buffer.*/
 	buw::pipelineStateDescription pickPSD;
 	pickPSD.effectFilename = filename;
 	pickPSD.pipelineStateName = "pick";
@@ -163,6 +196,7 @@ void ViewCubeEffect::v_init() {
 	pickPSD.useMSAA = false;
 	pickState_ = createPipelineState(pickPSD);
 
+	/*Create the MSAA depth stencil for scene rendering.*/
 	buw::texture2DDescription dsvTD;
 	dsvTD.width = width;
 	dsvTD.height = height;
@@ -172,21 +206,24 @@ void ViewCubeEffect::v_init() {
 	dsvTD.useMSAA = renderSystem()->getMSAAEnabled();
 	depthStencilMSAA_ = renderSystem()->createTexture2D(dsvTD, buw::eTextureBindType::DSV);
 
+	/*Create the non MSAA depth stencil for pickBuffer rendering.*/
 	dsvTD.useMSAA = false;
 	depthStencil_ = renderSystem()->createTexture2D(dsvTD, buw::eTextureBindType::DSV);
 
+	/*Create the descriptionBuffer on the GPU side.*/
 	buw::constantBufferDescription cbd1;
 	cbd1.sizeInBytes = sizeof(DescriptionBuffer);
 	cbd1.data = nullptr;
 	descriptionBuffer_ = renderSystem()->createConstantBuffer(cbd1);
 
+	/*Create the cameraBuffer on the GPU side to provide the camera transformation for rendering.*/
 	buw::constantBufferDescription cbd2;
 	cbd2.sizeInBytes = sizeof(CameraBuffer);
 	cbd2.data = nullptr;
 	cameraBuffer_ = renderSystem()->createConstantBuffer(cbd2);
 
+	/*Create the pickId buffer for highlighting selected regions.*/
 	lastPickId_ = 0;
-
 	buw::constantBufferDescription cbd3;
 	cbd3.sizeInBytes = sizeof(unsigned int);
 	cbd3.data = &lastPickId_;
@@ -194,7 +231,7 @@ void ViewCubeEffect::v_init() {
 }
 
 void ViewCubeEffect::resize(buw::viewportDescription vpd) {
-	viewport_->resize(buw::viewportDescription(std::min((int)vpd.width, 130), std::min((int)vpd.height, 130), std::max((int)vpd.width - 130, 0)));
+	viewport_->resize(buw::viewportDescription(std::min((int)vpd.width, viewportSize), std::min((int)vpd.height, viewportSize), std::max((int)vpd.width - viewportSize, 0)));
 
 	buw::texture2DDescription dsvTD;
 	dsvTD.width = vpd.width;
@@ -257,7 +294,28 @@ void ViewCubeEffect::v_render() {
 	}
 
 	if (renderCompass_) {
-		// TODO: draw compass
+		/*Draw compass.*/
+		setPipelineState(compassState_);
+		setViewport(viewport_);
+		setRenderTarget(renderTarget, depthStencilMSAA_);
+		setSampler(sampler_, "samplerLinear");
+		setVertexBuffer(vertexBufferCompass_);
+		setIndexBuffer(indexBufferCompass_);
+		setConstantBuffer(cameraBuffer_, "CameraTransformations");
+		setConstantBuffer(descriptionBuffer_, "RenderingDescription");
+		setConstantBuffer(pickIdBuffer_, "PickId");
+
+		drawIndexed(static_cast<UINT>(indexBufferCompass_->getIndexCount()));
+
+		// render compass pick buffer
+		setPipelineState(pickState_);
+		setViewport(viewport_);
+		setRenderTarget(pickBuffer_, depthStencil_);
+		setVertexBuffer(vertexBufferCompass_);
+		setIndexBuffer(indexBufferCompass_);
+		setConstantBuffer(cameraBuffer_, "CameraTransformations");
+
+		drawIndexed(static_cast<UINT>(indexBufferCompass_->getIndexCount()));
 	}
 
 	if (renderArrows_) {

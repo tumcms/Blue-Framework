@@ -50,10 +50,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using eFaceId = BlueFramework::Engine::ViewCube::eFaceId;
 using Description = BlueFramework::Engine::ViewCube::viewCubeDescription;
 using CubeVertexType = BlueFramework::Engine::ViewCubeEffect::CubeVertexType;
+using CompassVertexType = BlueFramework::Engine::ViewCubeEffect::CompassVertexType;
 using IndexType = BlueFramework::Engine::ViewCubeEffect::IndexType;
 
-const int regionIds[9][9] = { {0, 0, 0, 1, 1, 1, 2, 2, 2}, {0, 0, 0, 1, 1, 1, 2, 2, 2}, {0, 0, 0, 1, 1, 1, 2, 2, 2}, {3, 3, 3, 4, 4, 4, 5, 5, 5}, {3, 3, 3, 4, 4, 4, 5, 5, 5},
-							 {3, 3, 3, 4, 4, 4, 5, 5, 5}, {6, 6, 6, 7, 7, 7, 8, 8, 8}, {6, 6, 6, 7, 7, 7, 8, 8, 8}, {6, 6, 6, 7, 7, 7, 8, 8, 8} };
+const int regionIds[9][9] = {
+	{0, 0, 0, 1, 1, 1, 2, 2, 2}, {0, 0, 0, 1, 1, 1, 2, 2, 2}, {0, 0, 0, 1, 1, 1, 2, 2, 2},
+	{3, 3, 3, 4, 4, 4, 5, 5, 5}, {3, 3, 3, 4, 4, 4, 5, 5, 5}, {3, 3, 3, 4, 4, 4, 5, 5, 5},
+	{6, 6, 6, 7, 7, 7, 8, 8, 8}, {6, 6, 6, 7, 7, 7, 8, 8, 8}, {6, 6, 6, 7, 7, 7, 8, 8, 8} };
 
 const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>> views_ = {
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 4)}, buw::ViewCube::eViewCubeOrientation::FrontView),
@@ -65,9 +68,9 @@ const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCube
 
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 1), buw::Vector2i(int(eFaceId::Top), 7)},
 																				  buw::ViewCube::eViewCubeOrientation::TopFrontView),
-  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 5), buw::Vector2i(int(eFaceId::Right), 3)},
+  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 5), buw::Vector2i(int(eFaceId::Right), 3) },
 																				  buw::ViewCube::eViewCubeOrientation::FrontRightView),
-  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 3), buw::Vector2i(int(eFaceId::Left), 5)},
+  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 3), buw::Vector2i(int(eFaceId::Left), 5) },
 																				  buw::ViewCube::eViewCubeOrientation::FrontLeftView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Front), 7), buw::Vector2i(int(eFaceId::Bottom), 1)},
 																				  buw::ViewCube::eViewCubeOrientation::FrontBottomView),
@@ -79,9 +82,9 @@ const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCube
 																				  buw::ViewCube::eViewCubeOrientation::TopLeftView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Left), 7), buw::Vector2i(int(eFaceId::Bottom), 3)},
 																				  buw::ViewCube::eViewCubeOrientation::LeftBottomView),
-  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Back), 3), buw::Vector2i(int(eFaceId::Right), 5)},
+  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Back), 3), buw::Vector2i(int(eFaceId::Right), 5) },
 																				  buw::ViewCube::eViewCubeOrientation::RightBackView),
-  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Back), 5), buw::Vector2i(int(eFaceId::Left), 3)},
+  std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Back), 5), buw::Vector2i(int(eFaceId::Left), 3) },
 																				  buw::ViewCube::eViewCubeOrientation::BackLeftView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>({buw::Vector2i(int(eFaceId::Back), 1), buw::Vector2i(int(eFaceId::Top), 1)},
 																				  buw::ViewCube::eViewCubeOrientation::TopBackView),
@@ -89,10 +92,10 @@ const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCube
 																				  buw::ViewCube::eViewCubeOrientation::BackBottomView),
 
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
-	{buw::Vector2i(int(eFaceId::Front), 2), buw::Vector2i(int(eFaceId::Top), 8), buw::Vector2i(int(eFaceId::Right), 0)},
+	{buw::Vector2i(int(eFaceId::Front), 2), buw::Vector2i(int(eFaceId::Top), 8), buw::Vector2i(int(eFaceId::Right), 0), buw::Vector2i(int(eFaceId::SouthEast), 9) },
 	buw::ViewCube::eViewCubeOrientation::TopFrontRightView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
-	{buw::Vector2i(int(eFaceId::Front), 0), buw::Vector2i(int(eFaceId::Left), 2), buw::Vector2i(int(eFaceId::Top), 6)},
+	{buw::Vector2i(int(eFaceId::Front), 0), buw::Vector2i(int(eFaceId::Left), 2), buw::Vector2i(int(eFaceId::Top), 6), buw::Vector2i(int(eFaceId::SouthWest), 9) },
 	buw::ViewCube::eViewCubeOrientation::TopLeftFrontView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
 	{buw::Vector2i(int(eFaceId::Front), 8), buw::Vector2i(int(eFaceId::Right), 6), buw::Vector2i(int(eFaceId::Bottom), 2)},
@@ -101,10 +104,10 @@ const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCube
 	{buw::Vector2i(int(eFaceId::Front), 6), buw::Vector2i(int(eFaceId::Left), 8), buw::Vector2i(int(eFaceId::Bottom), 0)},
 	buw::ViewCube::eViewCubeOrientation::FrontLeftBottomView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
-	{buw::Vector2i(int(eFaceId::Back), 0), buw::Vector2i(int(eFaceId::Top), 2), buw::Vector2i(int(eFaceId::Right), 2)},
+	{buw::Vector2i(int(eFaceId::Back), 0), buw::Vector2i(int(eFaceId::Top), 2), buw::Vector2i(int(eFaceId::Right), 2), buw::Vector2i(int(eFaceId::NorthEast), 9) },
 	buw::ViewCube::eViewCubeOrientation::TopRightBackView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
-	{buw::Vector2i(int(eFaceId::Back), 2), buw::Vector2i(int(eFaceId::Top), 0), buw::Vector2i(int(eFaceId::Left), 0)},
+	{buw::Vector2i(int(eFaceId::Back), 2), buw::Vector2i(int(eFaceId::Top), 0), buw::Vector2i(int(eFaceId::Left), 0), buw::Vector2i(int(eFaceId::NorthWest), 9) },
 	buw::ViewCube::eViewCubeOrientation::TopLeftBackView),
   std::make_pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCubeOrientation>(
 	{buw::Vector2i(int(eFaceId::Back), 6), buw::Vector2i(int(eFaceId::Bottom), 8), buw::Vector2i(int(eFaceId::Right), 8)},
@@ -113,16 +116,8 @@ const std::vector<std::pair<std::vector<buw::Vector2i>, buw::ViewCube::eViewCube
 	{buw::Vector2i(int(eFaceId::Back), 8), buw::Vector2i(int(eFaceId::Bottom), 6), buw::Vector2i(int(eFaceId::Left), 6)},
 	buw::ViewCube::eViewCubeOrientation::BackLeftBottomView) };
 
-// std::multimap<unsigned int, std::pair<buw::Vector2i, buw::ViewCube::eViewCubeOrientation>>	buw::ViewCube::mapping;
 
 unsigned int BlueFramework::Engine::ViewCube::getMatchingPickId(eFaceId faceId, int regionId) {
-	/*for (auto entry : buw::ViewCube::mapping) {
-		if (entry.second.first.x() == (int)faceId && entry.second.first.y() == regionId)
-		{
-			return entry.first;
-		}
-	}*/
-
 	for(auto it : views_) {
 		for(auto it_pairs : it.first) {
 			if(it_pairs.x() == int(faceId) && it_pairs.y() == regionId) {
@@ -234,6 +229,7 @@ BlueFramework::Engine::ViewCube::~ViewCube() {
 }
 
 void createCubeBufferData(Description from, std::vector<CubeVertexType>& vertices_out, std::vector<IndexType>& indices_out) {
+	/*Initialize the offsets for the different viewCube regions.*/
 	float offsets[9] = { from.outerBoundWidth,
 						from.outerBoundHeight,
 						from.innerBoundWidth,
@@ -244,6 +240,10 @@ void createCubeBufferData(Description from, std::vector<CubeVertexType>& vertice
 						from.outerBoundHeight,
 						from.outerBoundWidth };
 
+	/*
+	Iterate over all faces to generate the raw vertex data.
+	TODO: Finish documentation!
+	*/
 	for(int faces = 0; faces < 6; ++faces) {
 		float top = 1.0f, bottom = 1.0f;
 		for(int rows = 0; rows < 9; ++rows) {
@@ -254,10 +254,16 @@ void createCubeBufferData(Description from, std::vector<CubeVertexType>& vertice
 				left = right;
 				right += offsets[cols];
 
+				/*Set start index as number of vertices already created.*/
 				int startIndex = int(vertices_out.size());
+
+				/*Determine region type from horizontal and vertical position.*/
 				int regionType = (cols % 3 == 1 && rows % 3 == 1) ? (cols == 4 && rows == 4) ? 2 : 1 : 0;
+
 				int regionId = regionIds[rows][cols];
 				unsigned int pickid = BlueFramework::Engine::ViewCube::getMatchingPickId(static_cast<eFaceId>(faces), regionId);
+
+				/*Push vertices into CPU side vertex buffer.*/
 				vertices_out.push_back(
 					CubeVertexType(transform(buw::Vector3f(left, top, -0.5f), static_cast<eFaceId>(faces)), mapToTexture(left, top), pickid, faces, regionType));
 				vertices_out.push_back(
@@ -267,6 +273,7 @@ void createCubeBufferData(Description from, std::vector<CubeVertexType>& vertice
 				vertices_out.push_back(
 					CubeVertexType(transform(buw::Vector3f(right, bottom, -0.5f), static_cast<eFaceId>(faces)), mapToTexture(right, bottom), pickid, faces, regionType));
 
+				/*Push indices into CPU side index buffer.*/
 				indices_out.push_back(startIndex);
 				indices_out.push_back(startIndex + 1);
 				indices_out.push_back(startIndex + 2);
@@ -278,6 +285,64 @@ void createCubeBufferData(Description from, std::vector<CubeVertexType>& vertice
 	}
 }
 
+/*Create vertices and indices for the compass from the viewCubeDescription.*/
+void createCompassBufferData(Description desc, std::vector<CompassVertexType>& vertices_out, std::vector<IndexType>& indices_out)
+{
+	/*Create the 4 segments for diagonal segments (ne,nw,se,sw).*/
+	buw::Vector3f offset = buw::Vector3f(desc.circleOffset, -0.4f, desc.circleOffset);
+	float offsets[3] = { desc.outerCircleWidth, desc.innerCircleWidth, desc.outerCircleWidth };
+	float radius[3] = {
+		desc.outerCircleRadius,
+		desc.outerCircleRadius - desc.outerCircleWidth,
+		desc.outerCircleRadius - desc.outerCircleWidth - desc.innerCircleWidth 
+	};
+
+	int faceId = 6;
+	/*Iterate over the 4 directions for the segments.*/
+	for(int hor = -1; hor <= 1; hor += 2) {
+		for(int ver = -1; ver <= 1; ver += 2) {
+			buw::Vector3f direction = buw::Vector3f(hor, 1.0f, ver);
+			for(int region = 0; region < 3; region++) {
+
+				/*Iterate over a 90° arc and create the points for the circles.*/
+				for(int deg = 0; deg < 90; deg++) {
+					int startIndex = int(vertices_out.size());
+					for(int shift = 0; shift < 2; shift++) {
+						float rad = buw::degreeToRadian(1.0f*(deg + shift));
+
+						CompassVertexType vertex;
+						buw::Vector3f posXYZ = buw::Vector3f(std::cosf(rad), 0, std::sinf(rad));
+						buw::Vector3f pos = posXYZ * radius[region] + offset;
+
+						vertex.faceid = faceId;
+						vertex.uv = buw::Vector2f(0.0f, 0.0f);
+						unsigned int pickId = BlueFramework::Engine::ViewCube::getMatchingPickId(static_cast<eFaceId>(faceId), 9);
+						vertex.pickid = pickId | 0b01000000;
+						vertex.regionid = deg <= 1 || deg >= 88 ? 0 : region % 2;
+
+						pos = (pos.array()*direction.array()).matrix();
+						vertex.position = pos;
+						vertices_out.push_back(vertex);
+
+						pos = posXYZ *(radius[region] - offsets[region]) + offset;
+						pos = (pos.array()*direction.array()).matrix();
+						vertex.position = pos;
+						vertices_out.push_back(vertex);
+					}
+
+					/*Push indices into CPU side index buffer.*/
+					indices_out.push_back(startIndex);
+					indices_out.push_back(startIndex + 1);
+					indices_out.push_back(startIndex + 2);
+					indices_out.push_back(startIndex + 3);
+					indices_out.push_back(startIndex + 2);
+					indices_out.push_back(startIndex + 1);
+				}
+			}
+			faceId++;
+		}
+	}
+}
 std::string BlueFramework::Engine::ViewCube::viewCubeDescription::getFaceTexturePath(eFaceId face) {
 	switch(face) {
 	case eFaceId::Front: return frontTexturePath;
@@ -290,6 +355,7 @@ std::string BlueFramework::Engine::ViewCube::viewCubeDescription::getFaceTexture
 	}
 }
 
+/*Save the current viewCubeDescription to a file to reimport it.*/
 void BlueFramework::Engine::ViewCube::viewCubeDescription::saveToFile(QString filename)
 {
 	std::ofstream ofstream(filename.toStdString(), std::ofstream::out);
@@ -377,11 +443,18 @@ Description BlueFramework::Engine::ViewCube::getDescription()
 void BlueFramework::Engine::ViewCube::setDescription(Description desc) {
 	desc_ = desc;
 	std::vector<CubeVertexType> vertices_cube;
-	std::vector<IndexType> indices_cube;
+	std::vector<CompassVertexType> vertices_compass;
+	std::vector<IndexType> indices_cube, indices_compass;
 
+	/*Create raw vertex data and create GPU buffers for the rendering effect.*/
 	createCubeBufferData(desc_, vertices_cube, indices_cube);
 	effect_.createCubeBuffers(vertices_cube, indices_cube);
 
+	/*Create the CPU side buffers and let the effect create the GPU side buffers.*/
+	createCompassBufferData(desc_, vertices_compass, indices_compass);
+	effect_.createCompassBuffers(vertices_compass, indices_compass);
+
+	/*Pass the description on to the effect for rendering.*/
 	ViewCubeEffect::DescriptionBuffer buffer;
 	buffer.size[0] = desc_.size;
 	buffer.bindingColor = desc_.bindingColor;
@@ -393,23 +466,26 @@ void BlueFramework::Engine::ViewCube::setDescription(Description desc) {
 
 	effect_.updateDescriptionBuffer(convert(desc_));
 
+	/*Iterate over all faces and load the corresponding textures from the files specified in the description.*/
 	for(int face = 0; face < 6; ++face) {
 		eFaceId faceid = static_cast<eFaceId>(face);
-
 		auto img = buw::loadImage4b(desc_.getFaceTexturePath(faceid));
 
+		/*Create the texture description for the GPU side buffer.*/
 		buw::texture2DDescription td;
 		td.width = img.getWidth();
 		td.height = img.getHeight();
 		td.format = buw::eTextureFormat::R8G8B8A8_UnsignedNormalizedInt_SRGB;
 		td.data = img.getData();
 
+		/*Create the texture on the GPU side.*/
 		auto tex = effect_.renderSystem()->createTexture2D(td, buw::eTextureBindType::SRV);
 		setFaceTexture(faceid, tex);
 	}
 }
 
 void BlueFramework::Engine::ViewCube::render() {
+	/*Update the camera matrix and render the viewCube.*/
 	const buw::Matrix44f rotation = cameraController_->getCamera()->transformation().rotationMatrix();
 	effect_.updateRotationMatrix(rotation);
 	effect_.render();
@@ -422,12 +498,13 @@ void BlueFramework::Engine::ViewCube::resize(buw::viewportDescription vpd) {
 	effect_.resize(vpd);
 }
 
+/*Forward mouse movement to rendering effect.*/
 void BlueFramework::Engine::ViewCube::mouseMove(const int x, const int y) {
 	effect_.mouseMove(x, y);
 }
 
 void BlueFramework::Engine::ViewCube::mousePress() {
-	if(effect_.getLastPickId() < 64) {
+	if(effect_.getLastPickId() < 128) {
 		ViewCube::eViewCubeOrientation newOrientation = ViewCube::eViewCubeOrientation(effect_.getLastPickId());
 		if(newOrientation != Unselected) {
 			currentOrientation_ = newOrientation;
@@ -436,6 +513,7 @@ void BlueFramework::Engine::ViewCube::mousePress() {
 	}
 }
 
+/*Retrieve geometric view direction from enum.*/
 const buw::Vector3f BlueFramework::Engine::ViewCube::getViewDirection(eViewCubeOrientation orientation) const {
 	buw::Vector3f viewDirection;
 	viewDirection[1] = ((orientation & ViewCube::eViewCubeOrientation::TopView) > 0) ? 1.0f : ((orientation & ViewCube::eViewCubeOrientation::BottomView) > 0) ? -1.0f : 0.0f;
@@ -448,6 +526,7 @@ const buw::Vector3f BlueFramework::Engine::ViewCube::getViewDirection(eViewCubeO
 	return const_viewDirection;
 }
 
+/*Convert description from format used by ViewCube class to the one used by ViewCubeEffect.*/
 BlueFramework::Engine::ViewCubeEffect::DescriptionBuffer BlueFramework::Engine::ViewCube::convert(Description desc) {
 	ViewCubeEffect::DescriptionBuffer buffer;
 	buffer.size[0] = desc.size;
@@ -460,6 +539,7 @@ BlueFramework::Engine::ViewCubeEffect::DescriptionBuffer BlueFramework::Engine::
 	return buffer;
 }
 
+/*Load a description from file.*/
 Description BlueFramework::Engine::ViewCube::loadDescription(std::string filename) {
 	QFile file(filename.data());
 	BLUE_ASSERT(file.open(QIODevice::ReadOnly | QIODevice::Text))

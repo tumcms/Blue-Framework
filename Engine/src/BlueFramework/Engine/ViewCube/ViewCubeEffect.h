@@ -61,12 +61,15 @@ public:
 public:
 	typedef uint32_t IndexType;
 	typedef buw::VertexPosition3Texture2PickId1FaceId1RegionId1 CubeVertexType;
+	typedef buw::VertexPosition3Texture2PickId1FaceId1RegionId1 CompassVertexType;
 
 	ViewCubeEffect(buw::IRenderSystem* renderSystem, buw::ReferenceCounted<buw::ITexture2D> pickBuffer);
 	// ViewCubeEffect() {};
 	virtual ~ViewCubeEffect();
 
 	void createCubeBuffers(std::vector<CubeVertexType>& vertices, std::vector<IndexType>& indices);
+
+	void createCompassBuffers(std::vector<CompassVertexType>& vertices, std::vector<IndexType>& indices);
 
 	void updateDescriptionBuffer(DescriptionBuffer& buffer);
 	void updatePickId(unsigned int pickId);
@@ -131,7 +134,7 @@ private:
 	void updateCameraBuffer();
 
 private:
-	bool renderCube_ = true, renderCompass_ = false, renderArrows_ = false;
+	bool renderCube_ = true, renderCompass_ = true, renderArrows_ = false;
 
 	buw::ReferenceCounted<buw::IPipelineState> cubeState_, compassState_, arrowsState_, pickState_;
 	buw::ReferenceCounted<buw::IVertexBuffer> vertexBufferCube_, vertexBufferCompass_, vertexBufferArrows_;
