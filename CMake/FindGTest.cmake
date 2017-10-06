@@ -1,19 +1,18 @@
 #
-#   This file is part of BlueFramework, a simple 3D engine.
-#	Copyright (c) 2016-2017 Technical University of Munich
-#	Chair of Computational Modeling and Simulation.
+#    Copyright (c) 2017 Technical University of Munich
+#    Chair of Computational Modeling and Simulation.
 #
-#   BlueFramework is free software; you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License Version 3
-#   as published by the Free Software Foundation.
+#    TUM Open Infra Platform is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License Version 3
+#    as published by the Free Software Foundation.
 #
-#   BlueFramework is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#   GNU General Public License for more details.
+#    TUM Open Infra Platform is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
 #
-#   You should have received a copy of the GNU General Public License
-#   along with this program. If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU General Public License
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 #	This module defines the following variables:
 #
@@ -30,20 +29,32 @@ find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h googlemock/include/g
 
 if(NOT GTEST_ROOT)
 	set(CMAKE_MODULE_PATH ${CMAKE_ROOT}/Modules)
-	find_package(gtest REQUIRED)
+	find_package(gtest)
 	set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 	
 	set(GTEST_INSTALL_DIR "C:/thirdparty/${MSVC_VERSION_STRING}/x64" CACHE FILEPATH "Please specify an installation directory.")
 	option(GTEST_AUTOMATIC_INSTALL OFF)
 	if(GTEST_AUTOMATIC_INSTALL AND GTEST_INSTALL_DIR)
 		message(STATUS "Installing GTest...")
-		execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_googletest-1.8.0_Visual Studio 14 2015 Win64.cmd"
-		${GTEST_INSTALL_DIR}
-		"${CMAKE_COMMAND}"
-		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
-		RESULT_VARIABLE RESULT
-		ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt"
-		OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt")
+		if(${MSVC_VERSION_STRING} STREQUAL "vs2015")
+			execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_googletest-1.8.0_Visual Studio 14 2015 Win64.cmd"
+				${GTEST_INSTALL_DIR}
+				"${CMAKE_COMMAND}"
+				WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
+				RESULT_VARIABLE RESULT
+				ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt"
+				OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt")
+		elseif(${MSVC_VERSION_STRING} STREQUAL "vs2017")
+			execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_googletest-1.8.0_Visual Studio 15 2017 Win64.cmd"
+				${GTEST_INSTALL_DIR}
+				"${CMAKE_COMMAND}"
+				WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
+				RESULT_VARIABLE RESULT
+				ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt"
+				OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_gtest.txt")
+		else()
+			message(FATAL_ERROR "Couldn't determine VS version.")
+		endif()
 		if(RESULT EQUAL 0)
 			set(GTEST_ROOT ${GTEST_INSTALL_DIR}/googletest-release-1.8.0 CACHE PATH "GTest root" FORCE)
 			message(STATUS "Successfully installed GTest.")

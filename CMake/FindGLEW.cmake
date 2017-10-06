@@ -39,14 +39,25 @@ if(NOT GLEW_FOUND AND NOT GLEW_ROOT)
 	endif()
 	if(GLEW_AUTOMATIC_INSTALL AND GLEW_INSTALL_DIR)
 		MESSAGE(STATUS "Installing glew...")
-		execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_glew-2.0.0_Visual Studio 14 2015 Win64.cmd"
-		${GLEW_INSTALL_DIR}
-		"${CMAKE_COMMAND}"
-		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
-		RESULT_VARIABLE RESULT
-		ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt"
-		OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt"
-		)
+		if(${MSVC_VERSION_STRING} STREQUAL "vs2015")
+			execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_glew-2.0.0_Visual Studio 14 2015 Win64.cmd"
+				${GLEW_INSTALL_DIR}
+				"${CMAKE_COMMAND}"
+				WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
+				RESULT_VARIABLE RESULT
+				ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt"
+				OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt")
+		elseif(${MSVC_VERSION_STRING} STREQUAL "vs2017")
+			execute_process(COMMAND "${PROJECT_SOURCE_DIR}/external/Build_glew-2.0.0_Visual Studio 15 2017 Win64.cmd"
+				${GLEW_INSTALL_DIR}
+				"${CMAKE_COMMAND}"
+				WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/external
+				RESULT_VARIABLE RESULT
+				ERROR_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt"
+				OUTPUT_FILE "${PROJECT_SOURCE_DIR}/external/log_install_glew.txt")
+		else()
+			message(FATAL_ERROR "Couldn't determine VS version.")
+		endif()
 		set(GLEW_AUTOMATIC_INSTALL OFF CACHE BOOL "Automatically install glew" FORCE)
 		if(RESULT EQUAL 0)
 			message(STATUS "Successfully installed GLEW.")
