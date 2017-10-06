@@ -34,11 +34,14 @@ void loadWebResources(const char* filename);
 void downloadFile(const downloadDescription& dd);
 void downloadFile(const std::string& uri, const std::string& localPath);
 
+std::vector<char> downloadBytes(const std::string& uri);
+
 BLUEFRAMEWORK_ENGINE_NAMESPACE_END
 
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(downloadDescription)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(loadWebResources)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(downloadFile)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(downloadFile)
+BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(downloadBytes)
 
 #endif // end define BlueFramework_Engine_download_532ddd47_eda3_4c21_8657_5f09d670ff66_h

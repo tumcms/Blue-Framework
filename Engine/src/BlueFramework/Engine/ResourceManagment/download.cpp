@@ -129,6 +129,21 @@ void downloadFile(const std::string& uri, const std::string& localPath) {
 	downloadFile(dd);
 }
 
+std::vector<char> downloadBytes(const std::string& uri)
+{
+	buw::Uri url(uri);
+	BLUE_LOG(info) << "Try to download " << url.getPath().c_str();
+
+	std::string path = url.getPath();
+	path = buw::replace(path, " ", "%20");
+
+	std::string result = getHttpData(url.getHost(), path);
+
+	std::vector<char> bytes(result.begin(), result.end());
+
+	return bytes;
+}
+
 void loadWebResources(const char* filename) {
 	if (!boost::filesystem::exists(filename)) {
 		BLUE_LOG(error) << "Resource file \"" << filename << "\" does not exist!";
