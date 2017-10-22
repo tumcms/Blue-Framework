@@ -9,7 +9,7 @@ add_custom_target(Qt5CopyBinaries
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Guid.dll          ${CMAKE_BINARY_DIR}/Debug
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Networkd.dll        ${CMAKE_BINARY_DIR}/Debug
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5OpenGLd.dll            ${CMAKE_BINARY_DIR}/Debug
-  COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Scriptd.dll            ${CMAKE_BINARY_DIR}/Debug
+  #COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Scriptd.dll            ${CMAKE_BINARY_DIR}/Debug
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Sqld.dll               ${CMAKE_BINARY_DIR}/Debug
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Widgetsd.dll           ${CMAKE_BINARY_DIR}/Debug
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Xmld.dll               ${CMAKE_BINARY_DIR}/Debug
@@ -33,7 +33,7 @@ add_custom_target(Qt5CopyBinaries
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Gui.dll         ${CMAKE_BINARY_DIR}/Release
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Network.dll       ${CMAKE_BINARY_DIR}/Release
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5OpenGL.dll         ${CMAKE_BINARY_DIR}/Release
-  COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Script.dll         ${CMAKE_BINARY_DIR}/Release
+  #COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Script.dll         ${CMAKE_BINARY_DIR}/Release
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Sql.dll         ${CMAKE_BINARY_DIR}/Release
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Widgets.dll       ${CMAKE_BINARY_DIR}/Release
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Xml.dll         ${CMAKE_BINARY_DIR}/Release
@@ -57,7 +57,7 @@ add_custom_target(Qt5CopyBinaries
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Gui.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Network.dll       ${CMAKE_BINARY_DIR}/RelWithDebInfo
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5OpenGL.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
-  COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Script.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
+  #COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Script.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Sql.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Widgets.dll       ${CMAKE_BINARY_DIR}/RelWithDebInfo
   COMMAND  ${CMAKE_COMMAND} -E copy ${Qt5Core_DIR}/../../../bin/Qt5Xml.dll         ${CMAKE_BINARY_DIR}/RelWithDebInfo
