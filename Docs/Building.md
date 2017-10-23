@@ -26,20 +26,16 @@ Install the following third-party libraries
 
 1. Windows 10 SDK (https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk)
 
-2. Boost: 1.63.0: Download a prebuild version from https://sourceforge.net/projects/boost/files/boost-binaries/1.63.0/ or build it yourself. For the second option you can use BlueGo see https://bitbucket.org/Vertexwahn/bluego)
+2. Boost: 1.65.1: Download a prebuild version from https://sourceforge.net/projects/boost/files/boost-binaries/1.65.1/ or build it yourself. For the second option you can use BlueGo see https://bitbucket.org/Vertexwahn/bluego) or one of the build scripts provided here: https://bitbucket.org/Vertexwahn/percdems
 Not all parts of boost are required. You just need: filesystem, python, signals and system.
+
 ![BlueGo](images/BlueGo.png)
 Building Boost can take some time and consumes a lot of disk space. To build it faster with less memory wastage you can build only the parts of boost that are needed. Use this command:
-`C:\thirdparty\vs2013\x64\boost_1_57_0>b2 address-model=64 toolset=msvc-12.0 --build-type=complete stage --with-filesystem --with-signals --with-system --with-date_time --with-regex`
+`C:\thirdparty\vs2017\x64\boost_1_65_1>b2 address-model=64 toolset=msvc-14.1 --build-type=complete stage --with-filesystem --with-signals --with-system --with-date_time --with-regex`
 
-3. Qt 5.8.0 from https://www.qt.io/
-
-4. LunarG Vulkan SDK 1.0.39.1 from https://www.lunarg.com/vulkan-sdk/
-
-- Start CMake (https://cmake.org/) and select as source folder the previous checked out BlueFramework3 folder
+3. Qt 5.9.2 from https://www.qt.io/
 
 ## How to build BlueFramework with CMake Step by Step
 
-BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2015 x64 Update 3. Currently, we are not aiming at supporting any other compilers.
+BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2017 x64 (Version 15.4.1). Currently, we are not aiming at supporting any other compilers.
 
-Start CMake select where the source code is located and where to build the binaries:
