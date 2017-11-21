@@ -25,8 +25,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
 
 # Suggest new version of CMake
-if(${CMAKE_VERSION} VERSION_LESS "3.9.4")
-    message("Please consider to switch to CMake 3.9.4")
+if(${CMAKE_VERSION} VERSION_LESS "3.10.0")
+    message("Please consider to switch to CMake 3.10.0")
 endif()
 
 enable_testing()
@@ -51,8 +51,6 @@ if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message("Please switch to x64 build.")
 	return()
 endif()
-
-set(Boost_ADDITIONAL_VERSIONS "1.64.0") # we should get rid of this
 
 #------------------------------------------------------------------------------
 # Create folders for different build configurations (if they do not exist) to 
