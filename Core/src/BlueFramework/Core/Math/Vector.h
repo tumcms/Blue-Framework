@@ -80,94 +80,94 @@ typedef Eigen::Vector4d Vector4d;
 
 template <typename Scalar>
 Scalar minimalComponent(const Vector<Scalar, 3>& v) {
-	return std::min(std::min(v.x(), v.y()), v.z());
+    return std::min(std::min(v.x(), v.y()), v.z());
 }
 
 template <typename Scalar, int N>
 Vector<Scalar, N> minimizedVector(const Vector<Scalar, N>& a, const Vector<Scalar, N>& b) {
-	Vector<Scalar, N> r;
+    Vector<Scalar, N> r;
 
-	for(int i=0; i<N; i++)
-		r(i) = std::min(a(i), b(i));
+    for(int i=0; i<N; i++)
+        r(i) = std::min(a(i), b(i));
 
-	return r;
+    return r;
 }
 
 template <typename Scalar, int N>
 Vector<Scalar, N> maximizedVector(const Vector<Scalar, N>& a, const Vector<Scalar, N>& b) {
-	Vector<Scalar, N> r;
+    Vector<Scalar, N> r;
 
-	for (int i = 0; i<N; i++)
-		r(i) = std::max(a(i), b(i));
+    for (int i = 0; i<N; i++)
+        r(i) = std::max(a(i), b(i));
 
-	return r;
+    return r;
 }
 
 template <typename Scalar>
 Scalar calculateAngleBetweenVectorsHalfCircle(const Vector<Scalar, 3>& v1, const Vector<Scalar, 3>& v2) {
-	if (v1 == Vector<Scalar, 3>(0, 0, 0) || v2 == Vector<Scalar, 3>(0, 0, 0)) {
-		return 0.0; // Invalid vector
-	}
+    if (v1 == Vector<Scalar, 3>(0, 0, 0) || v2 == Vector<Scalar, 3>(0, 0, 0)) {
+        return 0.0; // Invalid vector
+    }
 
-	Scalar a = v1.squaredNorm();
-	Scalar b = v2.squaredNorm();
+    Scalar a = v1.squaredNorm();
+    Scalar b = v2.squaredNorm();
 
-	if (a * b == 0) {
-		return 0; // Invalid vector
-	}
+    if (a * b == 0) {
+        return 0; // Invalid vector
+    }
 
-	if (a > 0 && b > 0) {
-		float sign = minimalComponent(v1.cross(v2));
+    if (a > 0 && b > 0) {
+        float sign = minimalComponent(v1.cross(v2));
 
-		// prevent division by 0
-		if (a * b == 0) {
-			return 0;
-		}
+        // prevent division by 0
+        if (a * b == 0) {
+            return 0;
+        }
 
-		if (sign < 0)
-			return -acos(v1.dot(v2) / sqrtf(a * b));
-		else
-			return acos(v1.dot(v2) / sqrtf(a * b));
-	}
+        if (sign < 0)
+            return -acos(v1.dot(v2) / sqrtf(a * b));
+        else
+            return acos(v1.dot(v2) / sqrtf(a * b));
+    }
 
-	return 0;
+    return 0;
 }
 
 template <typename Scalar>
 Scalar calculateAngleBetweenVectors(const Vector<Scalar, 3>& v1, const Vector<Scalar, 3>& v2) {
-	Scalar angle = calculateAngleBetweenVectorsHalfCircle(v1, v2);
+    Scalar angle = calculateAngleBetweenVectorsHalfCircle(v1, v2);
 
-	if (angle < 0)
-		angle += 2.0 * buw::constants<Scalar>::pi();
+    if (angle < 0)
+        angle += 2.0 * buw::constants<Scalar>::pi();
 
-	return static_cast<float>(angle);
+    return static_cast<float>(angle);
 }
 
 template <typename Scalar>
 Scalar calculateAngleBetweenVectors(const Vector<Scalar, 2>& v1, const Vector<Scalar, 2>& v2) {
-	Scalar angle = calculateAngleBetweenVectorsHalfCircle(Vector<Scalar, 3>(v1.x(), v1.y(), 0), Vector<Scalar, 3>(v2.x(), v2.y(), 0));
+    Scalar angle = calculateAngleBetweenVectorsHalfCircle(Vector<Scalar, 3>(v1.x(), v1.y(), 0), Vector<Scalar, 3>(v2.x(), v2.y(), 0));
 
-	if (angle < 0)
-		angle += 2.0 * buw::constants<Scalar>::pi();
+    if (angle < 0)
+        angle += 2.0 * buw::constants<Scalar>::pi();
 
-	return static_cast<float>(angle);
+    return static_cast<float>(angle);
 }
 
 template <typename Scalar, int RowsAtCompileTime>
 Scalar distance(const Vector<Scalar, RowsAtCompileTime>& v1, const Vector<Scalar, RowsAtCompileTime>& v2) {
-	return (v1 - v2).norm();
+    return (v1 - v2).norm();
 }
 
 // Gets the vector rotated by 90 degrees CCW or CW. Fast and numerically stable.
 template <typename Scalar>
 Vector<Scalar, 2> orthogonal(Vector<Scalar, 2> v, bool const bCCW) {
-	// Flip the respective sign.
-	v[int(bCCW)] = -v[int(bCCW)];
+    // Flip the respective sign.
+    v[int(bCCW)] = -v[int(bCCW)];
 
-	// Swap coordinates.
-	std::swap(v[0], v[1]);
+    // Swap coordinates.
+    std::swap(v[0], v[1]);
 
-	return v;
+    return v;
 }
 
 BLUEFRAMEWORK_CORE_MATH_NAMESPACE_END
