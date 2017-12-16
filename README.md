@@ -21,7 +21,8 @@ The **Engine** module over functionality to download resources such as textures 
 
 ### Ether.DebugVisualizer
 ![OIP](Docs/images/Ether.DebugVisualizer.png)
-[Country Kitchen](https://www.blendswap.com/blends/view/42851) scene by [Jay-Artist](https://www.blendswap.com/user/Jay-Artist)
+
+([Country Kitchen](https://www.blendswap.com/blends/view/42851) scene by [Jay-Artist](https://www.blendswap.com/user/Jay-Artist))
 
 ## Documentation
 
@@ -55,16 +56,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 ## Copyright notes
 BlueFramework version 3.0.0.0 and up uses several software libraries. The corresponding licenses can be found in the Licenses folder distributed with this source code:
 
-* boost 1.63.0 (http://www.boost.org/) (*Boost Software License*) ({root_dir}/Licenses/boost.LICENSE_1_0.txt)
-* Eigen 3.3.3 (http://eigen.tuxfamily.org/) (*MPL2*) ({root_dir}/Licenses/Eigen.COPYING.MPL2)
+* boost 1.65.1 (http://www.boost.org/) (*Boost Software License*) ({root_dir}/Licenses/boost.LICENSE_1_0.txt)
+* Eigen 3.3.4 (http://eigen.tuxfamily.org/) (*MPL2*) ({root_dir}/Licenses/Eigen.COPYING.MPL2)
 * Google Test 1.8.0 (https://github.com/google/googletest) (*BSD 3-Clause License*) ({root_dir}/Licenses/GoogleTest.LICENSE)
 * TinyXML-2 (https://github.com/leethomason/tinyxml2) (zlib license) ({root_dir}/Licenses/TinyXML-2.txt)
-* Qt 5.9.1 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
-* OGRE3D (http://www.ogre3d.org/) (MIT License) ({root_dir}/Licenses/OGRE3D.MIT.txt)
+* Qt 5.10.0 (http://doc.qt.io/qt-5/lgpl.html) (LGPL version 3) ({root_dir}/Licenses/Qt.LGPL_version_3.txt)
 * glew 2.0.0 (http://glew.sourceforge.net/) (*Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)*) ({root_dir}/Licenses/glew.LICENSE.txt)
 
 Some code has also been copied from the following projects:
 
+* OGRE3D (http://www.ogre3d.org/) (MIT License) ({root_dir}/Licenses/OGRE3D.MIT.txt)
 * API DESIGN FOR C++ (http://www.apibook.com/) (MIT license) ({root_dir}/Licenses/apibook.LICENSE)
 * appleseed (http://appleseedhq.net/) (MIT license) ({root_dir}/Licenses/appleseed.LICENSE.txt)
 * CML (Configurable Math Library) (Boost Software License) ({root_dir}/Licenses/CML.LICENSE.txt)
