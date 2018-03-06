@@ -103,6 +103,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE   		${CMAKE_BINARY_DIR}/Release)
 set(CMAKE_PDB_OUTPUT_DIRECTORY_RELEASE       		${CMAKE_BINARY_DIR}/Release)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO   ${CMAKE_BINARY_DIR}/RelWithDebInfo)
 set(CMAKE_PDB_OUTPUT_DIRECTORY_RELWITHDEBINFO       ${CMAKE_BINARY_DIR}/RelWithDebInfo)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL   	${CMAKE_BINARY_DIR}/MinSizeRel)
+set(CMAKE_PDB_OUTPUT_DIRECTORY_MINSIZEREL       	${CMAKE_BINARY_DIR}/MinSizeRel)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
@@ -201,7 +203,7 @@ set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy
 macro(AddCopyCommandForModule module target dest)
 	add_custom_command(TARGET ${target} COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${module}> ${dest}/$<CONFIG>/$<TARGET_FILE_NAME:${module}> VERBATIM)
 	add_custom_command(TARGET ${target} COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${module}> ${dest}/$<CONFIG>/$<TARGET_LINKER_FILE_NAME:${module}> VERBATIM)
-	add_custom_command(TARGET ${target} COMMAND ${CMAKE_COMMAND} -E copy $<IF:$<CONFIG:release>,$<TARGET_LINKER_FILE:${module}>,$<TARGET_PDB_FILE:${module}>> $<IF:$<CONFIG:release>,${dest}/$<CONFIG>/$<TARGET_LINKER_FILE_NAME:${module}>,${dest}/$<CONFIG>/$<TARGET_PDB_FILE_NAME:${module}>> VERBATIM)	
+	add_custom_command(TARGET ${target} COMMAND ${CMAKE_COMMAND} -E copy $<IF:$<OR:$<CONFIG:release>,$<CONFIG:minsizerel>>,$<TARGET_LINKER_FILE:${module}>,$<TARGET_PDB_FILE:${module}>> $<IF:$<OR:$<CONFIG:release>,$<CONFIG:minsizerel>>,${dest}/$<CONFIG>/$<TARGET_LINKER_FILE_NAME:${module}>,${dest}/$<CONFIG>/$<TARGET_PDB_FILE_NAME:${module}>> VERBATIM)	
 endmacro()
 
 macro(AddCopyCommandForAll target dest)
@@ -231,6 +233,7 @@ add_custom_target(UpdateLibsAndDLLsForCurrentBuildConfiguration
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Debug
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Release
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/MinSizeRel
   )
 
 AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
@@ -239,6 +242,7 @@ add_custom_target(DEPLOY
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
+  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target Qt5CopyBinaries
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target PACKAGE
 )
@@ -266,7 +270,7 @@ set(CPACK_WIX_CMAKE_PACKAGE_REGISTRY "${PROJECT_NAME}")
 
 include(CPackComponent)
 
-set(CPACK_COMPONENTS_ALL "cmake;include;source;library_release;library_debug;library_relwithdebinfo")
+set(CPACK_COMPONENTS_ALL "cmake;include;source;library_release;library_debug;library_relwithdebinfo;library_minsizerel")
 
 cpack_add_install_type(default DISPLAY_NAME "Default")
 
@@ -281,6 +285,7 @@ cpack_add_component_group(library DISPLAY_NAME "Libraries"
 cpack_add_component(library_release DISPLAY_NAME "Release" GROUP library INSTALL_TYPES default)
 cpack_add_component(library_debug DISPLAY_NAME "Debug" GROUP library INSTALL_TYPES default)
 cpack_add_component(library_relwithdebinfo DISPLAY_NAME "RelWithDebInfo" GROUP library INSTALL_TYPES default)
+cpack_add_component(library_minsizerel DISPLAY_NAME "MinSizeRel" GROUP library INSTALL_TYPES default)
 
 
 cpack_add_component(include DISPLAY_NAME "Header Files"
@@ -307,6 +312,10 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/Release/ 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/RelWithDebInfo/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/RelWithDebInfo
     COMPONENT library_relwithdebinfo
     FILES_MATCHING PATTERN "*.dll" PATTERN "*.lib" PATTERN "*.pdb")
+	
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/MinSizeRel/ DESTINATION lib/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/MinSizeRel
+    COMPONENT library_minsizerel
+    FILES_MATCHING PATTERN "*.dll" PATTERN "*.lib")
 
 	
 install(DIRECTORY include/ DESTINATION include
