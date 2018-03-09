@@ -89,7 +89,8 @@ if(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH)
 				"C:\\Qt\\Qt5.9.1\\5.9.1\\msvc${MSVC_VERSION_YEAR}_64" 
 				"C:\\Qt\\5.9.2\\msvc${MSVC_VERSION_YEAR}_64" 
 				"C:\\Qt\\Qt5.9.3\\5.9.3\\msvc${MSVC_VERSION_YEAR}_64"
-				"C:\\Qt\\5.10.0\\msvc${MSVC_VERSION_YEAR}_64")
+				"C:\\Qt\\5.10.0\\msvc${MSVC_VERSION_YEAR}_64"
+				"C:\\Qt\\5.10.1\\msvc${MSVC_VERSION_YEAR}_64")
     find_path(GLEW_ROOT NAMES include/GL/glew.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\glew-2.0.0")
     find_path(GTEST_ROOT NAMES googletest/include/gtest/gtest.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-release-1.8.0" "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\googletest-1.8.0")
     find_path(TINYXML2_ROOT NAMES tinyxml2.h HINTS "C:\\thirdparty\\${MSVC_VERSION_STRING}\\x64\\tinyxml2-master")
@@ -193,8 +194,8 @@ set_target_properties(BlueFramework.Engine                 PROPERTIES FOLDER "Bl
 set_target_properties(BlueFramework.Rasterizer             PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "BlueFramework")
 
-include(QtCopyBinaries)
-set_target_properties(Qt5CopyBinaries                 	 PROPERTIES FOLDER "Copy")
+include(ExecuteQtDeployTool)
+set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
 set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
@@ -239,7 +240,7 @@ add_custom_target(DEPLOY
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
-  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target Qt5CopyBinaries
+  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target ExecuteQtDeployTool
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target PACKAGE
 )
 
