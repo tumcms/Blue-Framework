@@ -72,14 +72,14 @@ std::string getHttpData(const std::string& server, const std::string& file) {
 			if (status_code == 404u) {
 				throw buw::FileNotFound404Exception(file);
 			}
-			if (status_code == 301u) {
+			if (status_code == 301u || status_code == 302u) {
 				std::string header;
-				/*while(std::getline(s, header) && header != "\r") {
+				while(std::getline(s, header) && header != "\r") {
 				    if(header.substr(0, 8) == "Location") {
 				        buw::Uri url(header.substr(10, header.size()));
-				        return get_http_data(url.getHost(), url.getPath());
+				        return getHttpData(url.getHost(), url.getPath());
 				    }
-				}*/
+				}
 				throw buw::Exception("Response returned with status code %u", status_code);
 			} else
 				throw buw::Exception("Response returned with status code %u", status_code);
