@@ -239,6 +239,21 @@ add_custom_target(UpdateLibsAndDLLsForCurrentBuildConfiguration
 
 AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
 
+add_custom_target(UpdateLibsAndDLLs
+	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
+	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
+	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
+	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
+	COMMENT "Copying BlueFramework Libraries ..." VERBATIM
+
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Debug
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Release
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/MinSizeRel
+)
+
+AddCopyCommandForAll(UpdateLibsAndDLLs "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
+	
 add_custom_target(DEPLOY  
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
