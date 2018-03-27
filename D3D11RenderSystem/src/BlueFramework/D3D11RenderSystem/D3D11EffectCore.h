@@ -73,6 +73,7 @@ private:
 
 	ComPtr<ID3D11InputLayout> inputLayout_;
 	ComPtr<ID3D11RasterizerState> rasterizerState_;
+	ComPtr<ID3D11BlendState> blendState_;
 
 	std::map<std::string, Binding> bindings_;
 	buw::ePrimitiveTopology primitiveTopology_;

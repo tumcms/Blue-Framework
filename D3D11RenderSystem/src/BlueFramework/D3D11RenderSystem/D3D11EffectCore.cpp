@@ -85,6 +85,92 @@ D3D11_PRIMITIVE_TOPOLOGY getD3D11PrimitiveTopologyType(const buw::ePrimitiveTopo
 	}
 }
 
+D3D11_BLEND getD3D11BlendValue(buw::eBlendValue blendValue)
+{
+	switch(blendValue) {
+	case buw::eBlendValue::One:
+		return D3D11_BLEND_ONE;
+	case buw::eBlendValue::Zero:
+		return D3D11_BLEND_ZERO;
+	case buw::eBlendValue::SrcColor:
+		return D3D11_BLEND_SRC_COLOR;
+	case buw::eBlendValue::InvSrcColor:
+		return D3D11_BLEND_INV_SRC_COLOR;
+	case buw::eBlendValue::SrcAlpha:
+		return D3D11_BLEND_SRC_ALPHA;
+	case buw::eBlendValue::InvSrcAlpha:
+		return D3D11_BLEND_INV_SRC_ALPHA;
+	case buw::eBlendValue::DestAlpha:
+		return D3D11_BLEND_DEST_ALPHA;
+	case buw::eBlendValue::InvDestAlpha:
+		return D3D11_BLEND_INV_DEST_ALPHA;
+	case buw::eBlendValue::DestColor:
+		return D3D11_BLEND_DEST_COLOR;
+	case buw::eBlendValue::InvDestColor:
+		return D3D11_BLEND_INV_DEST_COLOR;
+	case buw::eBlendValue::SrcAlphaSat:
+		return D3D11_BLEND_SRC_ALPHA_SAT;
+	case buw::eBlendValue::BlendFactor:
+		return D3D11_BLEND_BLEND_FACTOR;
+	case buw::eBlendValue::InvBlendFactor:
+		return D3D11_BLEND_INV_BLEND_FACTOR;
+	case buw::eBlendValue::Src1Color:
+		return D3D11_BLEND_SRC1_COLOR;
+	case buw::eBlendValue::InvSrc1Color:
+		return D3D11_BLEND_INV_SRC1_COLOR;
+	case buw::eBlendValue::Src1Alpha:
+		return D3D11_BLEND_SRC1_ALPHA;
+	case buw::eBlendValue::InvSrc1Alpha:
+		return D3D11_BLEND_INV_SRC1_ALPHA;
+	default:
+		return D3D11_BLEND_ZERO;
+	}
+}
+
+D3D11_BLEND_OP getD3D11BlendOperation(buw::eBlendOperation blendOperation)
+{
+	switch(blendOperation) {
+	case buw::eBlendOperation::Add:
+		return D3D11_BLEND_OP_ADD;
+	case buw::eBlendOperation::Sub:
+		return D3D11_BLEND_OP_SUBTRACT;
+	case buw::eBlendOperation::RevSub:
+		return D3D11_BLEND_OP_REV_SUBTRACT;
+	case buw::eBlendOperation::Min:
+		return D3D11_BLEND_OP_MIN;
+	case buw::eBlendOperation::Max:
+		return D3D11_BLEND_OP_MAX;
+	default:
+		return D3D11_BLEND_OP_ADD;
+	}
+}
+
+
+
+D3D11_RENDER_TARGET_BLEND_DESC getD3D11RenderTargetBlendDesc(buw::renderTargetBlendDescription from)
+{
+	D3D11_RENDER_TARGET_BLEND_DESC to;
+	to.BlendEnable = from.blendEnable;
+	to.BlendOp = getD3D11BlendOperation(from.blendOp);
+	to.BlendOpAlpha = getD3D11BlendOperation(from.blendOpAlpha);
+	to.SrcBlend = getD3D11BlendValue(from.srcBlend);
+	to.SrcBlendAlpha = getD3D11BlendValue(from.srcBlendAlpha);
+	to.DestBlend = getD3D11BlendValue(from.destBlend);
+	to.DestBlendAlpha = getD3D11BlendValue(from.destBlendAlpha);
+	to.RenderTargetWriteMask = from.renderTargetWriteMask;
+	return to;
+}
+
+D3D11_BLEND_DESC getD3D11BlendDesc(buw::blendStateDescription bsd)
+{
+	D3D11_BLEND_DESC desc;
+	desc.AlphaToCoverageEnable = bsd.alphaToCoverageEnable;
+	desc.IndependentBlendEnable = bsd.independentBlendEnable;
+	for(int i = 0; i < 8; i++)
+		desc.RenderTarget[i] = getD3D11RenderTargetBlendDesc(bsd.renderTarget[i]);
+	return desc;
+}
+
 D3D11_FILL_MODE getD3D11FillMode(const buw::eFillMode fillMode) {
 	switch (fillMode) {
 	case buw::eFillMode::Solid: return D3D11_FILL_SOLID;
@@ -237,6 +323,7 @@ D3D11PipelineState::D3D11PipelineState(D3D11RenderSystem* renderSystem, const bu
 	rd.MultisampleEnable = renderSystem->getMSAAEnabled();
 	rd.AntialiasedLineEnable = false;
 
+	renderSystem_->getDevice()->CreateBlendState(&getD3D11BlendDesc(psd.blendStateDesc), &blendState_);
 	renderSystem_->getDevice()->CreateRasterizerState(&rd, rasterizerState_.GetAddressOf());
 }
 D3D11PipelineState::~D3D11PipelineState() {
@@ -281,6 +368,8 @@ void D3D11EffectCore::setPipelineState(buw::ReferenceCounted<buw::IPipelineState
 
 	renderSystem_->getDeviceContext()->IASetInputLayout(current_->inputLayout_.Get());
 	renderSystem_->getDeviceContext()->IASetPrimitiveTopology(getD3D11PrimitiveTopologyType(current_->primitiveTopology_, current_->useAdjacency()));
+
+	renderSystem_->getDeviceContext()->OMSetBlendState(current_->blendState_.Get(), 0, 0xffffffff);
 
 	renderSystem_->getDeviceContext()->RSSetState(current_->rasterizerState_.Get());
 
