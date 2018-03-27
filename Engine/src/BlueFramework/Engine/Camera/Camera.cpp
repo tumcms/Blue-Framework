@@ -604,14 +604,9 @@ buw::ReferenceCounted<Camera> CameraController::getCamera()
     return camera_;
 }
 
-bool CameraController::isInterpolating()
+const bool CameraController::isCameraMoving() const
 {
-	return bInterpolating_;
-}
-
-float CameraController::getVelocity()
-{
-	return velocity_;
+	return camera_->velocity().length() > 0.0f;
 }
 
 BLUEFRAMEWORK_ENGINE_NAMESPACE_END

@@ -203,8 +203,8 @@ public:
 	void handleWheel(float delta);
 
 	buw::ReferenceCounted<Camera> getCamera();
-	bool isInterpolating();
-	float getVelocity();
+	
+	const bool isCameraMoving() const;
 
 private:
 	void startInterpolation(float duration, const CameraTransformation &target);
