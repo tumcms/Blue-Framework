@@ -265,7 +265,7 @@ add_custom_target(DEPLOY
 
 #-------------------------------------------------------------------------------------
 # Deployment
-set(CPACK_GENERATOR WIX)
+set(CPACK_GENERATOR WIX ZIP)
 set(CPACK_WIX_UPGRADE_GUID "F9D5D0DC-9801-4EC5-A72F-98A21CD8A436")
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "https://www.cms.bgu.tum.de/en/")
