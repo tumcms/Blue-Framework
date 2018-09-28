@@ -394,23 +394,23 @@ Description readDescription(QJsonObject from) {
 	Description desc;
 
 	// Global
-	desc.size = from.value("Size").toDouble();
+	desc.size = static_cast<float>(from.value("Size").toDouble());
 	desc.bindingColor = mapToColor(from.value("BindingColor").toString());
 	desc.faceColor = mapToColor(from.value("FaceColor").toString());
 	desc.highlightColor = mapToColor(from.value("HighlightColor").toString());
 	desc.textColor = mapToColor(from.value("TextColor").toString());
 
 	// ViewCube
-	desc.outerBoundHeight = from.value("OuterBoundHeight").toDouble();
-	desc.innerBoundHeight = from.value("InnerBoundHeight").toDouble();
-	desc.outerBoundWidth = from.value("OuterBoundWidth").toDouble();
-	desc.innerBoundWidth = from.value("InnerBoundWidth").toDouble();
+	desc.outerBoundHeight = static_cast<float>(from.value("OuterBoundHeight").toDouble());
+	desc.innerBoundHeight = static_cast<float>(from.value("InnerBoundHeight").toDouble());
+	desc.outerBoundWidth = static_cast<float>(from.value("OuterBoundWidth").toDouble());
+	desc.innerBoundWidth = static_cast<float>(from.value("InnerBoundWidth").toDouble());
 
 	// Compass
-	desc.outerCircleRadius = from.value("OuterCircleRadius").toDouble();
-	desc.outerCircleWidth = from.value("OuterCircleWidth").toDouble();
-	desc.innerCircleWidth = from.value("InnerCircleWidth").toDouble();
-	desc.circleOffset = from.value("CircleOffset").toDouble();
+	desc.outerCircleRadius = static_cast<float>(from.value("OuterCircleRadius").toDouble());
+	desc.outerCircleWidth = static_cast<float>(from.value("OuterCircleWidth").toDouble());
+	desc.innerCircleWidth = static_cast<float>(from.value("InnerCircleWidth").toDouble());
+	desc.circleOffset = static_cast<float>(from.value("CircleOffset").toDouble());
 
 	// Textures
 	desc.frontTexturePath = from.value("Front").toString().toStdString();

@@ -65,12 +65,21 @@ function(CreateEngineUnitTest UnitTestName)
 		COMMAND ${UnitTestName}
 	)
 	
-	# housekeeping for shaders, resources, etc. which are needed during testing
-	add_custom_target(Copy${UnitTestName}UnitTestResources
-		# Effect
-		COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader Shader
-		COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data   Data		
-	)
+	if(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data) 
+		# housekeeping for shaders, resources, etc. which are needed during testing
+		add_custom_target(Copy${UnitTestName}UnitTestResources
+			# Effect
+			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader Shader
+			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data   Data		
+		)
+	else()
+		# housekeeping for shaders, resources, etc. which are needed during testing
+		add_custom_target(Copy${UnitTestName}UnitTestResources
+			# Effect
+			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader Shader		
+		)
+	endif()
+
 	
 	set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/Engine")
 	set_target_properties(Copy${UnitTestName}UnitTestResources PROPERTIES FOLDER "BlueFramework/UnitTests/Engine/Copy")
