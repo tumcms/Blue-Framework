@@ -26,11 +26,17 @@ add_library(BlueFramework.ImageProcessing SHARED
     ${BlueFramework_ImageProcessing_Source}
 )
 
-target_link_libraries(BlueFramework.ImageProcessing
-	BlueFramework.Core
+target_include_directories(BlueFramework.Core
+	PUBLIC
+		src
 )
 
-qt5_use_modules(BlueFramework.ImageProcessing Widgets Gui)
+target_link_libraries(BlueFramework.ImageProcessing
+	PUBLIC
+		BlueFramework.Core
+	PRIVATE
+		Qt5::Widgets
+)
 
 install(
 	TARGETS BlueFramework.ImageProcessing

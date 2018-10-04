@@ -16,6 +16,7 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+# TODO: Do not use GLOBbing
 file(GLOB BlueFramework_Core_Diagnostics_IC_Source           src/BlueFramework/Core/Diagnostics/ic/*.*)
 file(GLOB BlueFramework_Core_Diagnostics_Source              src/BlueFramework/Core/Diagnostics/*.*)
 file(GLOB BlueFramework_Core_Math_Source                     src/BlueFramework/Core/Math/*.*)
@@ -23,6 +24,12 @@ file(GLOB BlueFramework_Core_UtfConverter_Source             src/BlueFramework/C
 file(GLOB BlueFramework_Core_Source                          src/BlueFramework/Core/*.*)
 
 file(GLOB_RECURSE BlueFramework_Core_Headers				 src/BlueFramework/Core/*.h)
+
+source_group(BlueFramework\\Core\\Diagnostics\\ic            FILES ${BlueFramework_Core_Diagnostics_IC_Source})
+source_group(BlueFramework\\Core\\Diagnostics                FILES ${BlueFramework_Core_Diagnostics_Source})
+source_group(BlueFramework\\Core\\Math                       FILES ${BlueFramework_Core_Math_Source})
+source_group(BlueFramework\\Core\\UtfConverter               FILES ${BlueFramework_Core_UtfConverter_Source})
+source_group(BlueFramework\\Core                             FILES ${BlueFramework_Core_Source})
 
 add_library(BlueFramework.Core SHARED
 	${BlueFramework_Core_Diagnostics_IC_Source}
@@ -32,13 +39,19 @@ add_library(BlueFramework.Core SHARED
     ${BlueFramework_Core_Source}
 )
 
-source_group(BlueFramework\\Core\\Diagnostics\\ic            FILES ${BlueFramework_Core_Diagnostics_IC_Source})
-source_group(BlueFramework\\Core\\Diagnostics                FILES ${BlueFramework_Core_Diagnostics_Source})
-source_group(BlueFramework\\Core\\Math                       FILES ${BlueFramework_Core_Math_Source})
-source_group(BlueFramework\\Core\\UtfConverter               FILES ${BlueFramework_Core_UtfConverter_Source})
-source_group(BlueFramework\\Core                             FILES ${BlueFramework_Core_Source})
+target_include_directories(BlueFramework.Core
+	PUBLIC
+		${Boost_INCLUDE_DIR}
+		${EIGEN3_INCLUDE_DIR}
+		src
+)
 
-qt5_use_modules(BlueFramework.Core Widgets)
+target_link_libraries(BlueFramework.Core
+	PUBLIC
+		Boost::system
+		Boost::boost  
+		Boost::log
+)
 
 install(TARGETS BlueFramework.Core
 	RUNTIME DESTINATION bin/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>

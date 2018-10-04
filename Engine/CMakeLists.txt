@@ -36,10 +36,6 @@ source_group(BlueFramework\\Engine\\SDF						FILES ${BlueFramework_Engine_SDF_So
 source_group(BlueFramework\\Engine\\VertexCache             FILES ${BlueFramework_Engine_VertexCache_Source})
 source_group(BlueFramework\\Engine\\ViewCube				FILES ${BlueFramework_Engine_ViewCube_Source})
 
-include_directories(
-	${TINYXML2_INCLUDE_DIR}
-)
-
 add_library(BlueFramework.Engine SHARED
 	${BlueFramework_Engine_Camera_Source}
 	${BlueFramework_Engine_Mesh_Source}
@@ -50,14 +46,23 @@ add_library(BlueFramework.Engine SHARED
 	${BlueFramework_Engine_ViewCube_Source}
 )
 
-target_link_libraries(BlueFramework.Engine
-	BlueFramework.Core
-	BlueFramework.Rasterizer
-	BlueFramework.ImageProcessing
-	${TINYXML2_LIB}
+target_include_directories(BlueFramework.Engine
+	PUBLIC
+		src
+	PRIVATE
+		${TINYXML2_INCLUDE_DIR}
 )
 
-qt5_use_modules(BlueFramework.Engine Core)
+target_link_libraries(BlueFramework.Engine
+	PUBLIC
+		BlueFramework.Core
+		BlueFramework.Rasterizer
+		BlueFramework.ImageProcessing
+	PRIVATE
+		${TINYXML2_LIB}
+		Qt5::Core
+		Qt5::Widgets
+)
 
 install(TARGETS BlueFramework.Engine
     RUNTIME DESTINATION bin/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>

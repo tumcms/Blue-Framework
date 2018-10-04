@@ -20,8 +20,10 @@ project(BlueFramework.Rasterizer)
 
 file(GLOB BlueFramework_Rasterizer_Resources_Source                src/BlueFramework/Rasterizer/Resources/*.*)
 file(GLOB BlueFramework_Rasterizer_Source                          src/BlueFramework/Rasterizer/*.*)
-
 file(GLOB_RECURSE BlueFramework_Rasterizer_Headers				   src/BlueFramework/Rasterizer/*.h)
+
+source_group(BlueFramework\\Rasterizer\\Resources                  FILES ${BlueFramework_Rasterizer_Resources_Source})
+source_group(BlueFramework\\Rasterizer                             FILES ${BlueFramework_Rasterizer_Source})
 
 add_library(BlueFramework.Rasterizer SHARED
     ${BlueFramework_Rasterizer_Descriptions_Source}
@@ -29,18 +31,17 @@ add_library(BlueFramework.Rasterizer SHARED
     ${BlueFramework_Rasterizer_Source}
 )
 
-include_directories(
-	${TINYXML2_INCLUDE_DIR}
+target_include_directories(BlueFramework.Rasterizer
+	PUBLIC
+		src
+	PRIVATE
+		${TINYXML2_INCLUDE_DIR}
 )
-
-source_group(BlueFramework\\Rasterizer\\Resources                  FILES ${BlueFramework_Rasterizer_Resources_Source})
-source_group(BlueFramework\\Rasterizer                             FILES ${BlueFramework_Rasterizer_Source})
 
 target_link_libraries(BlueFramework.Rasterizer
 	BlueFramework.Core
 	${TINYXML2_LIBRARIES}
 )
-
 
 install(TARGETS BlueFramework.Rasterizer
    RUNTIME DESTINATION bin/${MSVC_VERSION_STRING}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>

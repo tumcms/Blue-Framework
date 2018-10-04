@@ -52,14 +52,24 @@ function(CreateEngineUnitTest UnitTestName)
 	)
 		
 	target_link_libraries(${UnitTestName}
-		BlueFramework.Core
-		BlueFramework.Rasterizer
-		BlueFramework.Engine
-		BlueFramework.D3D11RenderSystem # force this to be rebuild, because it is needed by the unit test
-		BlueFramework.D3D12RenderSystem # force this to be rebuild, because it is needed by the unit test
-		${GTEST_BOTH_LIBRARIES}
+		PRIVATE
+			BlueFramework.Core
+			BlueFramework.Rasterizer
+			BlueFramework.Engine
+			BlueFramework.D3D11RenderSystem # force this to be rebuild, because it is maybe needed by the unit test
+			BlueFramework.D3D12RenderSystem # force this to be rebuild, because it is maybe needed by the unit test
+			BlueFramework.GLRenderSystem # force this to be rebuild, because it is maybe needed by the unit test
+			${GTEST_BOTH_LIBRARIES}
+			#GTest::GTest
+			#GTest::Main
+			Qt5::Widgets
 	)
 	
+	target_include_directories(${UnitTestName}
+		PRIVATE
+			${GTEST_INCLUDE_DIRS}
+	)
+		
 	add_test(
 		NAME ${UnitTestName}Test
 		COMMAND ${UnitTestName}
@@ -93,6 +103,4 @@ function(CreateEngineUnitTest UnitTestName)
 		BlueFramework.Engine
 		Copy${UnitTestName}UnitTestResources # Copy resources
 	)	
-	
-	qt5_use_modules(${UnitTestName} Widgets)
 endfunction()

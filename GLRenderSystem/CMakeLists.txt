@@ -36,16 +36,22 @@ add_library(BlueFramework.GLRenderSystem
 	SHARED
 	${BlueFramework_GLRenderSystem_Source})
 
-include_directories(
-	${GLEW_INCLUDE_DIRS}
-	${TINYXML2_INCLUDE_DIR}
+target_include_directories(BlueFramework.GLRenderSystem
+	PUBLIC
+		src
+	PRIVATE
+		${GLEW_INCLUDE_DIRS}
+		${TINYXML2_INCLUDE_DIR}
 )
+
 target_link_libraries(BlueFramework.GLRenderSystem
-	BlueFramework.Core
-	BlueFramework.Rasterizer
-	${GLEW_LIBRARIES}
-	${OPENGL_gl_LIBRARY}
-	${TINYXML2_LIB}
+	PUBLIC
+		BlueFramework.Core
+		BlueFramework.Rasterizer
+	PRIVATE
+		${GLEW_LIBRARIES}
+		${OPENGL_gl_LIBRARY}
+		${TINYXML2_LIB}
 )
 
 install(TARGETS BlueFramework.GLRenderSystem   

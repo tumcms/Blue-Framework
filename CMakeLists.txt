@@ -125,11 +125,11 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.63.0 COMPONENTS signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
+find_package(Boost 1.63.0 COMPONENTS log signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
-find_package(gtest REQUIRED)
+find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
 find_package(TinyXML2 REQUIRED)
 
 # find_package(Vulkan REQUIRED)
@@ -153,26 +153,6 @@ find_package(Qt5Widgets       5.9.0 REQUIRED)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC OFF)
 
-include_directories(
-  ${Boost_INCLUDE_DIR}
-  ${EIGEN3_INCLUDE_DIR}
-  #${Vulkan_INCLUDE_DIR}
-  Application/src
-  Core/src
-  D3D11RenderSystem/src
-  D3D12RenderSystem/src
-  GLRenderSystem/src
-  #VulkanRenderSystem/src
-  Engine/src
-  Rasterizer/src
-  ImageProcessing/src
-  ${GTEST_INCLUDE_DIRS}
-)
-
-link_directories(
-  ${Boost_LIBRARY_DIRS}
-)
-
 add_subdirectory(Application)
 add_subdirectory(Core)
 add_subdirectory(D3D11RenderSystem)
@@ -183,7 +163,6 @@ add_subdirectory(Engine)
 add_subdirectory(ImageProcessing)
 add_subdirectory(Rasterizer)
 add_subdirectory(UnitTests)
-
 
 # Development
 set_target_properties(BlueFramework.Application            PROPERTIES FOLDER "BlueFramework")

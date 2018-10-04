@@ -26,15 +26,21 @@ add_library(BlueFramework.D3D11RenderSystem SHARED
     ${BlueFramework_D3D11RenderSystem_Source}
 )
 
-include_directories(${TINYXML2_INCLUDE_DIR})
-
+target_include_directories(BlueFramework.D3D11RenderSystem
+	PUBLIC
+		src
+	PRIVATE
+		${TINYXML2_INCLUDE_DIR}
+)
 
 target_link_libraries(BlueFramework.D3D11RenderSystem
-	BlueFramework.Core
-	BlueFramework.Rasterizer
-	BlueFramework.ImageProcessing
-	${TINYXML2_LIBRARIES}
-	#DirectX11 libs linked in source.
+	PUBLIC
+		BlueFramework.Core
+		BlueFramework.Rasterizer
+		BlueFramework.ImageProcessing
+	PRIVATE
+		${TINYXML2_LIBRARIES}
+		#DirectX11 libs linked in source.
 )
 
 install(TARGETS BlueFramework.D3D11RenderSystem   
