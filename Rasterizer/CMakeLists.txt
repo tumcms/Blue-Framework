@@ -23,22 +23,29 @@ file(GLOB BlueFramework_Rasterizer_Source                          src/BlueFrame
 
 file(GLOB_RECURSE BlueFramework_Rasterizer_Headers				   src/BlueFramework/Rasterizer/*.h)
 
+
 add_library(BlueFramework.Rasterizer SHARED
     ${BlueFramework_Rasterizer_Descriptions_Source}
     ${BlueFramework_Rasterizer_Resources_Source}
     ${BlueFramework_Rasterizer_Source}
 )
 
-include_directories(
-	${TINYXML2_INCLUDE_DIR}
-)
+
+message(STATUS ${TINYXML2_INCLUDE_DIR})
+
+
+target_include_directories(BlueFramework.D3D11RenderSystem PRIVATE ${TINYXML2_INCLUDE_DIR})
+
+
+#get_target_property(LOC tinyxml2::tinyxml2 IMPORTED)
+#message(STATUS ${LOC})
 
 source_group(BlueFramework\\Rasterizer\\Resources                  FILES ${BlueFramework_Rasterizer_Resources_Source})
 source_group(BlueFramework\\Rasterizer                             FILES ${BlueFramework_Rasterizer_Source})
 
 target_link_libraries(BlueFramework.Rasterizer
 	BlueFramework.Core
-	${TINYXML2_LIBRARIES}
+	tinyxml2::tinyxml2
 )
 
 

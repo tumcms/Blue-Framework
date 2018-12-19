@@ -132,6 +132,8 @@ find_package(glew REQUIRED)
 find_package(gtest REQUIRED)
 find_package(TinyXML2 REQUIRED)
 
+get_target_property(TINYXML2_INCLUDE_DIR tinyxml2::tinyxml2 INTERFACE_INCLUDE_DIRECTORIES)
+
 # find_package(Vulkan REQUIRED)
 
 if(${EIGEN3_VERSION} VERSION_LESS "3.3.3")
@@ -198,7 +200,7 @@ set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "Bl
 
 include(ExecuteQtDeployTool)
 set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
-set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
+#set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
 macro(AddCopyCommandForModule module target dest)
@@ -242,14 +244,14 @@ AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SO
 add_custom_target(UpdateLibsAndDLLs
 	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
 	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
-	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
-	COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
+	#COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
+	#COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
 	COMMENT "Copying BlueFramework Libraries ..." VERBATIM
 
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Debug
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Release
-	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
-	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/MinSizeRel
+	#COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
+	#COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/MinSizeRel
 )
 
 AddCopyCommandForAll(UpdateLibsAndDLLs "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
@@ -257,8 +259,8 @@ AddCopyCommandForAll(UpdateLibsAndDLLs "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION
 add_custom_target(DEPLOY  
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config debug
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config release
-  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
-  COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
+  #COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config relWithDebInfo
+  #COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target UpdateLibsAndDLLsForCurrentBuildConfiguration --config minSizeRel
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target ExecuteQtDeployTool
   COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target PACKAGE
 )
