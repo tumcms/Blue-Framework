@@ -28,10 +28,10 @@ BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
 // A simple std::map wrapper.
 // For some reason the C++ committee did never manage to create a easy usable map.
 template <typename Key, typename Value>
-class Map : public std::map<Key, Value> {
+class Map : public std::map<Key, Value> {	// a C++20 like std::map
 public:
 	bool contains(const Key& key) {
-		return this->find(key) != this->end();
+		return this->find(key) != this->end(); // standard function of std::map in C++20
 	}
 
 	void insert(const Key& k, const Value& v) {

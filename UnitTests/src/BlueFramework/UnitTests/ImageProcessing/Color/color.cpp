@@ -26,6 +26,12 @@ using namespace std;
 namespace
 {
 	TEST(Color3f, Color3f_add_test) {
-		buw::Color3f a;
+		buw::Color3f a(0.3f, 0.3f, 0.3f);
+		buw::Color3f b(0.1f, 0.1f, 0.1f);
+		auto c = a + b;
+
+		EXPECT_TRUE(c.red() == 0.4f);
+		EXPECT_TRUE(c.green() == 0.4f);
+		EXPECT_TRUE(c.blue() == 0.4f);
 	}
 }
