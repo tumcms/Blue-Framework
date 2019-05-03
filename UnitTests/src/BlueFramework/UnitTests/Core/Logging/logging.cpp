@@ -1,5 +1,5 @@
 /*! \verbatim
- *  \copyright      Copyright (c) 2018 Technical University of Munich
+ *  \copyright      Copyright (c) 2019 Technical University of Munich
  *                  Chair of Computational Modeling and Simulation. All rights reserved.
  *  \brief          This file is part of the BlueFramework.
  *  \endverbatim

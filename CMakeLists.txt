@@ -213,7 +213,7 @@ add_custom_target(UpdateLibsAndDLLsForCurrentBuildConfiguration
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/Release
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/RelWithDebInfo
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_DIR}/MinSizeRel
-  )
+)
 
 AddCopyCommandForAll(UpdateLibsAndDLLsForCurrentBuildConfiguration "${PROJECT_SOURCE_DIR}/lib/${MSVC_VERSION_STRING}/x64/")
 
