@@ -27,9 +27,15 @@ add_executable(Version
 	${BlueFramework_UnitTests_Core_Version}
 )
 
+target_include_directories(Version
+	PRIVATE
+		${GTEST_INCLUDE_DIRS}
+)
+
 target_link_libraries(Version
-	BlueFramework.Core
-	${GTEST_BOTH_LIBRARIES}
+	PRIVATE
+		BlueFramework.Core
+		${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(

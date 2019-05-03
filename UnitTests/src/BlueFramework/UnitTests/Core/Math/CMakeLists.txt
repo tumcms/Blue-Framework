@@ -33,8 +33,9 @@ target_include_directories(Math
 )
 
 target_link_libraries(Math 
-	BlueFramework.Core
-	${GTEST_BOTH_LIBRARIES}
+	PRIVATE
+		BlueFramework.Core
+		${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(
