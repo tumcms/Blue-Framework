@@ -27,9 +27,15 @@ add_executable(Logging
 	${BlueFramework_UnitTests_Core_Logging}
 )
 
+target_include_directories(Logging
+	PRIVATE
+		${GTEST_INCLUDE_DIRS}
+)
+
 target_link_libraries(Logging
-	BlueFramework.Core
-	${GTEST_BOTH_LIBRARIES}
+	PRIVATE
+		BlueFramework.Core
+		${GTEST_BOTH_LIBRARIES}
 )
 
 add_test(
