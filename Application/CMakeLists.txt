@@ -62,26 +62,6 @@ source_group(BlueFramework\\Application\\DataManagement\\Notification     FILES 
 source_group(BlueFramework\\Application\\UserInterface                    FILES ${BlueFramework_Application_UserInterface_Source})
 source_group(BlueFramework\\Application\\UserInterface\\ViewPanel         FILES ${BlueFramework_Application_UserInterface_ViewPanel_Source})
 
-#include_directories(
-#  ${BLUEAPPLICATION_INCLUDE_DIR}
-#  ${BLUECORE_INCLUDE_DIR}
-#  ${BLUEENGINE_INCLUDE_DIR}
-#  ${BLUEIMAGEPROCESSING_INCLUDE_DIR}
-#  ${BLUERASTERIZER_INCLUDE_DIR}
-#  ${Boost_INCLUDE_DIR}
-#  ${CMAKE_CURRENT_BINARY_DIR} # Qt generated files will be located here
-#  ${VLD_INCLUDE_DIR}
-#)
-
-#link_directories(
-#  ${Boost_LIBRARY_DIRS}
-#  ${DX_LIBRARY_DIR}
-#  ${GLEW_DIRECTORY}/lib
-#  ${VLD_LIBRARIES_DIR}
-#)
-
-#INCLUDE(${QT_USE_FILE})
-
 add_library(BlueFramework.Application SHARED
   ${BLUECORE_MOCS}
   ${BLUECORE_UIS_H}
