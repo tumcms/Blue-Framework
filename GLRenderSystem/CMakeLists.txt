@@ -22,19 +22,23 @@ set(CMAKE_LIBRARY_PATH ${GLEW_ROOT}/lib/Release/x64;${CMAKE_LIBRARY_PATH})
 file(GLOB_RECURSE
 	BlueFramework_GLRenderSystem_Source
 	LIST_DIRECTORIES false
-	src/BlueFramework/GLRenderSystem/*.*)
+	src/BlueFramework/GLRenderSystem/*.*
+)
 
 file(GLOB_RECURSE
 	BlueFramework_GLRenderSystem_Headers
 	LIST_DIRECTORIES false
-	src/BlueFramework/GLRenderSystem/*.h)
+	src/BlueFramework/GLRenderSystem/*.h
+)
 
 source_group(BlueFramework\\GLRenderSystem
-	FILES ${BlueFramework_GLRenderSystem_Source})
+	FILES ${BlueFramework_GLRenderSystem_Source}
+)
 
 add_library(BlueFramework.GLRenderSystem
 	SHARED
-	${BlueFramework_GLRenderSystem_Source})
+	${BlueFramework_GLRenderSystem_Source}
+)
 
 target_include_directories(BlueFramework.GLRenderSystem
 	PUBLIC
