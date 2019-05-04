@@ -6,3 +6,4 @@ build/*
 external/log_install_*
 BlueFrameworkConfig.cmake
 BlueFrameworkConfigVersion.cmake
+bazel-*

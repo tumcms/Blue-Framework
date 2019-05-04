@@ -10,8 +10,10 @@
 #include <BlueFramework/Core/Singleton.h>
 #include <BlueFramework/Core/Version.h>
 #include <BlueFramework/Core/filesystem.h>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
+
 #include <fstream>
 #include <gtest/gtest.h>
 #include <iostream>

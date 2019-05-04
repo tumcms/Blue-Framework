@@ -23,6 +23,7 @@ file(GLOB BlueFramework_UnitTests_Source src/BlueFramework/UnitTests/*.*)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Core/Logging)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Core/Math)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Core/Version)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Core/Uri)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/ImageProcessing/Color)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/ImageProcessing/RandomHeightmapGeneration)
