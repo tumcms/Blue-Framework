@@ -40,3 +40,16 @@ The percdems repository (https://bitbucket.org/Vertexwahn/percdems) contains som
 
 BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2017 x64 (Version 15.4.4). Currently, we are not aiming at supporting any other compilers.
 
+# Bazel
+
+Building with Bazel is just in an very early experimental state. Neverthelese if you want to try out or contribute here are some hints:
+
+Build everything:
+```
+bazel build //...
+```
+
+Rund UriTest unit tess:
+```
+bazel test //UnitTests/src/BlueFramework/UnitTests/Core/Uri:UriTest
+```
