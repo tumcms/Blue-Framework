@@ -49,7 +49,12 @@ Build everything:
 bazel build //...
 ```
 
-Rund UriTest unit tess:
+Build BlueFramework.Core
+```
+bazel build //Core:BlueFramework.Core
+```
+
+Run UriTest unit tess:
 ```
 bazel test //UnitTests/src/BlueFramework/UnitTests/Core/Uri:UriTest
 ```
