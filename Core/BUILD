@@ -13,8 +13,8 @@ cc_library(
 		#"src/BlueFramework/Core/assert.cpp",
 		#"src/BlueFramework/Core/assert.h",
 
-#		"src/BlueFramework/Core/Path.cpp",
-#		"src/BlueFramework/Core/Path.h",
+		"src/BlueFramework/Core/Path.cpp",
+		"src/BlueFramework/Core/Path.h",
 
 		#"src/BlueFramework/Core/PropertySet.cpp",
 		#"src/BlueFramework/Core/PropertySet.h",
@@ -35,4 +35,7 @@ cc_library(
 		#"//Core:BlueFramework_Core_Math_Source",
 	],
 	includes = ["src"],
+	deps = [
+		"@boost//:filesystem"
+	]
 )
