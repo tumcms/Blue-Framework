@@ -25,24 +25,46 @@ filegroup(
     ]),
 )
 
+filegroup(
+    name = "BlueFramework_Core_UtfConverter_Source",
+    srcs = glob([
+        "src/BlueFramework/Core/UtfConverter/*.*",
+    ]),
+)
+
+filegroup(
+    name = "BlueFramework_Core_Diagnostics_Source",
+    srcs = glob([
+        "src/BlueFramework/Core/Diagnostics/Stack*.*",
+    ]),
+)
+
 cc_library(
 	name = "BlueFramework.Core",
 	srcs = [
-		#"src/BlueFramework/Core/assert.cpp",
-		#"src/BlueFramework/Core/assert.h",
+		"src/BlueFramework/Core/assert.cpp",
+		"src/BlueFramework/Core/assert.h",
+		"src/BlueFramework/Core/deprecated.h",
+
+		#"src/BlueFramework/Core/Exception.cpp",
+		#"src/BlueFramework/Core/Exception.h",
 
 		"src/BlueFramework/Core/Path.cpp",
 		"src/BlueFramework/Core/Path.h",
 
 		#"src/BlueFramework/Core/PropertySet.cpp",
 		#"src/BlueFramework/Core/PropertySet.h",
+		"src/BlueFramework/Core/filesystem.h",
+		"src/BlueFramework/Core/flags.h",
+		"src/BlueFramework/Core/Map.h",
 		"src/BlueFramework/Core/memory.h",
 		"src/BlueFramework/Core/NonCopyable.cpp",
 		"src/BlueFramework/Core/NonCopyable.h",
 
 		"src/BlueFramework/Core/Singleton.h",
-
-
+		"src/BlueFramework/Core/Stopwatch.h",
+		"src/BlueFramework/Core/string.cpp",
+		"src/BlueFramework/Core/string.h",
 		"src/BlueFramework/Core/tinyformat.h",
 		"src/BlueFramework/Core/types.h",
         "src/BlueFramework/Core/namespace.h",
@@ -51,6 +73,8 @@ cc_library(
 		"src/BlueFramework/Core/Version.cpp",
 		"src/BlueFramework/Core/Version.h",
 		#"//Core:BlueFramework_Core_Math_Source",
+		"//Core:BlueFramework_Core_UtfConverter_Source",
+		#"//Core:BlueFramework_Core_Diagnostics_Source",
 	],
 	includes = ["src"],
 	deps = [

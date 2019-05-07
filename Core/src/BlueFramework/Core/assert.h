@@ -20,7 +20,7 @@
 #ifndef BlueFramework_Core_bassert_14e5fc9e_d952_446e_8e5c_c086a8e615fc_h
 #define BlueFramework_Core_bassert_14e5fc9e_d952_446e_8e5c_c086a8e615fc_h
 
-#include "BlueFramework/Core/Diagnostics/log.h"
+#include "BlueFramework/Core/namespace.h"
 
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
 
