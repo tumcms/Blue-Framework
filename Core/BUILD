@@ -34,9 +34,12 @@ filegroup(
 
 filegroup(
     name = "BlueFramework_Core_Diagnostics_Source",
-    srcs = glob([
-        "src/BlueFramework/Core/Diagnostics/Stack*.*",
-    ]),
+    srcs =	[
+        "src/BlueFramework/Core/Diagnostics/StackWalker.h",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": ["StackWalker_Windows.h", "StackWalker_Windows.cpp"],
+        "//conditions:default": [],
+    }),
 )
 
 cc_library(
