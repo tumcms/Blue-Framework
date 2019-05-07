@@ -45,16 +45,20 @@ BlueFramework version 3.0.0.0 and up compiles with Visual Studio 2017 x64 (Versi
 Building with Bazel is just in an very early experimental state. Neverthelese if you want to try out or contribute here are some hints:
 
 Build everything:
-```
+```bash
 bazel build //...
+```
+Clean everthing
+```bash
+bazel clean --expunge_async
 ```
 
 Build BlueFramework.Core
-```
+```bash
 bazel build //Core:BlueFramework.Core
 ```
 
 Run UriTest unit tess:
-```
+```bash
 bazel test //UnitTests/src/BlueFramework/UnitTests/Core/Uri:UriTest
 ```
