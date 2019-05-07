@@ -23,7 +23,6 @@
 
 class BlueFramework::Core::Path::PathImpl : private buw::NonCopyable {
 public:
-	//! Default constructor.
 	PathImpl() {
 	}
 
@@ -43,6 +42,7 @@ public:
 	// assignment operator
 	PathImpl& operator=(const PathImpl& other) {
 		path_ = other.path_;
+		return *this;
 	}
 
 	PathImpl& operator=(const char* path) {

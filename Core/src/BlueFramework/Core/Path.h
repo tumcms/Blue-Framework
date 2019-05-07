@@ -20,7 +20,7 @@
 #ifndef BlueFramework_Core_Path_80a543c8_5f30_4cc8_8bb4_c3af8070a8c4_h
 #define BlueFramework_Core_Path_80a543c8_5f30_4cc8_8bb4_c3af8070a8c4_h
 
-#include "BlueFramework/Core/Noncopyable.h"
+#include "BlueFramework/Core/NonCopyable.h"
 #include "BlueFramework/Core/memory.h"
 #include "BlueFramework/Core/namespace.h"
 #include <string>
