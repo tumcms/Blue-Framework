@@ -58,7 +58,17 @@ Build BlueFramework.Core
 bazel build //Core:BlueFramework.Core
 ```
 
-Run UriTest unit tess:
+Run UriTest unit test:
 ```bash
 bazel test //UnitTests/src/BlueFramework/UnitTests/Core/Uri:UriTest
+```
+
+Run VersionTest unit test:
+```bash
+bazel test //UnitTests/src/BlueFramework/UnitTests/Core/Version:VersionTest
+```
+
+Run all Core tests:
+```bash
+bazel test //UnitTests/src/BlueFramework/UnitTests/Core/...
 ```

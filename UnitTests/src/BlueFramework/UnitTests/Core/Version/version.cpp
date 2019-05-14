@@ -16,24 +16,25 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <BlueFramework/Core/Diagnostics/log.h>
-#include <BlueFramework/Core/Exception.h>
-#include <BlueFramework/Core/Singleton.h>
+//#include <BlueFramework/Core/Diagnostics/log.h>
+//#include <BlueFramework/Core/Exception.h>
+//#include <BlueFramework/Core/Singleton.h>
 #include <BlueFramework/Core/Version.h>
-#include <BlueFramework/Core/filesystem.h>
+//#include <BlueFramework/Core/filesystem.h>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem.hpp>
+//#include <boost/algorithm/string/predicate.hpp>
+//#include <boost/filesystem.hpp>
 
-#include <fstream>
+//#include <fstream>
 #include <gtest/gtest.h>
-#include <iostream>
-#include <string>
+//#include <iostream>
+//#include <string>
 
 namespace {
 	TEST(Version, Major) {
 		EXPECT_TRUE(BlueFramework::Core::Version::getMajor() >= 3);
 
+		/*
 		std::vector<std::string> fileList = buw::getFileList("C:\\dev\\BlueFramework3\\Core\\src");
 
 		std::ofstream ofs("C:\\dev\\BlueFramework3\\Tools\\runCLangFormat.bat", std::ofstream::out);
@@ -59,5 +60,6 @@ namespace {
 		}
 
 		ofs.close();
+		*/
 	}
 }
