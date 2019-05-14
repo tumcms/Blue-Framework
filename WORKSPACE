@@ -1,6 +1,7 @@
 workspace(name = "BlueFramework")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Bazel version
 git_repository(
@@ -34,3 +35,11 @@ git_repository(
 
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
+
+# Eigen
+http_archive(
+  name = "eigen_archive",
+  url = "https://bitbucket.org/eigen/eigen/get/c5e90d9.tar.gz",
+  sha256 = "3a66f9bfce85aff39bc255d5a341f87336ec6f5911e8d816dd4a3fdc500f8acf",
+  build_file = "eigen.BUILD",
+)
