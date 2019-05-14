@@ -17,12 +17,19 @@
 */
 
 #include "BlueFramework/Core/assert.h"
+
+#ifdef _WIN32
 #include <Windows.h> // root of all evil
+#endif
 
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
 
 bool isDebuggerConnected() {
-	return IsDebuggerPresent() == 1;
+#ifdef _WIN32	
+    return IsDebuggerPresent() == 1;
+#else
+    return false;
+#endif
 }
 
 BLUEFRAMEWORK_CORE_NAMESPACE_END
