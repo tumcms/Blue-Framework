@@ -8,3 +8,4 @@ BlueFrameworkConfig.cmake
 BlueFrameworkConfigVersion.cmake
 bazel-*
 .vscode/ipch/*
+.vscode/*
