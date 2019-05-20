@@ -18,7 +18,7 @@
 
 #include "util.h"
 
-#include "BlueFramework/Core/assert.h"
+//#include "BlueFramework/Core/assert.h"
 #include <iomanip>
 #include <sstream>
 
@@ -33,8 +33,9 @@ double BlueFramework::Core::Math::round(const double val, const int precision) {
 double BlueFramework::Core::Math::factorial(const int n) {
 	const int maxValue = 20;
 
-	BLUE_ASSERT(n >= 0, "Invalid value.");
-	BLUE_ASSERT(n <= maxValue, "Invalid value.");
+	// TODO include this again - was comment out because bazel build can not handel IC right now
+	//BLUE_ASSERT(n >= 0, "Invalid value.");
+  //BLUE_ASSERT(n <= maxValue, "Invalid value.");
 
 	static double lookupTable[maxValue + 1] = {
 	  1.0,                                    // 0!
