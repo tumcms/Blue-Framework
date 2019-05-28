@@ -35,8 +35,8 @@
 #ifndef BlueFramework_Core_Singleton_230f7462_436c_4872_8df9_a538b5a86bb3_h
 #define BlueFramework_Core_Singleton_230f7462_436c_4872_8df9_a538b5a86bb3_h
 
-#include "BlueFRamework/Core/NonCopyable.h"
-#include "BlueFRamework/Core/namespace.h"
+#include "BlueFramework/Core/NonCopyable.h"
+#include "BlueFramework/Core/namespace.h"
 
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
 
