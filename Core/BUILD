@@ -36,10 +36,15 @@ filegroup(
     name = "BlueFramework_Core_Diagnostics_Source",
     srcs = [
         "src/BlueFramework/Core/Diagnostics/StackWalker.h",
+        "src/BlueFramework/Core/Diagnostics/ic/ic.hpp",
+        "src/BlueFramework/Core/Diagnostics/log.h",
+        "src/BlueFramework/Core/Diagnostics/log.cpp",
     ] + select({
         "@bazel_tools//src/conditions:windows": [
             "src/BlueFramework/Core/Diagnostics/StackWalker_Windows.h",
             "src/BlueFramework/Core/Diagnostics/StackWalker_Windows.cpp",
+            "src/BlueFramework/Core/Diagnostics/ic/ic_Windows.hpp",
+            "src/BlueFramework/Core/Diagnostics/ic/ic_Windows.cpp",
         ],
         "//conditions:default": [],
     }),
@@ -76,9 +81,10 @@ cc_library(
         "src/BlueFramework/Core/Uri.h",
         "src/BlueFramework/Core/Version.cpp",
         "src/BlueFramework/Core/Version.h",
+        "src/BlueFramework/Core/warnings.h",
         "//Core:BlueFramework_Core_Math_Source",
         "//Core:BlueFramework_Core_UtfConverter_Source",
-        #"//Core:BlueFramework_Core_Diagnostics_Source",
+        "//Core:BlueFramework_Core_Diagnostics_Source",
     ],
     includes = ["src"],
 	copts = ["-Iexternal/eigen"],
