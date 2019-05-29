@@ -28,12 +28,19 @@
 
 #include "BlueFramework/Core/Diagnostics/StackWalker.h"
 #include "BlueFramework/Core/assert.h"
+#include "BlueFramework/Core/Diagnostics/log.h"
 
+#ifdef _WIN32
 #pragma warning(push)
 #pragma warning(disable : 4702)
 #pragma warning(disable : 4127)
+#endif
+
 #include "BlueFramework/Core/tinyformat.h"
+
+#ifdef _WIN32
 #pragma warning(pop)
+#endif
 
 #include <stdexcept>
 
@@ -47,7 +54,9 @@ public:
 	}
 
 protected:
+#ifdef _WIN32
 	virtual void OnOutput(LPCSTR szText);
+#endif
 };
 
 class Exception : public std::runtime_error {

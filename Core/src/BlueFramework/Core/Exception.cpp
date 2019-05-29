@@ -24,11 +24,11 @@ BlueFramework::Core::BlueStackWalker::BlueStackWalker() : StackWalker() {
 }
 
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN
-
+#ifdef _WIN32
 void BlueStackWalker::OnOutput(LPCSTR szText) {
 	BLUE_LOG(error) << szText;
 }
-
+#endif
 FileNotFoundException::FileNotFoundException(std::string Filename) : m_Filename(Filename), Exception("File not found.") {
 }
 

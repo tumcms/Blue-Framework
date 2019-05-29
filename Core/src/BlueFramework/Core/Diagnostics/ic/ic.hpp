@@ -107,12 +107,16 @@ namespace ic {
     class Console
     {
         // Constructors
-        Console ();
+        Console () {};
     public:
-        ~Console ();
+        ~Console () {};
 
         // Singleton access
-        static Console& getInstance ();
+        static Console& getInstance ()
+        {
+            static Console instance;
+            return instance;
+        }
 
         // Hide/Show console
         void hide ();
@@ -134,7 +138,7 @@ namespace ic {
         //	Enabled: Screen buffer may be larger than the window, scrolling enabled.
         //	Note: Only buffered mode enables "wrap output at end of line" behavior.
         bool isBufferedMode () const;
-        void setBufferedMode (bool enabled);
+        void setBufferedMode (bool enabled) {};
 
         // Clear console
         //void clear (Color color = FG_WHITE | BG_BLACK, WCHAR character = L' ');
@@ -186,7 +190,7 @@ namespace ic {
         //	If buffered mode is disabled (default) you have to keep minimum buffer sizes in mind (see setBufferSize).
         int getWindowWidth () const;
         int getWindowHeight () const;
-        void setWindowSize (int width, int height);
+        void setWindowSize (int width, int height) {};
 
         // Get maximum window size
         int getMaxWindowWidth () const;

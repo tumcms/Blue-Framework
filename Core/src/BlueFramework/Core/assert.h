@@ -28,12 +28,16 @@ bool isDebuggerConnected();
 
 BLUEFRAMEWORK_CORE_NAMESPACE_END
 
+#if _WIN32
 #define BLUE_BREAKPOINT                                 \
 	{                                                   \
 		if (BlueFramework::Core::isDebuggerConnected()) \
 			__debugbreak();                             \
 	\
 }
+#else
+#define BLUE_BREAKPOINT ;
+#endif
 
 // macro overloading technique
 // more details here: https://github.com/jason-deng/C99FunctionOverload

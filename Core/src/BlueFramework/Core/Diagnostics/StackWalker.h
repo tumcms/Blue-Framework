@@ -21,5 +21,11 @@
 #ifdef _WIN32	
     #include "StackWalker_Windows.h"
 #else
-    
+    class StackWalker {
+    public:
+        StackWalker() {}
+        virtual  ~StackWalker() {};
+
+        void ShowCallstack() {};
+    };
 #endif

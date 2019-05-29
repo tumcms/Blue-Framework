@@ -56,9 +56,8 @@ cc_library(
         "src/BlueFramework/Core/assert.cpp",
         "src/BlueFramework/Core/assert.h",
         "src/BlueFramework/Core/deprecated.h",
-
-        #"src/BlueFramework/Core/Exception.cpp",
-        #"src/BlueFramework/Core/Exception.h",
+        "src/BlueFramework/Core/Exception.cpp",
+        "src/BlueFramework/Core/Exception.h",
         "src/BlueFramework/Core/Path.cpp",
         "src/BlueFramework/Core/Path.h",
 
@@ -87,10 +86,13 @@ cc_library(
         "//Core:BlueFramework_Core_UtfConverter_Source",
         "//Core:BlueFramework_Core_Diagnostics_Source",
     ],
+    copts = ["-Iexternal/eigen"],
+    #defines = ["BOOST_LOG_DYN_LINK"],
     includes = ["src"],
-	copts = ["-Iexternal/eigen"],
     deps = [
         "@boost//:filesystem",
-		"@eigen",
+        "@boost//:log",
+        "@boost//:system",
+        "@eigen",
     ],
 )
