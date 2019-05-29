@@ -33,6 +33,8 @@
 #include <boost/log/utility/setup/console.hpp>
 #include <boost/log/utility/setup/file.hpp>
 
+#include <string>
+
 namespace logging = boost::log;
 namespace expr = boost::log::expressions;
 namespace attrs = boost::log::attributes;
@@ -144,7 +146,7 @@ void initializeLogSystem(std::string path, bool writeToLogFile, bool writeToDebu
 				<< "] "
 				<< expr::smessage));
 	}
-
+#if _WIN32
 	if(writeToDebugOutput) {
 		typedef sinks::synchronous_sink<sinks::debug_output_backend> DebugOutput;
 
@@ -157,7 +159,7 @@ void initializeLogSystem(std::string path, bool writeToLogFile, bool writeToDebu
 
 		logging::core::get()->add_sink(debugOutput);
 	}
-
+#endif
 	logging::add_common_attributes();
 
 	loggingInitialized = true;

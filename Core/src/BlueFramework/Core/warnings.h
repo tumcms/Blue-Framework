@@ -21,7 +21,7 @@
 // This one is tricky. It cannot be enclosed by push/pop but must be disabled for the
 // whole compilation unit. Disables
 // warning C4714: function 'boost::log::v2s_mt_nt6::aux::attribute_set_reference_proxy::operator boost::log::v2s_mt_nt6::aux::attribute_set_reference_proxy::mapped_type(void) noexcept const' marked as __forceinline not inlined
-#define WARN_BOOST_INLINE_DISABLE __pragma(warning(disable: 4714))
+#define WARN_BOOST_INLINE_DISABLE __pragma(warning(disable: 4714));
 
 #define WARN_QT_PUSH \
 	__pragma(warning(push)) \

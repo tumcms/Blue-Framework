@@ -66,6 +66,7 @@ cc_library(
         #"src/BlueFramework/Core/PropertySet.h",
         "src/BlueFramework/Core/filesystem.h",
         "src/BlueFramework/Core/flags.h",
+        "src/BlueFramework/Core/flags.cpp",
         "src/BlueFramework/Core/Map.h",
         "src/BlueFramework/Core/memory.h",
         "src/BlueFramework/Core/NonCopyable.cpp",

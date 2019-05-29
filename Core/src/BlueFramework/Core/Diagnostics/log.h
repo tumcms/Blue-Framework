@@ -25,7 +25,11 @@
 #include "BlueFramework/Core/warnings.h"
 #include "BlueFramework/Core/Singleton.h"
 #include "BlueFramework/Core/namespace.h"
+
+#if  _WIN32
 WARN_BOOST_INLINE_DISABLE
+#endif
+
 #include <boost/log/trivial.hpp>
 #include <sstream>
 #include <string>
