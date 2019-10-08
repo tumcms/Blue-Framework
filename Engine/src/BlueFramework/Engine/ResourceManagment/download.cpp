@@ -43,8 +43,7 @@ BLUEFRAMEWORK_ENGINE_NAMESPACE_BEGIN
 std::string getHttpData(const std::string& server, const std::string& file) {
 	try {
 		boost::asio::ip::tcp::iostream s(server, "http");
-
-		s.expires_from_now(boost::posix_time::seconds(60));
+		s.expires_from_now(std::chrono::seconds(60));
 
 		if (!s) {
 			throw "Unable to connect: " + s.error().message();

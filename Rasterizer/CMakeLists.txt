@@ -34,13 +34,12 @@ add_library(BlueFramework.Rasterizer SHARED
 target_include_directories(BlueFramework.Rasterizer
 	PUBLIC
 		src
-	PRIVATE
-		${TINYXML2_INCLUDE_DIR}
 )
 
 target_link_libraries(BlueFramework.Rasterizer
-	BlueFramework.Core
-	${TINYXML2_LIBRARIES}
+	PUBLIC
+		BlueFramework.Core
+		tinyxml2
 )
 
 install(TARGETS BlueFramework.Rasterizer

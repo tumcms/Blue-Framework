@@ -23,6 +23,8 @@ project(BlueFramework)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
+include(FetchContent)
+find_package(Git REQUIRED)
 
 # Suggest new version of CMake
 if(${CMAKE_VERSION} VERSION_LESS "3.14.3")
@@ -126,18 +128,39 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.63.0 COMPONENTS log signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
-find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
-find_package(OpenGL REQUIRED)
-find_package(glew REQUIRED)
-find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
-find_package(TinyXML2 REQUIRED)
+find_package(Boost 1.65.1 COMPONENTS log signals system filesystem REQUIRED) # we suggest Boost 1.65.1
+
+#find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
+
+FetchContent_Declare(
+	eigen
+	GIT_REPOSITORY https://github.com/eigenteam/eigen-git-mirror.git
+	GIT_TAG 3.3.7
+)
+  
+FetchContent_GetProperties(eigen)
+if(NOT eigen_POPULATED)
+	FetchContent_Populate(eigen)
+	add_subdirectory(${eigen_SOURCE_DIR} ${eigen_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+
+#find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
+#find_package(TinyXML2 REQUIRED)
+FetchContent_Declare(
+	tinyxml2
+	GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+	GIT_TAG 7.1.0
+)
+  
+FetchContent_GetProperties(tinyxml2)
+if(NOT tinyxml2_POPULATED)
+	FetchContent_Populate(tinyxml2)
+	add_subdirectory(${tinyxml2_SOURCE_DIR} ${tinyxml2_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 
 # find_package(Vulkan REQUIRED)
-
-if(${EIGEN3_VERSION} VERSION_LESS "3.3.3")
-	message("Please switch to Eigen 3.3.3.")
-endif()
 
 # We suggest boost 1.64.0 - but 1.63.0 is also fine
 if(${Boost_MAJOR_VERSION} EQUAL 1 AND ${Boost_MINOR_VERSION} EQUAL 63 ) 
@@ -176,7 +199,6 @@ set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "Bl
 
 include(ExecuteQtDeployTool)
 set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
-set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
 macro(AddCopyCommandForModule module target dest)
