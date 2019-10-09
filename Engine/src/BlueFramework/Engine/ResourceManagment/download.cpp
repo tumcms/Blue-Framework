@@ -31,6 +31,7 @@
 #include <boost/filesystem.hpp>
 #include <fstream>
 #include <memory>
+#include <chrono>
 
 #include <tinyxml2.h>
 
@@ -43,7 +44,11 @@ BLUEFRAMEWORK_ENGINE_NAMESPACE_BEGIN
 std::string getHttpData(const std::string& server, const std::string& file) {
 	try {
 		boost::asio::ip::tcp::iostream s(server, "http");
+#if BOOST_VERSION < 106700
+		s.expires_from_now(boost::posix_time::seconds(60));
+#else
 		s.expires_from_now(std::chrono::seconds(60));
+#endif
 
 		if (!s) {
 			throw "Unable to connect: " + s.error().message();
