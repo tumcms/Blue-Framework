@@ -26,11 +26,11 @@ add_executable(AmbientOcclusion
 	${BlueFramework_UnitTests_Source}
 )
 
-link_against_gtest(AmbientOcclusion)
-
 target_link_libraries(AmbientOcclusion
 	BlueFramework.Core
 	BlueFramework.Cheetah
+	gtest
+	gtest_main
 )
 
 add_test(

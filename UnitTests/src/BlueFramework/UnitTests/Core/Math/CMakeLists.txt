@@ -27,15 +27,11 @@ add_executable(Math
 	${BlueFramework_UnitTests_Core_Math}
 )
 
-target_include_directories(Math
-	PRIVATE
-		${GTEST_INCLUDE_DIRS}
-)
-
 target_link_libraries(Math 
 	PRIVATE
 		BlueFramework.Core
-		${GTEST_BOTH_LIBRARIES}
+		gtest
+		gtest_main
 )
 
 add_test(

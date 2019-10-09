@@ -25,15 +25,12 @@ add_executable(Color
 	${BlueFramework_UnitTests_ImageProcessing_Color}
 )
 
-target_include_directories(Color
-	PRIVATE
-		${GTEST_INCLUDE_DIRS}
-)
 
 target_link_libraries(Color 
 	BlueFramework.Core
 	BlueFramework.ImageProcessing
-	${GTEST_BOTH_LIBRARIES}
+	gtest
+	gtest_main
 )
 
 add_test(
