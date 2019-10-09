@@ -27,6 +27,8 @@ if(NOT glew_POPULATED)
 	add_subdirectory(${glew_SOURCE_DIR}/build/cmake ${glew_SOURCE_DIR}/build EXCLUDE_FROM_ALL)
 endif()
 
+get_target_property(glew_INCLUDE_DIR glew_s INCLUDE_DIRECTORIES)
+
 file(GLOB_RECURSE
 	BlueFramework_GLRenderSystem_Source
 	LIST_DIRECTORIES false
@@ -51,6 +53,7 @@ add_library(BlueFramework.GLRenderSystem
 target_include_directories(BlueFramework.GLRenderSystem
 	PUBLIC
 		src
+		${glew_INCLUDE_DIR}
 )
 
 target_link_libraries(BlueFramework.GLRenderSystem

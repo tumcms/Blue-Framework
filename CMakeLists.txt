@@ -55,6 +55,14 @@ if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif()
 
 #------------------------------------------------------------------------------
+# Fix for MSVC 1915 / Visual Studio 2017 15.8
+#------------------------------------------------------------------------------
+
+if(MSVC_VERSION GREATER_EQUAL 1915)
+	add_compile_definitions(_ENABLE_EXTENDED_ALIGNED_STORAGE)
+endif()
+
+#------------------------------------------------------------------------------
 # Create folders for different build configurations (if they do not exist) to 
 # prevent problems with Copy*** scripts
 #------------------------------------------------------------------------------
