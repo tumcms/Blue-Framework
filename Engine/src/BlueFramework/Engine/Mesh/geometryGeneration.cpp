@@ -1,6 +1,6 @@
 /*
     This file is part of BlueFramework, a simple 3D engine.
-	Copyright (c) 2019 Technical University of Munich
+	Copyright (c) 2018 Technical University of Munich
 	Chair of Computational Modeling and Simulation.
 
     BlueFramework is free software; you can redistribute it and/or modify
@@ -226,6 +226,57 @@ void createIndexedCube(
 				
 	o_vertexBuffer = vbb.getVertices();
 	o_indices = ibb.indices;
+}
+
+void createBoundingBox(std::vector<buw::VertexPosition3>& o_vertexBuffer, std::vector<unsigned int>& o_indices, const float centerX, const float centerY, const float centerZ, const float sizeX, const float sizeY, const float sizeZ)
+{
+	size_t startIndex = o_vertexBuffer.size();
+
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX + sizeX, centerY + sizeY, centerZ + sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX - sizeX, centerY + sizeY, centerZ + sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX + sizeX, centerY - sizeY, centerZ + sizeZ)));	
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX + sizeX, centerY + sizeY, centerZ - sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX - sizeX, centerY - sizeY, centerZ + sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX + sizeX, centerY - sizeY, centerZ - sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX - sizeX, centerY + sizeY, centerZ - sizeZ)));
+	o_vertexBuffer.push_back(buw::VertexPosition3(buw::Vector3f(centerX - sizeX, centerY - sizeY, centerZ - sizeZ)));
+
+	// Connect all points which differ in only 1 dimension.
+	o_indices.push_back(startIndex);
+	o_indices.push_back(startIndex + 1);
+
+	o_indices.push_back(startIndex);
+	o_indices.push_back(startIndex + 2);
+
+	o_indices.push_back(startIndex);
+	o_indices.push_back(startIndex + 3);
+
+	o_indices.push_back(startIndex + 1);
+	o_indices.push_back(startIndex + 4);
+
+	o_indices.push_back(startIndex + 1);
+	o_indices.push_back(startIndex + 6);
+
+	o_indices.push_back(startIndex + 2);
+	o_indices.push_back(startIndex + 4);
+
+	o_indices.push_back(startIndex + 2);
+	o_indices.push_back(startIndex + 5);
+
+	o_indices.push_back(startIndex + 3);
+	o_indices.push_back(startIndex + 6);
+
+	o_indices.push_back(startIndex + 3);
+	o_indices.push_back(startIndex + 5);
+
+	o_indices.push_back(startIndex + 4);
+	o_indices.push_back(startIndex + 7);
+
+	o_indices.push_back(startIndex + 5);
+	o_indices.push_back(startIndex + 7);
+
+	o_indices.push_back(startIndex + 6);
+	o_indices.push_back(startIndex + 7);
 }
 
 void createIndexedCube(
