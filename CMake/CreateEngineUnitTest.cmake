@@ -50,6 +50,8 @@ function(CreateEngineUnitTest UnitTestName)
 		${BlueFramework_UnitTests_Engine_UnitTest_Shader_OGL}
 		${BlueFramework_UnitTests_Engine_UnitTest_ReferenceImages}
 	)
+
+	set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/Engine")
 		
 	target_link_libraries(${UnitTestName}
 		PRIVATE
@@ -91,12 +93,18 @@ function(CreateEngineUnitTest UnitTestName)
 		)
 	endif()
 
-	set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/Engine")
 	set_target_properties(Copy${UnitTestName}UnitTestResources PROPERTIES FOLDER "BlueFramework/UnitTests/Engine/Copy")
 	add_dependencies(${UnitTestName} Copy${UnitTestName}UnitTestResources)
 	endif()
 
-	
+if(TARGET Qt5::windeployqt)
+    # execute windeployqt in a tmp directory after build
+    add_custom_command(TARGET ${UnitTestName}
+        POST_BUILD
+        COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
+        COMMAND Qt5::windeployqt --dir "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>" "$<TARGET_FILE_DIR:${UnitTestName}>/$<TARGET_FILE_NAME:${UnitTestName}>"
+    )
+endif()
 
 
 	add_dependencies(${UnitTestName}	

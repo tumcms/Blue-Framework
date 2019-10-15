@@ -180,6 +180,27 @@ cmake_policy(SET CMP0020 NEW)
 
 find_package(Qt5 5.9.0 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
 
+if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
+    get_target_property(_qt5_qmake_location Qt5::qmake IMPORTED_LOCATION)
+
+    execute_process(
+        COMMAND "${_qt5_qmake_location}" -query QT_INSTALL_PREFIX
+        RESULT_VARIABLE return_code
+        OUTPUT_VARIABLE qt5_install_prefix
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+    set(imported_location "${qt5_install_prefix}/bin/windeployqt.exe")
+
+    if(EXISTS ${imported_location})
+        add_executable(Qt5::windeployqt IMPORTED)
+
+        set_target_properties(Qt5::windeployqt PROPERTIES
+            IMPORTED_LOCATION ${imported_location}
+        )
+    endif()
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC OFF)
 
@@ -194,6 +215,14 @@ add_subdirectory(ImageProcessing)
 add_subdirectory(Rasterizer)
 add_subdirectory(UnitTests)
 
+if(TARGET Qt5::windeployqt)
+    # execute windeployqt in a tmp directory after build
+    add_custom_target(ExecuteQtDeployTool
+        COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
+        COMMAND Qt5::windeployqt --dir "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>"
+    )
+endif()
+
 # Development
 set_target_properties(BlueFramework.Application            PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.Core                   PROPERTIES FOLDER "BlueFramework")
@@ -205,8 +234,8 @@ set_target_properties(BlueFramework.Engine                 PROPERTIES FOLDER "Bl
 set_target_properties(BlueFramework.Rasterizer             PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "BlueFramework")
 
-include(ExecuteQtDeployTool)
-set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
+#include(ExecuteQtDeployTool)
+#set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
 macro(AddCopyCommandForModule module target dest)
