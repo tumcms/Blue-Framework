@@ -26,13 +26,14 @@ add_executable(RandomHeightmapGeneration
 )
 
 
-target_link_libraries(RandomHeightmapGeneration 
-	PRIVATE
+target_link_libraries(RandomHeightmapGeneration
+	PUBLIC
 		BlueFramework.Core
 		BlueFramework.ImageProcessing
 		gtest
 		gtest_main
 )
+
 
 add_test(
     NAME RandomHeightmapGenerationTest

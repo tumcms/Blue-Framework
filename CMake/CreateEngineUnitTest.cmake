@@ -102,7 +102,7 @@ if(TARGET Qt5::windeployqt)
     add_custom_command(TARGET ${UnitTestName}
         POST_BUILD
         COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
-        COMMAND Qt5::windeployqt --dir "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>" "$<TARGET_FILE_DIR:${UnitTestName}>/$<TARGET_FILE_NAME:${UnitTestName}>"
+        COMMAND Qt5::windeployqt --dir "${CMAKE_BINARY_DIR}/$<CONFIG>" "$<TARGET_FILE_DIR:${UnitTestName}>/$<TARGET_FILE_NAME:${UnitTestName}>"
     )
 endif()
 
