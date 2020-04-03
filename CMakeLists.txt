@@ -16,20 +16,14 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-cmake_minimum_required(VERSION 3.8) # Kittens will die if you switch to an earlier version of CMake.
-cmake_policy(VERSION 3.8)
+cmake_minimum_required(VERSION 3.14.3) # Kittens will die if you switch to an earlier version of CMake.
+cmake_policy(VERSION 3.14.3)
  
 project(BlueFramework)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
 
-# Suggest new version of CMake
-if(${CMAKE_VERSION} VERSION_LESS "3.14.3")
-    message("Please consider to switch to CMake 3.14.3")
-endif()
-
-enable_testing()
 
 #------------------------------------------------------------------------------
 # Check for Microsoft VisualStudio version and processor architecture.
@@ -126,7 +120,7 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.63.0 COMPONENTS log signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
+find_package(Boost 1.65.1 COMPONENTS log signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
 find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
 find_package(OpenGL REQUIRED)
 find_package(glew REQUIRED)
