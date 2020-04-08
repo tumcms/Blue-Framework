@@ -16,8 +16,6 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-project(BlueFramework.Rasterizer)
-
 file(GLOB BlueFramework_Rasterizer_Resources_Source                src/BlueFramework/Rasterizer/Resources/*.*)
 file(GLOB BlueFramework_Rasterizer_Source                          src/BlueFramework/Rasterizer/*.*)
 file(GLOB_RECURSE BlueFramework_Rasterizer_Headers				   src/BlueFramework/Rasterizer/*.h)
