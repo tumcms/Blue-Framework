@@ -1,8 +1,0 @@
-syntax: glob
-lib/*
-make.bat
-Tools/updateVersion.pyo
-build/*
-external/log_install_*
-BlueFrameworkConfig.cmake
-BlueFrameworkConfigVersion.cmake

@@ -123,6 +123,9 @@ public:
     void setPickIdBuffer(buw::ReferenceCounted<buw::IConstantBuffer> &pickIdBuffer);
 	buw::ReferenceCounted<buw::ITexture2D>& getPickBuffer();
 
+	std::string getResourceRootDir();
+	void setResourceRootDir(const std::string& ssResourceRootDir);
+
 private:
 	void v_init() override;
 	void v_render() override;
@@ -153,6 +156,7 @@ private:
 	CameraBuffer cameraMatrices_;
 	buw::Image4b pickBufferImage_;
 	unsigned int lastPickId_;
+	std::string  ssResourceRootDir_;
 };
 
 BLUEFRAMEWORK_ENGINE_NAMESPACE_END
