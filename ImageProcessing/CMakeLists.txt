@@ -34,9 +34,18 @@ target_include_directories(BlueFramework.Core
 target_link_libraries(BlueFramework.ImageProcessing
 	PUBLIC
 		BlueFramework.Core
-	PRIVATE
 		Qt5::Widgets
+		Qt5::Gui
 )
+
+if(TARGET Qt5::windeployqt)
+    # execute windeployqt in a tmp directory after build
+    add_custom_command(TARGET BlueFramework.ImageProcessing
+        POST_BUILD
+        COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
+        COMMAND Qt5::windeployqt --dir "${CMAKE_BINARY_DIR}/$<CONFIG>" "$<TARGET_FILE_DIR:BlueFramework.ImageProcessing>/$<TARGET_FILE_NAME:BlueFramework.ImageProcessing>"
+    )
+endif()
 
 install(
 	TARGETS BlueFramework.ImageProcessing

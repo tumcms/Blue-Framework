@@ -23,6 +23,8 @@ project(BlueFramework)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
+include(FetchContent)
+find_package(Git REQUIRED)
 
 
 #------------------------------------------------------------------------------
@@ -44,6 +46,14 @@ endif()
 if(NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
     message("Please switch to x64 build.")
 	return()
+endif()
+
+#------------------------------------------------------------------------------
+# Fix for MSVC 1915 / Visual Studio 2017 15.8
+#------------------------------------------------------------------------------
+
+if(MSVC_VERSION GREATER_EQUAL 1915)
+	add_compile_definitions(_ENABLE_EXTENDED_ALIGNED_STORAGE)
 endif()
 
 #------------------------------------------------------------------------------
@@ -120,18 +130,37 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.65.1 COMPONENTS log signals system filesystem python3 REQUIRED) # we suggest Boost 1.65.1
-find_package(Eigen3 3.3.2 REQUIRED) # we suggest Eigen 3.3.4
-find_package(OpenGL REQUIRED)
-find_package(glew REQUIRED)
-find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
-find_package(TinyXML2 REQUIRED)
+find_package(Boost 1.65.1 COMPONENTS log signals system filesystem REQUIRED) # we suggest Boost 1.65.1
+
+FetchContent_Declare(
+	eigen
+	GIT_REPOSITORY https://github.com/eigenteam/eigen-git-mirror.git
+	GIT_TAG 3.3.7
+)
+  
+FetchContent_GetProperties(eigen)
+if(NOT eigen_POPULATED)
+	FetchContent_Populate(eigen)
+	add_subdirectory(${eigen_SOURCE_DIR} ${eigen_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+
+#find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
+#find_package(TinyXML2 REQUIRED)
+FetchContent_Declare(
+	tinyxml2
+	GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git
+	GIT_TAG 7.1.0
+)
+  
+FetchContent_GetProperties(tinyxml2)
+if(NOT tinyxml2_POPULATED)
+	FetchContent_Populate(tinyxml2)
+	add_subdirectory(${tinyxml2_SOURCE_DIR} ${tinyxml2_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 
 # find_package(Vulkan REQUIRED)
-
-if(${EIGEN3_VERSION} VERSION_LESS "3.3.3")
-	message("Please switch to Eigen 3.3.3.")
-endif()
 
 # We suggest boost 1.64.0 - but 1.63.0 is also fine
 if(${Boost_MAJOR_VERSION} EQUAL 1 AND ${Boost_MINOR_VERSION} EQUAL 63 ) 
@@ -142,6 +171,27 @@ endif()
 cmake_policy(SET CMP0020 NEW)
 
 find_package(Qt5 5.9.0 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
+
+if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
+    get_target_property(_qt5_qmake_location Qt5::qmake IMPORTED_LOCATION)
+
+    execute_process(
+        COMMAND "${_qt5_qmake_location}" -query QT_INSTALL_PREFIX
+        RESULT_VARIABLE return_code
+        OUTPUT_VARIABLE qt5_install_prefix
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+    set(imported_location "${qt5_install_prefix}/bin/windeployqt.exe")
+
+    if(EXISTS ${imported_location})
+        add_executable(Qt5::windeployqt IMPORTED)
+
+        set_target_properties(Qt5::windeployqt PROPERTIES
+            IMPORTED_LOCATION ${imported_location}
+        )
+    endif()
+endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC OFF)
@@ -157,6 +207,14 @@ add_subdirectory(ImageProcessing)
 add_subdirectory(Rasterizer)
 add_subdirectory(UnitTests)
 
+if(TARGET Qt5::windeployqt)
+    # execute windeployqt in a tmp directory after build
+    add_custom_target(ExecuteQtDeployTool
+        COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
+        COMMAND Qt5::windeployqt --dir "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>"
+    )
+endif()
+
 # Development
 set_target_properties(BlueFramework.Application            PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.Core                   PROPERTIES FOLDER "BlueFramework")
@@ -168,9 +226,8 @@ set_target_properties(BlueFramework.Engine                 PROPERTIES FOLDER "Bl
 set_target_properties(BlueFramework.Rasterizer             PROPERTIES FOLDER "BlueFramework")
 set_target_properties(BlueFramework.ImageProcessing        PROPERTIES FOLDER "BlueFramework")
 
-include(ExecuteQtDeployTool)
-set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
-set_target_properties(GTestCopyBinaries                	 PROPERTIES FOLDER "Copy")
+#include(ExecuteQtDeployTool)
+#set_target_properties(ExecuteQtDeployTool                 	 PROPERTIES FOLDER "Copy")
 
 # Copy libs
 macro(AddCopyCommandForModule module target dest)

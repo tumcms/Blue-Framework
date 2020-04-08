@@ -20,31 +20,5 @@
 namespace {
 	TEST(Version, Major) {
 		EXPECT_TRUE(BlueFramework::Core::Version::getMajor() >= 3);
-
-		std::vector<std::string> fileList = buw::getFileList("C:\\dev\\BlueFramework3\\Core\\src");
-
-		std::ofstream ofs("C:\\dev\\BlueFramework3\\Tools\\runCLangFormat.bat", std::ofstream::out);
-
-		for (auto filename : fileList) {
-		    // ignore some core files
-		    if (boost::algorithm::ends_with(filename, "ic\\ic.cpp") 
-				|| boost::algorithm::ends_with(filename, "StackWalker.cpp")
-		        || boost::algorithm::ends_with(filename, "StackWalker.h")
-		        || boost::algorithm::ends_with(filename, "UtfConverter\\ConvertUTF.cpp")
-		        || boost::algorithm::ends_with(filename, "UtfConverter\\ConvertUTF.h")
-		        || boost::algorithm::ends_with(filename, "UtfConverter\\ConvertUTF.cpp")
-		        || boost::algorithm::ends_with(filename, "UtfConverter\\CVTUTF7.cpp")
-				|| boost::algorithm::ends_with(filename, "UtfConverter\\CVTUTF7.h")
-				|| boost::algorithm::ends_with(filename, "tinyformat.h"))
-			    continue;
-
-		    if (boost::algorithm::ends_with(filename, ".cpp") || boost::algorithm::ends_with(filename, ".h")) {
-				ofs << "C:\\dev\\CMakeDemos\\tools\\clang-format.exe " << filename << " > " << filename << "_XXXX" << std::endl;
-				ofs << "del " << filename << std::endl;
-				ofs << "move " << filename << "_XXXX " << filename << std::endl;
-			}
-		}
-
-		ofs.close();
 	}
 }

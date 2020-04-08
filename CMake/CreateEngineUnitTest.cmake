@@ -50,6 +50,8 @@ function(CreateEngineUnitTest UnitTestName)
 		${BlueFramework_UnitTests_Engine_UnitTest_Shader_OGL}
 		${BlueFramework_UnitTests_Engine_UnitTest_ReferenceImages}
 	)
+
+	set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/Engine")
 		
 	target_link_libraries(${UnitTestName}
 		PRIVATE
@@ -59,30 +61,31 @@ function(CreateEngineUnitTest UnitTestName)
 			BlueFramework.D3D11RenderSystem # force this to be rebuild, because it is maybe needed by the unit test
 			BlueFramework.D3D12RenderSystem # force this to be rebuild, because it is maybe needed by the unit test
 			BlueFramework.GLRenderSystem # force this to be rebuild, because it is maybe needed by the unit test
-			${GTEST_BOTH_LIBRARIES}
-			#GTest::GTest
-			#GTest::Main
+			gtest
+			gtest_main
 			Qt5::Widgets
 	)
-	
-	target_include_directories(${UnitTestName}
-		PRIVATE
-			${GTEST_INCLUDE_DIRS}
-	)
-		
+			
 	add_test(
 		NAME ${UnitTestName}Test
 		COMMAND ${UnitTestName}
 	)
 	
-	if(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data) 
+	if(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data OR EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader) 
+	if(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data AND EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader) 
 		# housekeeping for shaders, resources, etc. which are needed during testing
 		add_custom_target(Copy${UnitTestName}UnitTestResources
 			# Effect
 			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader Shader
 			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data   Data		
 		)
-	else()
+	elseif(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data)
+		# housekeeping for shaders, resources, etc. which are needed during testing
+		add_custom_target(Copy${UnitTestName}UnitTestResources
+			# Effect
+			COMMAND	${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Data Data		
+		)
+	elseif(EXISTS ${PROJECT_SOURCE_DIR}/UnitTests/src/BlueFramework/UnitTests/Engine/${UnitTestName}/Shader)
 		# housekeeping for shaders, resources, etc. which are needed during testing
 		add_custom_target(Copy${UnitTestName}UnitTestResources
 			# Effect
@@ -90,9 +93,19 @@ function(CreateEngineUnitTest UnitTestName)
 		)
 	endif()
 
-	
-	set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/Engine")
 	set_target_properties(Copy${UnitTestName}UnitTestResources PROPERTIES FOLDER "BlueFramework/UnitTests/Engine/Copy")
+	add_dependencies(${UnitTestName} Copy${UnitTestName}UnitTestResources)
+	endif()
+
+if(TARGET Qt5::windeployqt)
+    # execute windeployqt in a tmp directory after build
+    add_custom_command(TARGET ${UnitTestName}
+        POST_BUILD
+        COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
+        COMMAND Qt5::windeployqt --dir "${CMAKE_BINARY_DIR}/$<CONFIG>" "$<TARGET_FILE_DIR:${UnitTestName}>/$<TARGET_FILE_NAME:${UnitTestName}>"
+    )
+endif()
+
 
 	add_dependencies(${UnitTestName}	
 		BlueFramework.Core
@@ -101,6 +114,5 @@ function(CreateEngineUnitTest UnitTestName)
 		BlueFramework.D3D12RenderSystem
 		BlueFramework.GLRenderSystem
 		BlueFramework.Engine
-		Copy${UnitTestName}UnitTestResources # Copy resources
 	)	
 endfunction()

@@ -42,7 +42,6 @@ add_library(BlueFramework.Core SHARED
 target_include_directories(BlueFramework.Core
 	PUBLIC
 		${Boost_INCLUDE_DIR}
-		${EIGEN3_INCLUDE_DIR}
 		src
 )
 
@@ -51,6 +50,7 @@ target_link_libraries(BlueFramework.Core
 		Boost::system
 		Boost::boost  
 		Boost::log
+		eigen
 )
 
 install(TARGETS BlueFramework.Core

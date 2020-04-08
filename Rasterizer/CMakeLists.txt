@@ -16,8 +16,6 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-project(BlueFramework.Rasterizer)
-
 file(GLOB BlueFramework_Rasterizer_Resources_Source                src/BlueFramework/Rasterizer/Resources/*.*)
 file(GLOB BlueFramework_Rasterizer_Source                          src/BlueFramework/Rasterizer/*.*)
 file(GLOB_RECURSE BlueFramework_Rasterizer_Headers				   src/BlueFramework/Rasterizer/*.h)
@@ -34,13 +32,12 @@ add_library(BlueFramework.Rasterizer SHARED
 target_include_directories(BlueFramework.Rasterizer
 	PUBLIC
 		src
-	PRIVATE
-		${TINYXML2_INCLUDE_DIR}
 )
 
 target_link_libraries(BlueFramework.Rasterizer
-	BlueFramework.Core
-	${TINYXML2_LIBRARIES}
+	PUBLIC
+		BlueFramework.Core
+		tinyxml2
 )
 
 install(TARGETS BlueFramework.Rasterizer

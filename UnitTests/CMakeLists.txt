@@ -16,6 +16,19 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+FetchContent_Declare(
+	gtest
+	GIT_REPOSITORY https://github.com/google/googletest.git
+	GIT_TAG release-1.10.0
+)
+ 
+FetchContent_GetProperties(gtest)
+if(NOT gtest_POPULATED)
+	FetchContent_Populate(gtest)
+	add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
+
 include(CreateEngineUnitTest)
 
 file(GLOB BlueFramework_UnitTests_Source src/BlueFramework/UnitTests/*.*)

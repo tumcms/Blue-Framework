@@ -15,9 +15,19 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+find_package(OpenGL REQUIRED)
 
-set(CMAKE_PREFIX_PATH ${GLEW_ROOT};${CMAKE_PREFIX_PATH})
-set(CMAKE_LIBRARY_PATH ${GLEW_ROOT}/lib/Release/x64;${CMAKE_LIBRARY_PATH})
+FetchContent_Declare(
+	glew
+	URL https://sourceforge.net/projects/glew/files/glew/2.0.0/glew-2.0.0.zip/download
+)
+  
+if(NOT glew_POPULATED)
+	FetchContent_Populate(glew)
+	add_subdirectory(${glew_SOURCE_DIR}/build/cmake ${glew_SOURCE_DIR}/build EXCLUDE_FROM_ALL)
+endif()
+
+get_target_property(glew_INCLUDE_DIR glew_s INCLUDE_DIRECTORIES)
 
 file(GLOB_RECURSE
 	BlueFramework_GLRenderSystem_Source
@@ -43,19 +53,17 @@ add_library(BlueFramework.GLRenderSystem
 target_include_directories(BlueFramework.GLRenderSystem
 	PUBLIC
 		src
-	PRIVATE
-		${GLEW_INCLUDE_DIRS}
-		${TINYXML2_INCLUDE_DIR}
+		${glew_INCLUDE_DIR}
 )
 
 target_link_libraries(BlueFramework.GLRenderSystem
 	PUBLIC
 		BlueFramework.Core
 		BlueFramework.Rasterizer
+		glew_s
+		tinyxml2
 	PRIVATE
-		${GLEW_LIBRARIES}
 		${OPENGL_gl_LIBRARY}
-		${TINYXML2_LIB}
 )
 
 install(TARGETS BlueFramework.GLRenderSystem   
