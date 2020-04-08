@@ -90,7 +90,10 @@ target_link_libraries(BlueFramework.Application
   BlueFramework.Rasterizer
   BlueFramework.Engine
   # Qt5
-  ${Qt5Core_QTMAIN_LIBRARIES}  # <-- New target available via find_package ( Qt5Core )
+  # ${Qt5Core_QTMAIN_LIBRARIES}  # <-- New target available via find_package ( Qt5Core )
+  Qt5::Widgets
+  Qt5::Xml
+  Qt5::XmlPatterns
 )
 
 add_dependencies(BlueFramework.Application
@@ -98,7 +101,7 @@ add_dependencies(BlueFramework.Application
 )
 
 # Use the Widgets module from Qt 5.
-qt5_use_modules(BlueFramework.Application Widgets Xml XmlPatterns)
+# qt5_use_modules(BlueFramework.Application Widgets Xml XmlPatterns)
 
 install(TARGETS BlueFramework.Application
    ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
