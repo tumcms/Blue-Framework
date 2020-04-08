@@ -16,8 +16,6 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-project(BlueFramework.Application)
-
 add_definitions(-DNOMINMAX)
 add_definitions(-DBLUEFRAMEWORK_EXPORT)
 
@@ -25,15 +23,6 @@ add_definitions(-DBLUEFRAMEWORK_EXPORT)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
-
-#set(CMAKE_MODULE_PATH ${PROJECT_Source_DIR}/build/)
-
-set(CMAKE_DEBUG_POSTFIX  "d")
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG   ../Debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE   ../Release)
-set(CMAKE_PDB_OUTPUT_DIRECTORY_DEBUG       ../Debug)
-set(CMAKE_PDB_OUTPUT_DIRECTORY_RELEASE       ../Release)
 
 # Unicode rules!
 add_definitions(-D_UNICODE -DQT_NO_KEYWORDS)
@@ -90,7 +79,7 @@ target_link_libraries(BlueFramework.Application
   BlueFramework.Rasterizer
   BlueFramework.Engine
   # Qt5
-  # ${Qt5Core_QTMAIN_LIBRARIES}  # <-- New target available via find_package ( Qt5Core )
+  Qt5::Core
   Qt5::Widgets
   Qt5::Xml
   Qt5::XmlPatterns

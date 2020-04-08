@@ -1,6 +1,6 @@
 /*
     This file is part of BlueFramework, a simple 3D engine.
-	Copyright (c) 2019 Technical University of Munich
+	Copyright (c) 2018 Technical University of Munich
 	Chair of Computational Modeling and Simulation.
 
     BlueFramework is free software; you can redistribute it and/or modify
@@ -45,6 +45,12 @@ void createIndexedCube(
 	std::vector<unsigned int>& o_indices,
 	const float sizeX, const float sizeY, const float sizeZ);
 
+void createBoundingBox(
+	std::vector<buw::VertexPosition3>& o_vertexBuffer,
+	std::vector<unsigned int>& o_indices,
+	const float centerX, const float centerY, const float centerZ,
+	const float sizeX, const float sizeY, const float sizeZ);
+
 // create a vertex and index buffer for a sphere - front facing triangles are 
 // counterclockwise-wounded
 void createIndexedSphere(
@@ -76,6 +82,7 @@ void createIndexedPlane(
 BLUEFRAMEWORK_ENGINE_NAMESPACE_END
 
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(createIndexedCube);
+BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(createBoundingBox);
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(createIndexedSphere);
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(createIndexedMesh);
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(createGrid);
