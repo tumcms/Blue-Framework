@@ -198,8 +198,12 @@ buw::Vector3f transform(buw::Vector3f pos, eFaceId id) {
 BlueFramework::Engine::ViewCube::ViewCube(buw::ReferenceCounted<buw::IRenderSystem> renderSystem,
 	buw::ReferenceCounted<buw::ITexture2D> pickBuffer,
 	buw::ReferenceCounted<buw::IConstantBuffer> pickIdBuffer /*=nullptr*/,
-	buw::ReferenceCounted<buw::CameraController> cameraController /*= nullptr*/)
+	buw::ReferenceCounted<buw::CameraController> cameraController /*= nullptr*/,
+	std::string ssResourceRootDir /*= "" */)
 	: effect_(renderSystem.get(), pickBuffer) {
+
+	effect_.setResourceRootDir(ssResourceRootDir); // is consumed in .init()
+
 	effect_.init();
 	effect_.updateRotationMatrix(buw::Matrix44f::Identity());
 	buw::CameraFrustum frustum = buw::CameraFrustum(std::min(pickBuffer->width(), 130),
@@ -210,7 +214,7 @@ BlueFramework::Engine::ViewCube::ViewCube(buw::ReferenceCounted<buw::IRenderSyst
 		BlueFramework::Core::Math::constants<float>::pi_over_4());
 	effect_.updateProjectionMatrix(frustum.projectionMatrix());
 
-	std::string filenameViewCubeDescription = "Data/ViewCube.json";
+	std::string filenameViewCubeDescription = effect_.getResourceRootDir() + "Data/ViewCube.json";
 	BLUE_ASSERT(boost::filesystem::exists(filenameViewCubeDescription), "Can not find view cube description file");
 
 	if(!boost::filesystem::exists(filenameViewCubeDescription)) {
@@ -469,7 +473,7 @@ void BlueFramework::Engine::ViewCube::setDescription(Description desc) {
 	/*Iterate over all faces and load the corresponding textures from the files specified in the description.*/
 	for(int face = 0; face < 6; ++face) {
 		eFaceId faceid = static_cast<eFaceId>(face);
-		auto img = buw::loadImage4b(desc_.getFaceTexturePath(faceid));
+		auto img = buw::loadImage4b(effect_.getResourceRootDir() + desc_.getFaceTexturePath(faceid));
 
 		/*Create the texture description for the GPU side buffer.*/
 		buw::texture2DDescription td;

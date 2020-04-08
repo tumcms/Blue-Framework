@@ -90,7 +90,7 @@ add_dependencies(BlueFramework.Application
 )
 
 # Use the Widgets module from Qt 5.
-qt5_use_modules(BlueFramework.Application Widgets Xml XmlPatterns)
+# qt5_use_modules(BlueFramework.Application Widgets Xml XmlPatterns)
 
 install(TARGETS BlueFramework.Application
    ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
