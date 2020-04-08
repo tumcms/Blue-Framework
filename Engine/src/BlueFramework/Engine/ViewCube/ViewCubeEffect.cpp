@@ -29,7 +29,7 @@ const int viewportSize = 180;
 ViewCubeEffect::ViewCubeEffect(buw::IRenderSystem* renderSystem,
 
                                                       buw::ReferenceCounted<buw::ITexture2D> pickBuffer)
-    : buw::Effect(renderSystem), pickBufferImage_(1, 1), pickBuffer_(pickBuffer) {
+    : buw::Effect(renderSystem), pickBufferImage_(1, 1), pickBuffer_(pickBuffer), ssResourceRootDir_("") {
 }
 
 ViewCubeEffect::~ViewCubeEffect() {
@@ -154,7 +154,7 @@ void ViewCubeEffect::v_init() {
 	buw::viewportDescription vpd(std::min(width, viewportSize), std::min(height, viewportSize), std::max(width - viewportSize, 0));
 	viewport_ = renderSystem()->createViewport(vpd);
 
-	std::string filename = "Shader/ViewCubeEffect.be";
+	std::string filename = getResourceRootDir() + "Shader/ViewCubeEffect.be";
 
 	BLUE_ASSERT(boost::filesystem::exists(filename), "ViewCube shader does not exist.");
 
@@ -423,6 +423,18 @@ void ViewCubeEffect::setPickBuffer(buw::ReferenceCounted<buw::ITexture2D> pickBu
 void ViewCubeEffect::setPickIdBuffer(buw::ReferenceCounted<buw::IConstantBuffer> &pickIdBuffer)
 {
     pickIdBuffer_ = pickIdBuffer;
+}
+
+
+std::string ViewCubeEffect::getResourceRootDir() {
+	return ssResourceRootDir_;
+}
+
+void ViewCubeEffect::setResourceRootDir(const std::string &ssResourceRootDir) {
+	ssResourceRootDir_ = ssResourceRootDir;
+	if (    !ssResourceRootDir_.empty()
+		 && ssResourceRootDir_.back() != '/')
+		ssResourceRootDir_ += '/';
 }
 
 BLUEFRAMEWORK_ENGINE_NAMESPACE_END

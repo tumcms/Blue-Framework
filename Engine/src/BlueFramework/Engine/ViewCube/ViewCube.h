@@ -100,7 +100,8 @@ public:
 	ViewCube(buw::ReferenceCounted<buw::IRenderSystem> renderSystem,
 	         buw::ReferenceCounted<buw::ITexture2D> pickBuffer,
              buw::ReferenceCounted<buw::IConstantBuffer> pickIdBuffer = nullptr,
-	         buw::ReferenceCounted<buw::CameraController> cameraController = nullptr);
+	         buw::ReferenceCounted<buw::CameraController> cameraController = nullptr,
+			 std::string ssResourceRootDir = "");
 	// ViewCube() {};
 	virtual ~ViewCube();
 
