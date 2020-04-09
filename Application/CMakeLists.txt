@@ -74,23 +74,17 @@ target_include_directories(BlueFramework.Application
 )
 
 target_link_libraries(BlueFramework.Application
-  BlueFramework.Core
-  BlueFramework.ImageProcessing
-  BlueFramework.Rasterizer
-  BlueFramework.Engine
-  # Qt5
-  Qt5::Core
-  Qt5::Widgets
-  Qt5::Xml
-  Qt5::XmlPatterns
+  PUBLIC
+    BlueFramework.Core
+    BlueFramework.ImageProcessing
+    BlueFramework.Rasterizer
+    BlueFramework.Engine
+    # Qt5
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Xml
+    Qt5::XmlPatterns
 )
-
-add_dependencies(BlueFramework.Application
-  BlueFramework.Core
-)
-
-# Use the Widgets module from Qt 5.
-# qt5_use_modules(BlueFramework.Application Widgets Xml XmlPatterns)
 
 install(TARGETS BlueFramework.Application
    ARCHIVE DESTINATION lib/${MSVC_VERSION}/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>
