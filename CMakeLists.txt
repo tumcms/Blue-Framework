@@ -211,7 +211,7 @@ if(TARGET Qt5::windeployqt)
     # execute windeployqt in a tmp directory after build
     add_custom_target(ExecuteQtDeployTool
         COMMAND set PATH=%PATH%$<SEMICOLON>${qt5_install_prefix}/bin
-        COMMAND Qt5::windeployqt ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>
+        COMMAND Qt5::windeployqt -xml ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>
     )
 endif()
 
