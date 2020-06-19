@@ -275,6 +275,40 @@ public:
 	}
 };
 
+struct VertexPosition3Color3Normal3Id1 {
+public:
+	VertexPosition3Color3Normal3Id1() {
+	}
+
+	VertexPosition3Color3Normal3Id1(
+		const buw::Vector3f position,
+		const buw::Vector3f& color,
+		const buw::Vector3f& normal,
+		const uint32_t& id)
+	:
+	position(position),
+	color(color),
+	normal(normal),
+	id(id)
+	{	}
+
+	Unaligned::Float3 position;
+	Unaligned::Float3 color;
+	Unaligned::Float3 normal;
+	Unaligned::UInt id;
+
+public:
+	static VertexLayout getVertexLayout() {
+		buw::VertexLayout vertexLayout;
+		vertexLayout.add(buw::eVertexAttributeSemantic::Position, buw::eVertexAttributeFormat::Float3);
+		vertexLayout.add(buw::eVertexAttributeSemantic::Color, buw::eVertexAttributeFormat::Float3);
+		vertexLayout.add(buw::eVertexAttributeSemantic::Normal, buw::eVertexAttributeFormat::Float3);
+		vertexLayout.add(buw::eVertexAttributeSemantic::PickId, buw::eVertexAttributeFormat::UInt);
+
+		return vertexLayout;
+	}
+};
+
 struct VertexPosition3Color3Texture2 {
 public:
 	VertexPosition3Color3Texture2() {
@@ -436,6 +470,7 @@ bool operator==(const VertexPosition3Color3Normal3& lhs, const VertexPosition3Co
 bool operator==(const VertexPosition3Normal3Texture2& lhs, const VertexPosition3Normal3Texture2& rhs);
 bool operator==(const VertexPosition3Color3Texture2& lhs, const VertexPosition3Color3Texture2& rhs);
 bool operator==(const VertexPosition3Texture2PickId1FaceId1RegionId1& lhs, const VertexPosition3Texture2PickId1FaceId1RegionId1& rhs);
+bool operator==(const VertexPosition3Color3Normal3Id1& lhs, const VertexPosition3Color3Normal3Id1& rhs);
 
 BLUEFRAMEWORK_RASTERIZER_NAMESPACE_END
 
@@ -456,5 +491,6 @@ BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture3)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Texture2PickId1FaceId1RegionId1)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition4)
 BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition4Texture2)
+BLUE_BLUEFRAMEWORK_RASTERIZER_EMBED_INTO_BUW_NAMESPACE(VertexPosition3Color3Normal3Id1)
 
 #endif // end define BlueFramework_Rasterizer_vertex_96687421_3eaf_4769_80fe_fb2fc11c93da_h

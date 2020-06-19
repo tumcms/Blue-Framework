@@ -50,6 +50,11 @@ bool operator==(const VertexPosition3Texture2PickId1FaceId1RegionId1& lhs, const
     return (lhs.position == rhs.position) && (rhs.uv == lhs.uv) && (rhs.pickid == lhs.pickid) && (rhs.faceid == lhs.faceid) && (rhs.regionid == lhs.regionid);
 }
 
+bool operator==(const VertexPosition3Color3Normal3Id1& lhs, const VertexPosition3Color3Normal3Id1& rhs) 
+{
+	return (lhs.position == rhs.position) && (lhs.color == rhs.color) && (lhs.normal == rhs.normal) && (lhs.id == rhs.id);
+}
+
 //---------------------------------------------------------------------------//
 // Less than
 //---------------------------------------------------------------------------//
