@@ -18,15 +18,15 @@
 
 function(CreateRenderSystemUnitTest RenderSystemName UnitTestName)
 
-set(TestExeName Test.${RenderSystemName}.${UnitTestName})
+set(TestExeName ${RenderSystemName}.${UnitTestName})
 
 file(GLOB BlueFramework_UnitTests_${RenderSystemName}_UnitTest					*.cpp *.h)
 file(GLOB BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader			Shader/*.*)
 file(GLOB BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader_${RenderSystemName}		Shader/${RenderSystemName}/*.*)
 
-source_group(${UnitTestName}					                FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest})
-source_group(${UnitTestName}\\Shader			                FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader})
-source_group(${UnitTestName}\\Shader\\${RenderSystemName}		FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader_${RenderSystemName}})
+source_group(${RenderSystemName}\\${UnitTestName}					                FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest})
+source_group(${RenderSystemName}\\${UnitTestName}\\Shader			                FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader})
+source_group(${RenderSystemName}\\${UnitTestName}\\Shader\\${RenderSystemName}		FILES ${BlueFramework_UnitTests_${RenderSystemName}_UnitTest_Shader_${RenderSystemName}})
 
 add_executable(${TestExeName}
     ${BlueFramework_BLUE_TEST}
@@ -44,11 +44,11 @@ target_link_libraries(${TestExeName}
         gtest_main
 )
 
-set_target_properties(${UnitTestName} PROPERTIES FOLDER "BlueFramework/UnitTests/${RenderSystemName}")
+set_target_properties(${TestExeName} PROPERTIES FOLDER "BlueFramework/UnitTests/${RenderSystemName}")
 
 
 add_test(
-    NAME ${RenderSystemName}.${UnitTestName}Test
+    NAME ${TestExeName}Test
     COMMAND ${TestExeName}
 )
 
