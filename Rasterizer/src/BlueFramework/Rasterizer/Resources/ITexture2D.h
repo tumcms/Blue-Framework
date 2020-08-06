@@ -40,6 +40,7 @@ public:
 	virtual bool hasDepthStencilView() const = 0;
     virtual bool isCPUReadable() const = 0;
 	virtual bool isCPUWriteable() const = 0;
+	virtual bool isMultisampled() const = 0;
 
     virtual void makeCPUReadable() = 0;
 	virtual void makeCPUWriteable() = 0;

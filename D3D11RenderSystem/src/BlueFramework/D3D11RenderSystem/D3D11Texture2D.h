@@ -41,7 +41,7 @@ public:
 
 	int width() const { return width_; }
 	int height() const { return height_; }
-	const bool isMultisampled() const { return msaa_; }
+	bool isMultisampled() const override { return msaa_; }
 
 	bool hasShaderResourceView() const;
 	bool hasRenderTargetView() const;
