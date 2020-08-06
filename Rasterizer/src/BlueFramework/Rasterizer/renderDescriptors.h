@@ -31,12 +31,11 @@ class IIndexBuffer;
 enum class eRenderAPI { Direct3D12, Direct3D11, Vulkan, OpenGL };
 
 struct renderSystemDescription {
-	renderSystemDescription() {
-	}
+	renderSystemDescription() = default;
 
 	int width = 1;
 	int height = 1;
-	void* windowId = nullptr;
+	void *windowId = nullptr;
 	bool enableMSAA = false;
 	bool forceWarpDevice = false;
 	eRenderAPI renderAPI = eRenderAPI::Direct3D12;
@@ -50,7 +49,7 @@ struct multiSamplingDescription {
 struct vertexBufferDescription {
 	buw::VertexLayout vertexLayout;
 	unsigned int vertexCount;
-	//unsigned int vertexStrideInBytes; // FIXME: used nowhere. remove?
+	// unsigned int vertexStrideInBytes; // FIXME: used nowhere. remove?
 	void *data;
 };
 
@@ -205,11 +204,11 @@ struct texture1DDescription {
 
 	eTextureFormat format;
 
-	const void* data;
+	const void *data;
 
 	bool isCpuReadable = false;
 
-	bool useMSAA = false;	
+	bool useMSAA = false;
 };
 
 struct texture2DDescription {
@@ -218,14 +217,17 @@ struct texture2DDescription {
 	/// height of top-level mipmap in pixels
 	int height = 0;
 
-	eTextureFormat format;
+	eTextureFormat format = eTextureFormat::Undefined;
 
-	const void* data;
+	const void *data = nullptr;
 
 	bool isCpuReadable = false;
 	bool isCpuWriteable = false;
+	bool useMSAA = false;
 
-	bool useMSAA = false;	
+	texture2DDescription() = default;
+	texture2DDescription(const int &width, const int &height, eTextureFormat format) : width(width), height(height), format(format) {
+	}
 };
 
 struct textureCubeDescription {
@@ -236,7 +238,7 @@ struct textureCubeDescription {
 
 	eTextureFormat format;
 
-	const void** data;
+	const void **data;
 
 	bool isCpuReadable = false;
 
@@ -314,19 +316,19 @@ struct pipelineStateDescription {
 	}
 
 	pipelineStateDescription(const std::string &effectFilename,
-							 const std::string &pipelineStateName,
+	                         const std::string &pipelineStateName,
 	                         const VertexLayout &vertexLayout,
 	                         ePrimitiveTopology primitiveTopology,
 	                         const std::vector<eTextureFormat> &renderTargetFormats,
 	                         bool useDepth,
-							 bool useAdjacency)
+	                         bool useAdjacency)
 	    : effectFilename(effectFilename)
-		, pipelineStateName(pipelineStateName)
+	    , pipelineStateName(pipelineStateName)
 	    , vertexLayout(vertexLayout)
 	    , primitiveTopology(primitiveTopology)
 	    , renderTargetFormats(renderTargetFormats)
 	    , useDepth(useDepth)
-		, useAdjacency(useAdjacency){
+	    , useAdjacency(useAdjacency) {
 	}
 
 	std::string effectFilename;
