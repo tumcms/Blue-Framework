@@ -126,6 +126,24 @@ public:
         return data_[x + y*width_];
 	}
 
+	const bool operator==(const Image &other) const {
+		BLUE_ASSERT(this->getWidth() == other.getWidth(), "different widths");
+		BLUE_ASSERT(this->getHeight() == other.getHeight(), "different heights");
+
+		if (this->getWidth() != other.getWidth() || this->getHeight() != other.getHeight()) {
+			return false;
+		}
+
+		for (int x = 0; x < this->getWidth(); x++) {
+			for (int y = 0; y < this->getHeight(); y++) {
+				if (this->getPixelColor(x, y) != other.getPixelColor(x, y))
+					return false;
+			}
+		}
+
+		return true;
+	}
+
 private:
 	int width_;
 	int height_;
