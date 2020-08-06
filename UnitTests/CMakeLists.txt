@@ -54,3 +54,5 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Engine/
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Engine/ViewCube)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Engine/TextRendering)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/Engine/DrawBoundingBox)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/BlueFramework/UnitTests/D3D11RenderSystem)
