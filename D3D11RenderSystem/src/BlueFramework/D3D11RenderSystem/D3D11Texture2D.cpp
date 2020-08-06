@@ -55,7 +55,6 @@ D3D11Texture2D::D3D11Texture2D(D3D11RenderSystem* renderSystem, const buw::textu
 		createDepthStencilView();
 }
 
-
 D3D11Texture2D::D3D11Texture2D()
 	: ITexture2D(), format_(buw::eTextureFormat::R8G8B8A8_UnsignedNormalizedInt_SRGB), width_(0), height_(0), renderSystem_(nullptr), bindType_(buw::eTextureBindType::None) {
 }
@@ -101,6 +100,11 @@ D3D11Texture2D::ComPtr<ID3D11Texture2D> D3D11Texture2D::getTexture() const {
 D3D11Texture2D::ComPtr<ID3D11Texture2D> D3D11Texture2D::getStagingTexture() const {
 	return stagingTexture_;
 }
+
+Microsoft::WRL::ComPtr<struct ID3D11Texture2D> D3D11Texture2D::getMSAAStagingTexture() const {
+	return msaaStagingTexture_;
+}
+
 D3D11Texture2D::ComPtr<ID3D11ShaderResourceView> D3D11Texture2D::getShaderResourceView() const {
 	return shaderResourceView_;
 }
@@ -174,8 +178,9 @@ void D3D11Texture2D::createStagingTexture(bool cpuReadable, bool cpuWriteable)
 
 	if (renderSystem_->getMSAAEnabled() && msaa_)
 	{
-		desc.SampleDesc.Count = renderSystem_->getSampleCount();
-		desc.SampleDesc.Quality = renderSystem_->getSampleQuality();
+		D3D11_TEXTURE2D_DESC msaaDesc = desc;
+		msaaDesc.Usage = D3D11_USAGE_DEFAULT;
+		renderSystem_->getDevice()->CreateTexture2D(&msaaDesc, nullptr, msaaStagingTexture_.GetAddressOf());
 	}
 
 	renderSystem_->getDevice()->CreateTexture2D(&desc, nullptr, stagingTexture_.GetAddressOf());

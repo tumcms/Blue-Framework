@@ -108,114 +108,71 @@ std::string featureLevelToString(const D3D_FEATURE_LEVEL FeatureLevel) {
 
 #include <d3d9.h>
 
-std::string format_error(unsigned __int32 hr)
-{
+std::string format_error(unsigned __int32 hr) {
 	std::stringstream ss;
 	ss << "Error code = 0x" << std::hex << hr << std::endl;
 	return ss.str();
 }
 
-void logD3DError(HRESULT hr)
-{
+void logD3DError(HRESULT hr) {
 	// todo add this states: http://msdn.microsoft.com/en-us/library/windows/desktop/bb509553(v=vs.85).aspx
-	switch (hr)
-	{
-	case D3DERR_INVALIDCALL:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3DERR_INVALIDCALL";
-	}
-	break;
+	switch (hr) {
+	case D3DERR_INVALIDCALL: {
+		BLUE_LOG(error) << "Error: D3DERR_INVALIDCALL";
+	} break;
 
-	case D3DERR_WASSTILLDRAWING:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3DERR_WASSTILLDRAWING";
-	}
-	break;
+	case D3DERR_WASSTILLDRAWING: {
+		BLUE_LOG(error) << "Error: D3DERR_WASSTILLDRAWING";
+	} break;
 
-	case DXGI_ERROR_INVALID_CALL:
-	{
-		BLUE_LOG(error)
-			<< "Error: DXGI_ERROR_INVALID_CALL";
-	}
-	break;
+	case DXGI_ERROR_INVALID_CALL: {
+		BLUE_LOG(error) << "Error: DXGI_ERROR_INVALID_CALL";
+	} break;
 
-	case DXGI_ERROR_UNSUPPORTED:
-	{
-		BLUE_LOG(error)
-			<< "Error: DXGI_ERROR_UNSUPPORTED";
-	}
-	break;
+	case DXGI_ERROR_UNSUPPORTED: {
+		BLUE_LOG(error) << "Error: DXGI_ERROR_UNSUPPORTED";
+	} break;
 
-	case D3D11_ERROR_FILE_NOT_FOUND:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3D11_ERROR_FILE_NOT_FOUND";
-	}
-	break;
+	case D3D11_ERROR_FILE_NOT_FOUND: {
+		BLUE_LOG(error) << "Error: D3D11_ERROR_FILE_NOT_FOUND";
+	} break;
 
-	case D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS";
-	}
-	break;
+	case D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS: {
+		BLUE_LOG(error) << "Error: D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS";
+	} break;
 
-	case D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS";
-	}
-	break;
+	case D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS: {
+		BLUE_LOG(error) << "Error: D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS";
+	} break;
 
-	case D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD:
-	{
-		BLUE_LOG(error)
-			<< "Error: D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD";
-	}
-	break;
+	case D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD: {
+		BLUE_LOG(error) << "Error: D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD";
+	} break;
 
-	case E_FAIL:
-	{
-		BLUE_LOG(error)
-			<< "Error: E_FAIL";
-	}
-	break;
+	case E_FAIL: {
+		BLUE_LOG(error) << "Error: E_FAIL";
+	} break;
 
-	case E_INVALIDARG:
-	{
-		BLUE_LOG(error)
-			<< "Error: E_INVALIDARG";
-	}
-	break;
+	case E_INVALIDARG: {
+		BLUE_LOG(error) << "Error: E_INVALIDARG";
+	} break;
 
-	case E_OUTOFMEMORY:
-	{
-		BLUE_LOG(error)
-			<< "Error: E_OUTOFMEMORY";
-	}
-	break;
+	case E_OUTOFMEMORY: {
+		BLUE_LOG(error) << "Error: E_OUTOFMEMORY";
+	} break;
 
-	case S_FALSE:
-	{
-		BLUE_LOG(error)
-			<< "Error: S_FALSE";
-	}
-	break;
+	case S_FALSE: {
+		BLUE_LOG(error) << "Error: S_FALSE";
+	} break;
 
-	default:
-	{
-		BLUE_LOG(error)
-			<< "Unknown Error Code: " << hr;
+	default: {
+		BLUE_LOG(error) << "Unknown Error Code: " << hr;
 
-		//wchar_t errorMessage[2000];
-		//DXGetErrorDescription(hr, errorMessage, 2000);
-		//std::string strError = buw::String::toStdString(errorMessage);
-		BLUE_LOG(error)
-			<< format_error(hr);
-	}
-	break;
+		// wchar_t errorMessage[2000];
+		// DXGetErrorDescription(hr, errorMessage, 2000);
+		// std::string strError = buw::String::toStdString(errorMessage);
+		BLUE_LOG(error) << format_error(hr);
+	} break;
 	}
 }
 
@@ -303,6 +260,14 @@ void D3D11RenderSystem::downloadTexture(buw::ReferenceCounted<buw::ITexture2D> i
 		ComPtr<ID3D11Texture2D> tex = texture->getTexture();
 		ComPtr<ID3D11Texture2D> staging = texture->getStagingTexture();
 
+		D3D11_TEXTURE2D_DESC texture_2d_desc;
+		tex->GetDesc(&texture_2d_desc);
+
+		D3D11_TEXTURE2D_DESC staging_desc;
+		staging->GetDesc(&staging_desc);
+
+		BLUE_ASSERT(texture_2d_desc.Format == staging_desc.Format);
+
 		D3D11_BOX region;
 		region.left = x;
 		region.right = x + dest.getWidth();
@@ -312,16 +277,25 @@ void D3D11RenderSystem::downloadTexture(buw::ReferenceCounted<buw::ITexture2D> i
 		region.back = 1;
 
 		bool copyAll = itexture->width() == dest.getWidth() && itexture->height() == dest.getHeight() && x == 0 && y == 0;
-		deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, tex.Get(), 0, !copyAll ? &region: nullptr);
+		if (!getMSAAEnabled()) {
+			deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, tex.Get(), 0, !copyAll ? &region : nullptr);
+		} else {
+			const ComPtr<ID3D11Texture2D> msaaStaging = texture->getMSAAStagingTexture();
+			
+			deviceContext_->ResolveSubresource(msaaStaging.Get(), 0, tex.Get(), 0, texture_2d_desc.Format);
+			deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, msaaStaging.Get(), 0, !copyAll ? &region : nullptr);
+		}
 
 		D3D11_MAPPED_SUBRESOURCE sub;
-		deviceContext_->Map(staging.Get(), 0, D3D11_MAP_READ, 0, &sub);
-		D3D11_TEXTURE2D_DESC desc;
-		tex->GetDesc(&desc);
+		const auto result = deviceContext_->Map(staging.Get(), 0, D3D11_MAP_READ, 0, &sub);
+		if(FAILED(result)) {
+			BLUE_LOG(error) << "Mapping subresource failed. HRESULT: " << getHRESULTErrorText(result);
+		}
+		
 
 		for (int row = 0; row < dest.getHeight(); row++) {
 			void* dst = dest.getData() + row * dest.getWidth();
-			void* src = (char*)sub.pData + (y + row) * sub.RowPitch + x * getElementByteSize(desc.Format);
+			void* src = (char*)sub.pData + (y + row) * sub.RowPitch + x * getElementByteSize(texture_2d_desc.Format);
 			memcpy(dst, src, dest.getRowPitch());
 		}
 
@@ -329,8 +303,7 @@ void D3D11RenderSystem::downloadTexture(buw::ReferenceCounted<buw::ITexture2D> i
 	}
 }
 
-void D3D11RenderSystem::uploadTexture(buw::ReferenceCounted<buw::ITexture2D> itexture, buw::Image4b& source, const int x, const int y)
-{
+void D3D11RenderSystem::uploadTexture(buw::ReferenceCounted<buw::ITexture2D> itexture, buw::Image4b& source, const int x, const int y) {
 	BLUE_ASSERT(itexture->isCPUWriteable());
 
 	if (x >= 0 && y >= 0 && x < itexture->width() && y < itexture->height() && x + source.getWidth() <= itexture->width() && y + source.getHeight() <= itexture->height()) {
@@ -482,11 +455,7 @@ void D3D11RenderSystem::getHardwareAdapter(IDXGIFactory4* pFactory, IDXGIAdapter
 	*ppAdapter = adapter.Detach();
 }
 
-HRESULT D3D11RenderSystem::injectMSAASetttings(
-	DXGI_SWAP_CHAIN_DESC_N &swapChainDesc,
-	const bool enableMSAA,
-	const D3D_FEATURE_LEVEL featureLevel)
-{
+HRESULT D3D11RenderSystem::injectMSAASetttings(DXGI_SWAP_CHAIN_DESC_N& swapChainDesc, const bool enableMSAA, const D3D_FEATURE_LEVEL featureLevel) {
 	HRESULT hr = S_OK;
 
 	// The default sampler mode, with no anti-aliasing, has a count of 1 and a quality level of 0.
@@ -494,8 +463,7 @@ HRESULT D3D11RenderSystem::injectMSAASetttings(
 	swapChainDesc.SampleDesc.Quality = 0;
 
 	// If anti-aliasing is activated the best possible sample and quality level is chosen.
-	if (enableMSAA)
-	{
+	if (enableMSAA) {
 		UINT maxQualityLevel = 0;
 		UINT sampleCount = 1;
 
@@ -503,29 +471,21 @@ HRESULT D3D11RenderSystem::injectMSAASetttings(
 		// findBestSamplingSettings
 
 		// Find highest available sample count and quality level
-		for (sampleCount = 1; sampleCount <= D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT; sampleCount++)
-		{
-			hr = device_->CheckMultisampleQualityLevels(
-				DXGI_FORMAT_R8G8B8A8_UNORM, sampleCount, &maxQualityLevel);
+		for (sampleCount = 1; sampleCount <= D3D11_MAX_MULTISAMPLE_SAMPLE_COUNT; sampleCount++) {
+			hr = device_->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, sampleCount, &maxQualityLevel);
 
-			if (maxQualityLevel > 0)
-			{
+			if (maxQualityLevel > 0) {
 				maxQualityLevel--;
 			}
 
-			if (hr != S_OK)
-			{
+			if (hr != S_OK) {
 				BLUE_LOG(error) << "CheckMultisampleQualityLevels failed.";
 			}
 
-			if (maxQualityLevel > 0)
-			{
-				BLUE_LOG(trace) <<
-					"MSAA " << sampleCount << "X supported with " <<
-					maxQualityLevel << " quality levels.";
+			if (maxQualityLevel > 0) {
+				BLUE_LOG(trace) << "MSAA " << sampleCount << "X supported with " << maxQualityLevel << " quality levels.";
 
-				if (sampleCount == 4)
-				{
+				if (sampleCount == 4) {
 					if (maxQualityLevel >= 8)
 						BLUE_LOG(trace) << "CSAA Mode 8x is supported";
 					if (maxQualityLevel >= 16)
@@ -534,8 +494,7 @@ HRESULT D3D11RenderSystem::injectMSAASetttings(
 						BLUE_LOG(trace) << "CSAA Mode 32x is supported";
 				}
 
-				if (sampleCount == 8)
-				{
+				if (sampleCount == 8) {
 					if (maxQualityLevel >= 8)
 						BLUE_LOG(trace) << "CSAA Mode 8xQ is supported";
 					if (maxQualityLevel >= 16)
@@ -550,88 +509,82 @@ HRESULT D3D11RenderSystem::injectMSAASetttings(
 		}
 	}
 
-	if (enableMSAA)
-	{
+	if (enableMSAA) {
 		// Direct3D 10.1 devices are required to support 4x MSAA
-		if (swapChainDesc.SampleDesc.Count == 1 &&
-			swapChainDesc.SampleDesc.Quality == 0 &&
-			featureLevel == D3D_FEATURE_LEVEL_10_1)
-		{
+		if (swapChainDesc.SampleDesc.Count == 1 && swapChainDesc.SampleDesc.Quality == 0 && featureLevel == D3D_FEATURE_LEVEL_10_1) {
 			swapChainDesc.SampleDesc.Count = 4;
 			swapChainDesc.SampleDesc.Quality = 0;
 			BLUE_LOG(trace) << "Try to enable MSAA 4X.";
 		}
-	}	return hr;
+	}
+	return hr;
 }
 
 void D3D11RenderSystem::createSwapChain(const buw::renderSystemDescription& rsd) {
+	// 	HRESULT hr = false;
+	//
+	// 	DXGI_SWAP_CHAIN_DESC_N swapChainDesc;
+	// 	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC_N));
+	//
+	// 	// set buffer dimensions and format
+	// 	swapChainDesc.BufferCount = 2;
+	// 	swapChainDesc.BufferDesc.Width = rsd.width;
+	// 	swapChainDesc.BufferDesc.Height = rsd.height;
+	// 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	// 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	// 	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	// 	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+	//
+	// 	bool m_bVsync = true;
+	//
+	// 	// set refresh rate
+	// 	if (m_bVsync)
+	// 	{
+	// 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+	// 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+	// 	}
+	// 	else
+	// 	{
+	// 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
+	// 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
+	// 	}
+	//
+	// 	// sampling settings
+	// 	hr = injectMSAASetttings(swapChainDesc, rsd.enableMSAA, featureLevel_);
+	//
+	//
+	// 	BLUE_LOG(trace)
+	// 		<< "SwapChain.SamplerDesc: Count = " << swapChainDesc.SampleDesc.Count
+	// 		<< " Quality = " << swapChainDesc.SampleDesc.Quality;
+	//
+	// 	// output window handle
+	// 	HWND hWnd = (HWND)rsd.windowId;
+	// 	swapChainDesc.OutputWindow = hWnd;
+	// 	swapChainDesc.Windowed = true;// rsd.windowed;
+	// 	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // allow full-screen switching
+	//
+	// 	hr = E_FAIL;
+	//
+	// 	// Attempt to create the swap chain
+	// 	hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, &swapChain_);
+	//
+	// 	if (FAILED(hr))
+	// 	{
+	// 		// Try a second time, may fail the first time due to back buffer count,
+	// 		// which will be corrected by the runtime
+	// 		hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, &swapChain_);
+	// 	}
+	//
+	// 	if (FAILED(hr))
+	// 	{
+	// 		BLUE_LOG(error)
+	// 			<< "Failed to create swap chain.";
+	//
+	// 		logD3DError(hr);
+	//
+	// 		throw buw::Exception("Failed to create swap chain.");
+	// 	}
 
-// 	HRESULT hr = false;
-// 
-// 	DXGI_SWAP_CHAIN_DESC_N swapChainDesc;
-// 	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC_N));
-// 
-// 	// set buffer dimensions and format
-// 	swapChainDesc.BufferCount = 2;
-// 	swapChainDesc.BufferDesc.Width = rsd.width;
-// 	swapChainDesc.BufferDesc.Height = rsd.height;
-// 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-// 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-// 	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-// 	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-// 
-// 	bool m_bVsync = true;
-// 
-// 	// set refresh rate
-// 	if (m_bVsync)
-// 	{
-// 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
-// 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-// 	}
-// 	else
-// 	{
-// 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
-// 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
-// 	}
-// 
-// 	// sampling settings
-// 	hr = injectMSAASetttings(swapChainDesc, rsd.enableMSAA, featureLevel_);
-// 
-// 
-// 	BLUE_LOG(trace)
-// 		<< "SwapChain.SamplerDesc: Count = " << swapChainDesc.SampleDesc.Count
-// 		<< " Quality = " << swapChainDesc.SampleDesc.Quality;
-// 
-// 	// output window handle
-// 	HWND hWnd = (HWND)rsd.windowId;
-// 	swapChainDesc.OutputWindow = hWnd;
-// 	swapChainDesc.Windowed = true;// rsd.windowed;
-// 	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; // allow full-screen switching
-// 
-// 	hr = E_FAIL;
-// 
-// 	// Attempt to create the swap chain		
-// 	hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, &swapChain_);
-// 
-// 	if (FAILED(hr))
-// 	{
-// 		// Try a second time, may fail the first time due to back buffer count,
-// 		// which will be corrected by the runtime
-// 		hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, &swapChain_);
-// 	}
-// 
-// 	if (FAILED(hr))
-// 	{
-// 		BLUE_LOG(error)
-// 			<< "Failed to create swap chain.";
-// 
-// 		logD3DError(hr);
-// 
-// 		throw buw::Exception("Failed to create swap chain.");
-// 	}
-
-
-	
 	HRESULT hr = S_OK;
 
 	// Describe and create the swap chain.
@@ -644,7 +597,7 @@ void D3D11RenderSystem::createSwapChain(const buw::renderSystemDescription& rsd)
 	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_STRETCHED;
 	swapChainDesc.BufferCount = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	//swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; // DXGI_SWAP_EFFECT_FLIP_DISCARD supported only on Windows 10 and up
+	// swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; // DXGI_SWAP_EFFECT_FLIP_DISCARD supported only on Windows 10 and up
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.SampleDesc.Quality = 0;
@@ -659,12 +612,11 @@ void D3D11RenderSystem::createSwapChain(const buw::renderSystemDescription& rsd)
 		sampleQuality_ = 0;
 	}
 
-	//HWND hWnd = HWND(rsd.windowId);
+	// HWND hWnd = HWND(rsd.windowId);
 
 	hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, swapChain_.GetAddressOf());
 
-	if (FAILED(hr))
-	{
+	if (FAILED(hr)) {
 		// Try a second time, may fail the first time due to back buffer count,
 		// which will be corrected by the runtime
 		hr = factory_->CreateSwapChain(device_.Get(), &swapChainDesc, &swapChain_);

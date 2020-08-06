@@ -59,6 +59,7 @@ public:
 
 	ComPtr<ID3D11Texture2D> getTexture() const;
 	ComPtr<ID3D11Texture2D> getStagingTexture() const;
+	ComPtr<ID3D11Texture2D> getMSAAStagingTexture() const;
 	ComPtr<ID3D11ShaderResourceView> getShaderResourceView() const;
 	ComPtr<ID3D11RenderTargetView> getRenderTargetView() const;
 	ComPtr<ID3D11DepthStencilView> getDepthStencilView() const;
@@ -78,6 +79,7 @@ private:
 	D3D11RenderSystem* renderSystem_;
 	ComPtr<ID3D11Texture2D> texture_ = nullptr;
 	ComPtr<ID3D11Texture2D> stagingTexture_ = nullptr;
+	ComPtr<ID3D11Texture2D> msaaStagingTexture_ = nullptr;
 
 	buw::eTextureBindType bindType_;
 	ComPtr<ID3D11ShaderResourceView> shaderResourceView_;

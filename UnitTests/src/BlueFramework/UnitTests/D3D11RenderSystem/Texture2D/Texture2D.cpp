@@ -35,6 +35,7 @@ public:
 
 	ITexture2DBuilder WithMSAA() {
 		_desc.useMSAA = true;
+		_bindType = BlueFramework::Rasterizer::eTextureBindType::SRV;
 		return *this;
 	}
 
@@ -60,6 +61,7 @@ public:
 		_renderSystemDescription.width = 640;
 		_renderSystemDescription.height = 480;
 		_renderSystemDescription.windowId = (void*)this;
+		_renderSystemDescription.enableMSAA = true;
 
 		_renderSystem = buw::makeReferenceCounted<D3D11RenderSystem>(_renderSystemDescription);
 	}
