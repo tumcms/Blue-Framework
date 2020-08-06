@@ -3,6 +3,7 @@ lib/*
 make.bat
 Tools/updateVersion.pyo
 build/*
+.vscode
 external/log_install_*
 BlueFrameworkConfig.cmake
 BlueFrameworkConfigVersion.cmake

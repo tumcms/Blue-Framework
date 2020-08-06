@@ -21,9 +21,8 @@
 #ifndef BlueFramework_ImageProcessing_ColorConstants_e730a33d_4053_4c52_bd16_ecf1fba26816_h
 #define BlueFramework_ImageProcessing_ColorConstants_e730a33d_4053_4c52_bd16_ecf1fba26816_h
 
-#include "BlueFramework/Core/Noncopyable.h"
-#include "BlueFramework/Core/Math/RandomNumberGenerator.h"
 #include "BlueFramework/Core/assert.h"
+#include "BlueFramework/ImageProcessing/Color.h"
 
 namespace BlueFramework
 {
@@ -31,7 +30,7 @@ namespace BlueFramework
 	{
 		// Implements different color constants.
 		template<typename ColorType>
-		struct colorConstants
+		struct ColorConstants
 		{
 			static ColorType aliceBlue()
 			{
@@ -735,712 +734,712 @@ namespace BlueFramework
 		};
 
 		template<>
-		struct colorConstants<color3f>
+		struct ColorConstants<Color3f>
 		{
-			static color3f aliceBlue()
+			static Color3f aliceBlue()
 			{
-				return color3f(240/255.0f, 248/255.0f, 255/255.0f);
+				return Color3f(240/255.0f, 248/255.0f, 255/255.0f);
 			};
 
-			static color3f antiqueWhite()
+			static Color3f antiqueWhite()
 			{
-				return color3f(250/255.0f, 235/255.0f, 215/255.0f);
+				return Color3f(250/255.0f, 235/255.0f, 215/255.0f);
 			};
 
-			static color3f aqua()
+			static Color3f aqua()
 			{
-				return color3f(0/255.0f, 255/255.0f, 255/255.0f);
+				return Color3f(0/255.0f, 255/255.0f, 255/255.0f);
 			};
 
-			static color3f aquaMarine()
+			static Color3f aquaMarine()
 			{
-				return color3f(127/255.0f, 255/255.0f, 212/255.0f);
+				return Color3f(127/255.0f, 255/255.0f, 212/255.0f);
 			};
 
-			static color3f azure()
+			static Color3f azure()
 			{
-				return color3f(240/255.0f, 255/255.0f, 255/255.0f);
+				return Color3f(240/255.0f, 255/255.0f, 255/255.0f);
 			};
 
-			static color3f beige()
+			static Color3f beige()
 			{
-				return color3f(245/255.0f, 245/255.0f, 220/255.0f);
+				return Color3f(245/255.0f, 245/255.0f, 220/255.0f);
 			};
 
-			static color3f bisque()
+			static Color3f bisque()
 			{
-				return color3f(255/255.0f, 228/255.0f, 196/255.0f);
+				return Color3f(255/255.0f, 228/255.0f, 196/255.0f);
 			};
 
-			static color3f black()
+			static Color3f black()
 			{
-				return color3f(0/255.0f, 0/255.0f, 0/255.0f);
+				return Color3f(0/255.0f, 0/255.0f, 0/255.0f);
 			};
 
-			static color3f blanchedalmond()
+			static Color3f blanchedalmond()
 			{
-				return color3f(255/255.0f, 235/255.0f, 205/255.0f);
+				return Color3f(255/255.0f, 235/255.0f, 205/255.0f);
 			};
 
-			static color3f blue()
+			static Color3f blue()
 			{
-				return color3f(0/255.0f, 0/255.0f, 255/255.0f);
+				return Color3f(0/255.0f, 0/255.0f, 255/255.0f);
 			};
 
-			static color3f blueViolet()
+			static Color3f blueViolet()
 			{
-				return color3f(138/255.0f, 43/255.0f, 226/255.0f);
+				return Color3f(138/255.0f, 43/255.0f, 226/255.0f);
 			};
 
-			static color3f brown()
+			static Color3f brown()
 			{
-				return color3f(165/255.0f, 42/255.0f, 42/255.0f);
+				return Color3f(165/255.0f, 42/255.0f, 42/255.0f);
 			};
 
-			static color3f burlywood()
+			static Color3f burlywood()
 			{
-				return color3f(222/255.0f, 184/255.0f, 135/255.0f);
+				return Color3f(222/255.0f, 184/255.0f, 135/255.0f);
 			};
 
-			static color3f cadetBlue()
+			static Color3f cadetBlue()
 			{
-				return color3f(95/255.0f, 158/255.0f, 160/255.0f);
+				return Color3f(95/255.0f, 158/255.0f, 160/255.0f);
 			};
 
-			static color3f chartreuse()
+			static Color3f chartreuse()
 			{
-				return color3f(127/255.0f, 255/255.0f, 0/255.0f);
+				return Color3f(127/255.0f, 255/255.0f, 0/255.0f);
 			};
 
-			static color3f chocolate()
+			static Color3f chocolate()
 			{
-				return color3f(210/255.0f, 105/255.0f, 30/255.0f);
+				return Color3f(210/255.0f, 105/255.0f, 30/255.0f);
 			};
 
-			static color3f coral()
+			static Color3f coral()
 			{
-				return color3f(255/255.0f, 127/255.0f, 80/255.0f);
+				return Color3f(255/255.0f, 127/255.0f, 80/255.0f);
 			};
 
-			static color3f cornflowerblue()
+			static Color3f cornflowerblue()
 			{
-				return color3f(100/255.0f, 149/255.0f, 237/255.0f);
+				return Color3f(100/255.0f, 149/255.0f, 237/255.0f);
 			};
 
-			static color3f cornsilk()
+			static Color3f cornsilk()
 			{
-				return color3f(255/255.0f, 248/255.0f, 220/255.0f);
+				return Color3f(255/255.0f, 248/255.0f, 220/255.0f);
 			};
 
-			static color3f crimson()
+			static Color3f crimson()
 			{
-				return color3f(220/255.0f, 20/255.0f, 60/255.0f);
+				return Color3f(220/255.0f, 20/255.0f, 60/255.0f);
 			};
 
-			static color3f cyan()
+			static Color3f cyan()
 			{
-				return color3f(0/255.0f, 255/255.0f, 255/255.0f);
+				return Color3f(0/255.0f, 255/255.0f, 255/255.0f);
 			};
 
-			static color3f darkOlivegreen()
+			static Color3f darkOlivegreen()
 			{
-				return color3f(85/255.0f, 107/255.0f, 47/255.0f);
+				return Color3f(85/255.0f, 107/255.0f, 47/255.0f);
 			};
 
-			static color3f darkblue()
+			static Color3f darkblue()
 			{
-				return color3f(0/255.0f, 0/255.0f, 139/255.0f);
+				return Color3f(0/255.0f, 0/255.0f, 139/255.0f);
 			};
 
-			static color3f darkcyan()
+			static Color3f darkcyan()
 			{
-				return color3f(0/255.0f, 139/255.0f, 139/255.0f);
+				return Color3f(0/255.0f, 139/255.0f, 139/255.0f);
 			};
 
-			static color3f darkgoldenrod()
+			static Color3f darkgoldenrod()
 			{
-				return color3f(184/255.0f, 134/255.0f, 11/255.0f);
+				return Color3f(184/255.0f, 134/255.0f, 11/255.0f);
 			};
 
-			static color3f darkgray()
+			static Color3f darkgray()
 			{
-				return color3f(169/255.0f, 169/255.0f, 169/255.0f);
+				return Color3f(169/255.0f, 169/255.0f, 169/255.0f);
 			};
 
-			static color3f darkgreen()
+			static Color3f darkgreen()
 			{
-				return color3f(0/255.0f, 100/255.0f, 0/255.0f);
+				return Color3f(0/255.0f, 100/255.0f, 0/255.0f);
 			};
 
-			static color3f darkkhaki()
+			static Color3f darkkhaki()
 			{
-				return color3f(189/255.0f, 183/255.0f, 107/255.0f);
+				return Color3f(189/255.0f, 183/255.0f, 107/255.0f);
 			};
 
-			static color3f darkmagenta()
+			static Color3f darkmagenta()
 			{
-				return color3f(139/255.0f, 0/255.0f, 139/255.0f);
+				return Color3f(139/255.0f, 0/255.0f, 139/255.0f);
 			};
 
-			static color3f darkorange()
+			static Color3f darkorange()
 			{
-				return color3f(255/255.0f, 140/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 140/255.0f, 0/255.0f);
 			};
 
-			static color3f darkorchid()
+			static Color3f darkorchid()
 			{
-				return color3f(153/255.0f, 50/255.0f, 204/255.0f);
+				return Color3f(153/255.0f, 50/255.0f, 204/255.0f);
 			};
 
-			static color3f darkRed()
+			static Color3f darkRed()
 			{
-				return color3f(139/255.0f, 0/255.0f, 0/255.0f);
+				return Color3f(139/255.0f, 0/255.0f, 0/255.0f);
 			};
 
-			static color3f darksalmon()
+			static Color3f darksalmon()
 			{
-				return color3f(233/255.0f, 150/255.0f, 122/255.0f);
+				return Color3f(233/255.0f, 150/255.0f, 122/255.0f);
 			};
 
-			static color3f darkseagreen()
+			static Color3f darkseagreen()
 			{
-				return color3f(143/255.0f, 188/255.0f, 143/255.0f);
+				return Color3f(143/255.0f, 188/255.0f, 143/255.0f);
 			};
 
-			static color3f darkslateblue()
+			static Color3f darkslateblue()
 			{
-				return color3f(72/255.0f, 61/255.0f, 139/255.0f);
+				return Color3f(72/255.0f, 61/255.0f, 139/255.0f);
 			};
 
-			static color3f darkslategray()
+			static Color3f darkslategray()
 			{
-				return color3f(47/255.0f, 79/255.0f, 79/255.0f);
+				return Color3f(47/255.0f, 79/255.0f, 79/255.0f);
 			};
 
-			static color3f darkturquoise()
+			static Color3f darkturquoise()
 			{
-				return color3f(0/255.0f, 206/255.0f, 209/255.0f);
+				return Color3f(0/255.0f, 206/255.0f, 209/255.0f);
 			};
 
-			static color3f darkviolet()
+			static Color3f darkviolet()
 			{
-				return color3f(148/255.0f, 0/255.0f, 211/255.0f);
+				return Color3f(148/255.0f, 0/255.0f, 211/255.0f);
 			};
 
-			static color3f deeppink()
+			static Color3f deeppink()
 			{
-				return color3f(255/255.0f, 20/255.0f, 147/255.0f);
+				return Color3f(255/255.0f, 20/255.0f, 147/255.0f);
 			};
 
-			static color3f deepskyblue()
+			static Color3f deepskyblue()
 			{
-				return color3f(0/255.0f, 191/255.0f, 255/255.0f);
+				return Color3f(0/255.0f, 191/255.0f, 255/255.0f);
 			};
 
-			static color3f dimgray()
+			static Color3f dimgray()
 			{
-				return color3f(105/255.0f, 105/255.0f, 105/255.0f);
+				return Color3f(105/255.0f, 105/255.0f, 105/255.0f);
 			};
 
-			static color3f dodgerblue()
+			static Color3f dodgerblue()
 			{
-				return color3f(30/255.0f, 144/255.0f, 255/255.0f);
+				return Color3f(30/255.0f, 144/255.0f, 255/255.0f);
 			};
 
-			static color3f firebrick()
+			static Color3f firebrick()
 			{
-				return color3f(178/255.0f, 34/255.0f, 34/255.0f);
+				return Color3f(178/255.0f, 34/255.0f, 34/255.0f);
 			};
 
-			static color3f floralwhite()
+			static Color3f floralwhite()
 			{
-				return color3f(255/255.0f, 250/255.0f, 240/255.0f);
+				return Color3f(255/255.0f, 250/255.0f, 240/255.0f);
 			};
 
-			static color3f forestgreen()
+			static Color3f forestgreen()
 			{
-				return color3f(34/255.0f, 139/255.0f, 34/255.0f);
+				return Color3f(34/255.0f, 139/255.0f, 34/255.0f);
 			};
 
-			static color3f fuchsia()
+			static Color3f fuchsia()
 			{
-				return color3f(255/255.0f, 0/255.0f, 255/255.0f);
+				return Color3f(255/255.0f, 0/255.0f, 255/255.0f);
 			};
 
-			static color3f gainsboro()
+			static Color3f gainsboro()
 			{
-				return color3f(220/255.0f, 220/255.0f, 220/255.0f);
+				return Color3f(220/255.0f, 220/255.0f, 220/255.0f);
 			};
 
-			static color3f ghostwhite()
+			static Color3f ghostwhite()
 			{
-				return color3f(248/255.0f, 248/255.0f, 255/255.0f);
+				return Color3f(248/255.0f, 248/255.0f, 255/255.0f);
 			};
 
-			static color3f gold()
+			static Color3f gold()
 			{
-				return color3f(255/255.0f, 215/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 215/255.0f, 0/255.0f);
 			};
 
-			static color3f goldenrod()
+			static Color3f goldenrod()
 			{
-				return color3f(218/255.0f, 165/255.0f, 32/255.0f);
+				return Color3f(218/255.0f, 165/255.0f, 32/255.0f);
 			};
 
-			static color3f gray()
+			static Color3f gray()
 			{
-				return color3f(128/255.0f, 128/255.0f, 128/255.0f);
+				return Color3f(128/255.0f, 128/255.0f, 128/255.0f);
 			};
 
-			static color3f green()
+			static Color3f green()
 			{
-				return color3f(0/255.0f, 128/255.0f, 0/255.0f);
+				return Color3f(0/255.0f, 128/255.0f, 0/255.0f);
 			};
 
-			static color3f greenyellow()
+			static Color3f greenyellow()
 			{
-				return color3f(173/255.0f, 255/255.0f, 47/255.0f);
+				return Color3f(173/255.0f, 255/255.0f, 47/255.0f);
 			};
 
-			static color3f honeydew()
+			static Color3f honeydew()
 			{
-				return color3f(240/255.0f, 255/255.0f, 240/255.0f);
+				return Color3f(240/255.0f, 255/255.0f, 240/255.0f);
 			};
 
-			static color3f hotpink()
+			static Color3f hotpink()
 			{
-				return color3f(255/255.0f, 105/255.0f, 180/255.0f);
+				return Color3f(255/255.0f, 105/255.0f, 180/255.0f);
 			};
 
-			static color3f indianred()
+			static Color3f indianred()
 			{
-				return color3f(205/255.0f, 92/255.0f, 92/255.0f);
+				return Color3f(205/255.0f, 92/255.0f, 92/255.0f);
 			};
 
-			static color3f indigo()
+			static Color3f indigo()
 			{
-				return color3f(75/255.0f, 0/255.0f, 130/255.0f);
+				return Color3f(75/255.0f, 0/255.0f, 130/255.0f);
 			};
 
-			static color3f ivory()
+			static Color3f ivory()
 			{
-				return color3f(255/255.0f, 255/255.0f, 240/255.0f);
+				return Color3f(255/255.0f, 255/255.0f, 240/255.0f);
 			};
 
-			static color3f khaki()
+			static Color3f khaki()
 			{
-				return color3f(240/255.0f, 230/255.0f, 140/255.0f);
+				return Color3f(240/255.0f, 230/255.0f, 140/255.0f);
 			};
 
-			static color3f lavender()
+			static Color3f lavender()
 			{
-				return color3f(230/255.0f, 230/255.0f, 250/255.0f);
+				return Color3f(230/255.0f, 230/255.0f, 250/255.0f);
 			};
 
-			static color3f lavenderblush()
+			static Color3f lavenderblush()
 			{
-				return color3f(255/255.0f, 240/255.0f, 245/255.0f);
+				return Color3f(255/255.0f, 240/255.0f, 245/255.0f);
 			};
 
-			static color3f lawngreen()
+			static Color3f lawngreen()
 			{
-				return color3f(124/255.0f, 252/255.0f, 0/255.0f);
+				return Color3f(124/255.0f, 252/255.0f, 0/255.0f);
 			};
 
-			static color3f lemonchiffon()
+			static Color3f lemonchiffon()
 			{
-				return color3f(255/255.0f, 250/255.0f, 205/255.0f);
+				return Color3f(255/255.0f, 250/255.0f, 205/255.0f);
 			};
 
-			static color3f lightblue()
+			static Color3f lightblue()
 			{
-				return color3f(173/255.0f, 216/255.0f, 230/255.0f);
+				return Color3f(173/255.0f, 216/255.0f, 230/255.0f);
 			};
 
-			static color3f lightcoral()
+			static Color3f lightcoral()
 			{
-				return color3f(240/255.0f, 128/255.0f, 128/255.0f);
+				return Color3f(240/255.0f, 128/255.0f, 128/255.0f);
 			};
 
-			static color3f lightcyan()
+			static Color3f lightcyan()
 			{
-				return color3f(224/255.0f, 255/255.0f, 255/255.0f);
+				return Color3f(224/255.0f, 255/255.0f, 255/255.0f);
 			};
 
-			static color3f lightgoldenrodyellow()
+			static Color3f lightgoldenrodyellow()
 			{
-				return color3f(250/255.0f, 250/255.0f, 210/255.0f);
+				return Color3f(250/255.0f, 250/255.0f, 210/255.0f);
 			};
 
-			static color3f lightgreen()
+			static Color3f lightgreen()
 			{
-				return color3f(144/255.0f, 238/255.0f, 144/255.0f);
+				return Color3f(144/255.0f, 238/255.0f, 144/255.0f);
 			};
 
-			static color3f lightgrey()
+			static Color3f lightgrey()
 			{
-				return color3f(211/255.0f, 211/255.0f, 211/255.0f);
+				return Color3f(211/255.0f, 211/255.0f, 211/255.0f);
 			};
 
-			static color3f lightpink()
+			static Color3f lightpink()
 			{
-				return color3f(255/255.0f, 182/255.0f, 193/255.0f);
+				return Color3f(255/255.0f, 182/255.0f, 193/255.0f);
 			};
 
-			static color3f lightsalmon()
+			static Color3f lightsalmon()
 			{
-				return color3f(255/255.0f, 160/255.0f, 122/255.0f);
+				return Color3f(255/255.0f, 160/255.0f, 122/255.0f);
 			};
 
-			static color3f lightseagreen()
+			static Color3f lightseagreen()
 			{
-				return color3f(32/255.0f, 178/255.0f, 170/255.0f);
+				return Color3f(32/255.0f, 178/255.0f, 170/255.0f);
 			};
 
-			static color3f lightskyblue()
+			static Color3f lightskyblue()
 			{
-				return color3f(135/255.0f, 206/255.0f, 250/255.0f);
+				return Color3f(135/255.0f, 206/255.0f, 250/255.0f);
 			};
 
-			static color3f lightslategray()
+			static Color3f lightslategray()
 			{
-				return color3f(119/255.0f, 136/255.0f, 153/255.0f);
+				return Color3f(119/255.0f, 136/255.0f, 153/255.0f);
 			};
 
-			static color3f lightsteelblue()
+			static Color3f lightsteelblue()
 			{
-				return color3f(176/255.0f, 196/255.0f, 222/255.0f);
+				return Color3f(176/255.0f, 196/255.0f, 222/255.0f);
 			};
 
-			static color3f lightyellow()
+			static Color3f lightyellow()
 			{
-				return color3f(255/255.0f, 255/255.0f, 224/255.0f);
+				return Color3f(255/255.0f, 255/255.0f, 224/255.0f);
 			};
 
-			static color3f lime()
+			static Color3f lime()
 			{
-				return color3f(0/255.0f, 255/255.0f, 0/255.0f);
+				return Color3f(0/255.0f, 255/255.0f, 0/255.0f);
 			};
 
-			static color3f limegreen()
+			static Color3f limegreen()
 			{
-				return color3f(50/255.0f, 205/255.0f, 50/255.0f);
+				return Color3f(50/255.0f, 205/255.0f, 50/255.0f);
 			};
 
-			static color3f linen()
+			static Color3f linen()
 			{
-				return color3f(250/255.0f, 240/255.0f, 230/255.0f);
+				return Color3f(250/255.0f, 240/255.0f, 230/255.0f);
 			};
 
-			static color3f magenta()
+			static Color3f magenta()
 			{
-				return color3f(255/255.0f, 0/255.0f, 255/255.0f);
+				return Color3f(255/255.0f, 0/255.0f, 255/255.0f);
 			};
 
-			static color3f maroon()
+			static Color3f maroon()
 			{
-				return color3f(128/255.0f, 0/255.0f, 0/255.0f);
+				return Color3f(128/255.0f, 0/255.0f, 0/255.0f);
 			};
 
-			static color3f mediumaquamarine()
+			static Color3f mediumaquamarine()
 			{
-				return color3f(102/255.0f, 205/255.0f, 170/255.0f);
+				return Color3f(102/255.0f, 205/255.0f, 170/255.0f);
 			};
 
-			static color3f mediumblue()
+			static Color3f mediumblue()
 			{
-				return color3f(0/255.0f, 0/255.0f, 205/255.0f);
+				return Color3f(0/255.0f, 0/255.0f, 205/255.0f);
 			};
 
-			static color3f mediumorchid()
+			static Color3f mediumorchid()
 			{
-				return color3f(186/255.0f, 85/255.0f, 211/255.0f);
+				return Color3f(186/255.0f, 85/255.0f, 211/255.0f);
 			};
 
-			static color3f mediumpurple()
+			static Color3f mediumpurple()
 			{
-				return color3f(147/255.0f, 112/255.0f, 219/255.0f);
+				return Color3f(147/255.0f, 112/255.0f, 219/255.0f);
 			};
 
-			static color3f mediumseagreen()
+			static Color3f mediumseagreen()
 			{
-				return color3f(60/255.0f, 179/255.0f, 113/255.0f);
+				return Color3f(60/255.0f, 179/255.0f, 113/255.0f);
 			};
 
-			static color3f mediumslateblue()
+			static Color3f mediumslateblue()
 			{
-				return color3f(123/255.0f, 104/255.0f, 238/255.0f);
+				return Color3f(123/255.0f, 104/255.0f, 238/255.0f);
 			};
 
-			static color3f mediumspringgreen()
+			static Color3f mediumspringgreen()
 			{
-				return color3f(0/255.0f, 250/255.0f, 154/255.0f);
+				return Color3f(0/255.0f, 250/255.0f, 154/255.0f);
 			};
 
-			static color3f mediumturquoise()
+			static Color3f mediumturquoise()
 			{
-				return color3f(72/255.0f, 209/255.0f, 204/255.0f);
+				return Color3f(72/255.0f, 209/255.0f, 204/255.0f);
 			};
 
-			static color3f mediumvioletred()
+			static Color3f mediumvioletred()
 			{
-				return color3f(199/255.0f, 21/255.0f, 133/255.0f);
+				return Color3f(199/255.0f, 21/255.0f, 133/255.0f);
 			};
 
-			static color3f midnightblue()
+			static Color3f midnightblue()
 			{
-				return color3f(25/255.0f, 25/255.0f, 112/255.0f);
+				return Color3f(25/255.0f, 25/255.0f, 112/255.0f);
 			};
 
-			static color3f mintcream()
+			static Color3f mintcream()
 			{
-				return color3f(245/255.0f, 255/255.0f, 250/255.0f);
+				return Color3f(245/255.0f, 255/255.0f, 250/255.0f);
 			};
 
-			static color3f mistyrose()
+			static Color3f mistyrose()
 			{
-				return color3f(255/255.0f, 228/255.0f, 225/255.0f);
+				return Color3f(255/255.0f, 228/255.0f, 225/255.0f);
 			};
 
-			static color3f moccasin()
+			static Color3f moccasin()
 			{
-				return color3f(255/255.0f, 228/255.0f, 181/255.0f);
+				return Color3f(255/255.0f, 228/255.0f, 181/255.0f);
 			};
 
-			static color3f navajowhite()
+			static Color3f navajowhite()
 			{
-				return color3f(255/255.0f, 222/255.0f, 173/255.0f);
+				return Color3f(255/255.0f, 222/255.0f, 173/255.0f);
 			};
 
-			static color3f navy()
+			static Color3f navy()
 			{
-				return color3f(0/255.0f, 0/255.0f, 128/255.0f);
+				return Color3f(0/255.0f, 0/255.0f, 128/255.0f);
 			};
 
-			static color3f oldlace()
+			static Color3f oldlace()
 			{
-				return color3f(253/255.0f, 245/255.0f, 230/255.0f);
+				return Color3f(253/255.0f, 245/255.0f, 230/255.0f);
 			};
 
-			static color3f olive()
+			static Color3f olive()
 			{
-				return color3f(128/255.0f, 128/255.0f, 0/255.0f);
+				return Color3f(128/255.0f, 128/255.0f, 0/255.0f);
 			};
 
-			static color3f olivedrab()
+			static Color3f olivedrab()
 			{
-				return color3f(107/255.0f, 142/255.0f, 35/255.0f);
+				return Color3f(107/255.0f, 142/255.0f, 35/255.0f);
 			};
 
-			static color3f orange()
+			static Color3f orange()
 			{
-				return color3f(255/255.0f, 165/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 165/255.0f, 0/255.0f);
 			};
 
-			static color3f orangered()
+			static Color3f orangered()
 			{
-				return color3f(255/255.0f, 69/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 69/255.0f, 0/255.0f);
 			};
 
-			static color3f orchid()
+			static Color3f orchid()
 			{
-				return color3f(218/255.0f, 112/255.0f, 214/255.0f);
+				return Color3f(218/255.0f, 112/255.0f, 214/255.0f);
 			};
 
-			static color3f palegoldenrod()
+			static Color3f palegoldenrod()
 			{
-				return color3f(238/255.0f, 232/255.0f, 170/255.0f);
+				return Color3f(238/255.0f, 232/255.0f, 170/255.0f);
 			};
 
-			static color3f palegreen()
+			static Color3f palegreen()
 			{
-				return color3f(152/255.0f, 251/255.0f, 152/255.0f);
+				return Color3f(152/255.0f, 251/255.0f, 152/255.0f);
 			};
 
-			static color3f paleturquoise()
+			static Color3f paleturquoise()
 			{
-				return color3f(175/255.0f, 238/255.0f, 238/255.0f);
+				return Color3f(175/255.0f, 238/255.0f, 238/255.0f);
 			};
 
-			static color3f palevioletred()
+			static Color3f palevioletred()
 			{
-				return color3f(219/255.0f, 112/255.0f, 147/255.0f);
+				return Color3f(219/255.0f, 112/255.0f, 147/255.0f);
 			};
 
-			static color3f papayawhip()
+			static Color3f papayawhip()
 			{
-				return color3f(255/255.0f, 239/255.0f, 213/255.0f);
+				return Color3f(255/255.0f, 239/255.0f, 213/255.0f);
 			};
 
-			static color3f peachpuff()
+			static Color3f peachpuff()
 			{
-				return color3f(255/255.0f, 218/255.0f, 185/255.0f);
+				return Color3f(255/255.0f, 218/255.0f, 185/255.0f);
 			};
 
-			static color3f peru()
+			static Color3f peru()
 			{
-				return color3f(205/255.0f, 133/255.0f, 63/255.0f);
+				return Color3f(205/255.0f, 133/255.0f, 63/255.0f);
 			};
 
-			static color3f pink()
+			static Color3f pink()
 			{
-				return color3f(255/255.0f, 192/255.0f, 203/255.0f);
+				return Color3f(255/255.0f, 192/255.0f, 203/255.0f);
 			};
 
-			static color3f plum()
+			static Color3f plum()
 			{
-				return color3f(221/255.0f, 160/255.0f, 221/255.0f);
+				return Color3f(221/255.0f, 160/255.0f, 221/255.0f);
 			};
 
-			static color3f powderblue()
+			static Color3f powderblue()
 			{
-				return color3f(176/255.0f, 224/255.0f, 230/255.0f);
+				return Color3f(176/255.0f, 224/255.0f, 230/255.0f);
 			};
 
-			static color3f purple()
+			static Color3f purple()
 			{
-				return color3f(128/255.0f, 0/255.0f, 128/255.0f);
+				return Color3f(128/255.0f, 0/255.0f, 128/255.0f);
 			};
 
-			static color3f red()
+			static Color3f red()
 			{
-				return color3f(255/255.0f, 0/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 0/255.0f, 0/255.0f);
 			};
 
-			static color3f rosybrown()
+			static Color3f rosybrown()
 			{
-				return color3f(188/255.0f, 143/255.0f, 143/255.0f);
+				return Color3f(188/255.0f, 143/255.0f, 143/255.0f);
 			};
 
-			static color3f royalblue()
+			static Color3f royalblue()
 			{
-				return color3f(65/255.0f, 105/255.0f, 225/255.0f);
+				return Color3f(65/255.0f, 105/255.0f, 225/255.0f);
 			};
 
-			static color3f saddlebrown()
+			static Color3f saddlebrown()
 			{
-				return color3f(139/255.0f, 69/255.0f, 19/255.0f);
+				return Color3f(139/255.0f, 69/255.0f, 19/255.0f);
 			};
 
-			static color3f salmon()
+			static Color3f salmon()
 			{
-				return color3f(250/255.0f, 128/255.0f, 114/255.0f);
+				return Color3f(250/255.0f, 128/255.0f, 114/255.0f);
 			};
 
-			static color3f sandybrown()
+			static Color3f sandybrown()
 			{
-				return color3f(244/255.0f, 164/255.0f, 96/255.0f);
+				return Color3f(244/255.0f, 164/255.0f, 96/255.0f);
 			};
 
-			static color3f seagreen()
+			static Color3f seagreen()
 			{
-				return color3f(46/255.0f, 139/255.0f, 87/255.0f);
+				return Color3f(46/255.0f, 139/255.0f, 87/255.0f);
 			};
 
-			static color3f seashell()
+			static Color3f seashell()
 			{
-				return color3f(255/255.0f, 245/255.0f, 238/255.0f);
+				return Color3f(255/255.0f, 245/255.0f, 238/255.0f);
 			};
 
-			static color3f sienna()
+			static Color3f sienna()
 			{
-				return color3f(160/255.0f, 82/255.0f, 45/255.0f);
+				return Color3f(160/255.0f, 82/255.0f, 45/255.0f);
 			};
 
-			static color3f silver()
+			static Color3f silver()
 			{
-				return color3f(192/255.0f, 192/255.0f, 192/255.0f);
+				return Color3f(192/255.0f, 192/255.0f, 192/255.0f);
 			};
 
-			static color3f skyblue()
+			static Color3f skyblue()
 			{
-				return color3f(135/255.0f, 206/255.0f, 235/255.0f);
+				return Color3f(135/255.0f, 206/255.0f, 235/255.0f);
 			};
 
-			static color3f slateblue()
+			static Color3f slateblue()
 			{
-				return color3f(106/255.0f, 90/255.0f, 205/255.0f);
+				return Color3f(106/255.0f, 90/255.0f, 205/255.0f);
 			};
 
-			static color3f slategray()
+			static Color3f slategray()
 			{
-				return color3f(112/255.0f, 128/255.0f, 144/255.0f);
+				return Color3f(112/255.0f, 128/255.0f, 144/255.0f);
 			};
 
-			static color3f snow()
+			static Color3f snow()
 			{
-				return color3f(255/255.0f, 250/255.0f, 250/255.0f);
+				return Color3f(255/255.0f, 250/255.0f, 250/255.0f);
 			};
 
-			static color3f springgreen()
+			static Color3f springgreen()
 			{
-				return color3f(0/255.0f, 255/255.0f, 127/255.0f);
+				return Color3f(0/255.0f, 255/255.0f, 127/255.0f);
 			};
 
-			static color3f steelblue()
+			static Color3f steelblue()
 			{
-				return color3f(70/255.0f, 130/255.0f, 180/255.0f);
+				return Color3f(70/255.0f, 130/255.0f, 180/255.0f);
 			};
 
-			static color3f tan()
+			static Color3f tan()
 			{
-				return color3f(210/255.0f, 180/255.0f, 140/255.0f);
+				return Color3f(210/255.0f, 180/255.0f, 140/255.0f);
 			};
 
-			static color3f teal()
+			static Color3f teal()
 			{
-				return color3f(0/255.0f, 128/255.0f, 128/255.0f);
+				return Color3f(0/255.0f, 128/255.0f, 128/255.0f);
 			};
 
-			static color3f thistle()
+			static Color3f thistle()
 			{
-				return color3f(216/255.0f, 191/255.0f, 216/255.0f);
+				return Color3f(216/255.0f, 191/255.0f, 216/255.0f);
 			};
 
-			static color3f tomato()
+			static Color3f tomato()
 			{
-				return color3f(255/255.0f, 99/255.0f, 71/255.0f);
+				return Color3f(255/255.0f, 99/255.0f, 71/255.0f);
 			};
 
-			static color3f turquoise()
+			static Color3f turquoise()
 			{
-				return color3f(64/255.0f, 224/255.0f, 208/255.0f);
+				return Color3f(64/255.0f, 224/255.0f, 208/255.0f);
 			};
 
-			static color3f violet()
+			static Color3f violet()
 			{
-				return color3f(238/255.0f, 130/255.0f, 238/255.0f);
+				return Color3f(238/255.0f, 130/255.0f, 238/255.0f);
 			};
 
-			static color3f wheat()
+			static Color3f wheat()
 			{
-				return color3f(245/255.0f, 222/255.0f, 179/255.0f);
+				return Color3f(245/255.0f, 222/255.0f, 179/255.0f);
 			};
 
-			static color3f white()
+			static Color3f white()
 			{
-				return color3f(255/255.0f, 255/255.0f, 255/255.0f);
+				return Color3f(255/255.0f, 255/255.0f, 255/255.0f);
 			};
 
-			static color3f whitesmoke()
+			static Color3f whitesmoke()
 			{
-				return color3f(245/255.0f, 245/255.0f, 245/255.0f);
+				return Color3f(245/255.0f, 245/255.0f, 245/255.0f);
 			};
 
-			static color3f yellow()
+			static Color3f yellow()
 			{
-				return color3f(255/255.0f, 255/255.0f, 0/255.0f);
+				return Color3f(255/255.0f, 255/255.0f, 0/255.0f);
 			};
 
-			static color3f yellowgreen()
+			static Color3f yellowgreen()
 			{
-				return color3f(154/255.0f, 205/255.0f, 50/255.0f);
+				return Color3f(154/255.0f, 205/255.0f, 50/255.0f);
 			};
 
-			static color3f random()
+			/*static Color3f random()
 			{
 				const int color_array_size = 140;
-				static color3f colors[color_array_size] =
+				static Color3f colors[color_array_size] =
 				{
 					aliceBlue(),
 					antiqueWhite(),
@@ -1590,737 +1589,1305 @@ namespace BlueFramework
 				BLUE_ASSERT(index < color_array_size, "Invalid index.");
 
 				return colors[index];
-			}
+			}*/
 		};
 
 		template<>
-		struct colorConstants<color4f>
+		struct ColorConstants<Color4f>
 		{
-			static color4f black()
+			static Color4f black()
 			{
-				return color4f(0/255.0f, 0/255.0f, 0/255.0f, 1.0f);
+				return Color4f(0/255.0f, 0/255.0f, 0/255.0f, 1.0f);
 			};
 
-			static color4f white()
+			static Color4f white()
 			{
-				return color4f(255/255.0f, 255/255.0f, 255/255.0f, 1.0f);
+				return Color4f(255/255.0f, 255/255.0f, 255/255.0f, 1.0f);
 			};
 		};
 
 		template<>
-		struct colorConstants<color3b>
+		struct ColorConstants<Color3b>
 		{
-			static color3b aliceBlue()
+			static Color3b aliceBlue()
 			{
-				return color3b(240, 248, 255);
+				return Color3b(240, 248, 255);
 			};
 
-			static color3b antiqueWhite()
+			static Color3b antiqueWhite()
 			{
-				return color3b(250, 235, 215);
+				return Color3b(250, 235, 215);
 			};
 
-			static color3b aqua()
+			static Color3b aqua()
 			{
-				return color3b(0, 255, 255);
+				return Color3b(0, 255, 255);
 			};
 
-			static color3b aquaMarine()
+			static Color3b aquaMarine()
 			{
-				return color3b(127, 255, 212);
+				return Color3b(127, 255, 212);
 			};
 
-			static color3b azure()
+			static Color3b azure()
 			{
-				return color3b(240, 255, 255);
+				return Color3b(240, 255, 255);
 			};
 
-			static color3b beige()
+			static Color3b beige()
 			{
-				return color3b(245, 245, 220);
+				return Color3b(245, 245, 220);
 			};
 
-			static color3b bisque()
+			static Color3b bisque()
 			{
-				return color3b(255, 228, 196);
+				return Color3b(255, 228, 196);
 			};
 
-			static color3b black()
+			static Color3b black()
 			{
-				return color3b(0, 0, 0);
+				return Color3b(0, 0, 0);
 			};
 
-			static color3b blanchedalmond()
+			static Color3b blanchedalmond()
 			{
-				return color3b(255, 235, 205);
+				return Color3b(255, 235, 205);
 			};
 
-			static color3b blue()
+			static Color3b blue()
 			{
-				return color3b(0, 0, 255);
+				return Color3b(0, 0, 255);
 			};
 
-			static color3b blueViolet()
+			static Color3b blueViolet()
 			{
-				return color3b(138, 43, 226);
+				return Color3b(138, 43, 226);
 			};
 
-			static color3b brown()
+			static Color3b brown()
 			{
-				return color3b(165, 42, 42);
+				return Color3b(165, 42, 42);
 			};
 
-			static color3b burlywood()
+			static Color3b burlywood()
 			{
-				return color3b(222, 184, 135);
+				return Color3b(222, 184, 135);
 			};
 
-			static color3b cadetBlue()
+			static Color3b cadetBlue()
 			{
-				return color3b(95, 158, 160);
+				return Color3b(95, 158, 160);
 			};
 
-			static color3b chartreuse()
+			static Color3b chartreuse()
 			{
-				return color3b(127, 255, 0);
+				return Color3b(127, 255, 0);
 			};
 
-			static color3b chocolate()
+			static Color3b chocolate()
 			{
-				return color3b(210, 105, 30);
+				return Color3b(210, 105, 30);
 			};
 
-			static color3b coral()
+			static Color3b coral()
 			{
-				return color3b(255, 127, 80);
+				return Color3b(255, 127, 80);
 			};
 
-			static color3b cornflowerblue()
+			static Color3b cornflowerblue()
 			{
-				return color3b(100, 149, 237);
+				return Color3b(100, 149, 237);
 			};
 
-			static color3b cornsilk()
+			static Color3b cornsilk()
 			{
-				return color3b(255, 248, 220);
+				return Color3b(255, 248, 220);
 			};
 
-			static color3b crimson()
+			static Color3b crimson()
 			{
-				return color3b(220, 20, 60);
+				return Color3b(220, 20, 60);
 			};
 
-			static color3b cyan()
+			static Color3b cyan()
 			{
-				return color3b(0, 255, 255);
+				return Color3b(0, 255, 255);
 			};
 
-			static color3b darkOlivegreen()
+			static Color3b darkOlivegreen()
 			{
-				return color3b(85, 107, 47);
+				return Color3b(85, 107, 47);
 			};
 
-			static color3b darkblue()
+			static Color3b darkblue()
 			{
-				return color3b(0, 0, 139);
+				return Color3b(0, 0, 139);
 			};
 
-			static color3b darkcyan()
+			static Color3b darkcyan()
 			{
-				return color3b(0, 139, 139);
+				return Color3b(0, 139, 139);
 			};
 
-			static color3b darkgoldenrod()
+			static Color3b darkgoldenrod()
 			{
-				return color3b(184, 134, 11);
+				return Color3b(184, 134, 11);
 			};
 
-			static color3b darkgray()
+			static Color3b darkgray()
 			{
-				return color3b(169, 169, 169);
+				return Color3b(169, 169, 169);
 			};
 
-			static color3b darkgreen()
+			static Color3b darkgreen()
 			{
-				return color3b(0, 100, 0);
+				return Color3b(0, 100, 0);
 			};
 
-			static color3b darkkhaki()
+			static Color3b darkkhaki()
 			{
-				return color3b(189, 183, 107);
+				return Color3b(189, 183, 107);
 			};
 
-			static color3b darkmagenta()
+			static Color3b darkmagenta()
 			{
-				return color3b(139, 0, 139);
+				return Color3b(139, 0, 139);
 			};
 
-			static color3b darkorange()
+			static Color3b darkorange()
 			{
-				return color3b(255, 140, 0);
+				return Color3b(255, 140, 0);
 			};
 
-			static color3b darkorchid()
+			static Color3b darkorchid()
 			{
-				return color3b(153, 50, 204);
+				return Color3b(153, 50, 204);
 			};
 
-			static color3b darkRed()
+			static Color3b darkRed()
 			{
-				return color3b(139, 0, 0);
+				return Color3b(139, 0, 0);
 			};
 
-			static color3b darksalmon()
+			static Color3b darksalmon()
 			{
-				return color3b(233, 150, 122);
+				return Color3b(233, 150, 122);
 			};
 
-			static color3b darkseagreen()
+			static Color3b darkseagreen()
 			{
-				return color3b(143, 188, 143);
+				return Color3b(143, 188, 143);
 			};
 
-			static color3b darkslateblue()
+			static Color3b darkslateblue()
 			{
-				return color3b(72, 61, 139);
+				return Color3b(72, 61, 139);
 			};
 
-			static color3b darkslategray()
+			static Color3b darkslategray()
 			{
-				return color3b(47, 79, 79);
+				return Color3b(47, 79, 79);
 			};
 
-			static color3b darkturquoise()
+			static Color3b darkturquoise()
 			{
-				return color3b(0, 206, 209);
+				return Color3b(0, 206, 209);
 			};
 
-			static color3b darkviolet()
+			static Color3b darkviolet()
 			{
-				return color3b(148, 0, 211);
+				return Color3b(148, 0, 211);
 			};
 
-			static color3b deeppink()
+			static Color3b deeppink()
 			{
-				return color3b(255, 20, 147);
+				return Color3b(255, 20, 147);
 			};
 
-			static color3b deepskyblue()
+			static Color3b deepskyblue()
 			{
-				return color3b(0, 191, 255);
+				return Color3b(0, 191, 255);
 			};
 
-			static color3b dimgray()
+			static Color3b dimgray()
 			{
-				return color3b(105, 105, 105);
+				return Color3b(105, 105, 105);
 			};
 
-			static color3b dodgerblue()
+			static Color3b dodgerblue()
 			{
-				return color3b(30, 144, 255);
+				return Color3b(30, 144, 255);
 			};
 
-			static color3b firebrick()
+			static Color3b firebrick()
 			{
-				return color3b(178, 34, 34);
+				return Color3b(178, 34, 34);
 			};
 
-			static color3b floralwhite()
+			static Color3b floralwhite()
 			{
-				return color3b(255, 250, 240);
+				return Color3b(255, 250, 240);
 			};
 
-			static color3b forestgreen()
+			static Color3b forestgreen()
 			{
-				return color3b(34, 139, 34);
+				return Color3b(34, 139, 34);
 			};
 
-			static color3b fuchsia()
+			static Color3b fuchsia()
 			{
-				return color3b(255, 0, 255);
+				return Color3b(255, 0, 255);
 			};
 
-			static color3b gainsboro()
+			static Color3b gainsboro()
 			{
-				return color3b(220, 220, 220);
+				return Color3b(220, 220, 220);
 			};
 
-			static color3b ghostwhite()
+			static Color3b ghostwhite()
 			{
-				return color3b(248, 248, 255);
+				return Color3b(248, 248, 255);
 			};
 
-			static color3b gold()
+			static Color3b gold()
 			{
-				return color3b(255, 215, 0);
+				return Color3b(255, 215, 0);
 			};
 
-			static color3b goldenrod()
+			static Color3b goldenrod()
 			{
-				return color3b(218, 165, 32);
+				return Color3b(218, 165, 32);
 			};
 
-			static color3b gray()
+			static Color3b gray()
 			{
-				return color3b(128, 128, 128);
+				return Color3b(128, 128, 128);
 			};
 
-			static color3b green()
+			static Color3b green()
 			{
-				return color3b(0, 128, 0);
+				return Color3b(0, 128, 0);
 			};
 
-			static color3b greenyellow()
+			static Color3b greenyellow()
 			{
-				return color3b(173, 255, 47);
+				return Color3b(173, 255, 47);
 			};
 
-			static color3b honeydew()
+			static Color3b honeydew()
 			{
-				return color3b(240, 255, 240);
+				return Color3b(240, 255, 240);
 			};
 
-			static color3b hotpink()
+			static Color3b hotpink()
 			{
-				return color3b(255, 105, 180);
+				return Color3b(255, 105, 180);
 			};
 
-			static color3b indianred()
+			static Color3b indianred()
 			{
-				return color3b(205, 92, 92);
+				return Color3b(205, 92, 92);
 			};
 
-			static color3b indigo()
+			static Color3b indigo()
 			{
-				return color3b(75, 0, 130);
+				return Color3b(75, 0, 130);
 			};
 
-			static color3b ivory()
+			static Color3b ivory()
 			{
-				return color3b(255, 255, 240);
+				return Color3b(255, 255, 240);
 			};
 
-			static color3b khaki()
+			static Color3b khaki()
 			{
-				return color3b(240, 230, 140);
+				return Color3b(240, 230, 140);
 			};
 
-			static color3b lavender()
+			static Color3b lavender()
 			{
-				return color3b(230, 230, 250);
+				return Color3b(230, 230, 250);
 			};
 
-			static color3b lavenderblush()
+			static Color3b lavenderblush()
 			{
-				return color3b(255, 240, 245);
+				return Color3b(255, 240, 245);
 			};
 
-			static color3b lawngreen()
+			static Color3b lawngreen()
 			{
-				return color3b(124, 252, 0);
+				return Color3b(124, 252, 0);
 			};
 
-			static color3b lemonchiffon()
+			static Color3b lemonchiffon()
 			{
-				return color3b(255, 250, 205);
+				return Color3b(255, 250, 205);
 			};
 
-			static color3b lightblue()
+			static Color3b lightblue()
 			{
-				return color3b(173, 216, 230);
+				return Color3b(173, 216, 230);
 			};
 
-			static color3b lightcoral()
+			static Color3b lightcoral()
 			{
-				return color3b(240, 128, 128);
+				return Color3b(240, 128, 128);
 			};
 
-			static color3b lightcyan()
+			static Color3b lightcyan()
 			{
-				return color3b(224, 255, 255);
+				return Color3b(224, 255, 255);
 			};
 
-			static color3b lightgoldenrodyellow()
+			static Color3b lightgoldenrodyellow()
 			{
-				return color3b(250, 250, 210);
+				return Color3b(250, 250, 210);
 			};
 
-			static color3b lightgreen()
+			static Color3b lightgreen()
 			{
-				return color3b(144, 238, 144);
+				return Color3b(144, 238, 144);
 			};
 
-			static color3b lightgrey()
+			static Color3b lightgrey()
 			{
-				return color3b(211, 211, 211);
+				return Color3b(211, 211, 211);
 			};
 
-			static color3b lightpink()
+			static Color3b lightpink()
 			{
-				return color3b(255, 182, 193);
+				return Color3b(255, 182, 193);
 			};
 
-			static color3b lightsalmon()
+			static Color3b lightsalmon()
 			{
-				return color3b(255, 160, 122);
+				return Color3b(255, 160, 122);
 			};
 
-			static color3b lightseagreen()
+			static Color3b lightseagreen()
 			{
-				return color3b(32, 178, 170);
+				return Color3b(32, 178, 170);
 			};
 
-			static color3b lightskyblue()
+			static Color3b lightskyblue()
 			{
-				return color3b(135, 206, 250);
+				return Color3b(135, 206, 250);
 			};
 
-			static color3b lightslategray()
+			static Color3b lightslategray()
 			{
-				return color3b(119, 136, 153);
+				return Color3b(119, 136, 153);
 			};
 
-			static color3b lightsteelblue()
+			static Color3b lightsteelblue()
 			{
-				return color3b(176, 196, 222);
+				return Color3b(176, 196, 222);
 			};
 
-			static color3b lightyellow()
+			static Color3b lightyellow()
 			{
-				return color3b(255, 255, 224);
+				return Color3b(255, 255, 224);
 			};
 
-			static color3b lime()
+			static Color3b lime()
 			{
-				return color3b(0, 255, 0);
+				return Color3b(0, 255, 0);
 			};
 
-			static color3b limegreen()
+			static Color3b limegreen()
 			{
-				return color3b(50, 205, 50);
+				return Color3b(50, 205, 50);
 			};
 
-			static color3b linen()
+			static Color3b linen()
 			{
-				return color3b(250, 240, 230);
+				return Color3b(250, 240, 230);
 			};
 
-			static color3b magenta()
+			static Color3b magenta()
 			{
-				return color3b(255, 0, 255);
+				return Color3b(255, 0, 255);
 			};
 
-			static color3b maroon()
+			static Color3b maroon()
 			{
-				return color3b(128, 0, 0);
+				return Color3b(128, 0, 0);
 			};
 
-			static color3b mediumaquamarine()
+			static Color3b mediumaquamarine()
 			{
-				return color3b(102, 205, 170);
+				return Color3b(102, 205, 170);
 			};
 
-			static color3b mediumblue()
+			static Color3b mediumblue()
 			{
-				return color3b(0, 0, 205);
+				return Color3b(0, 0, 205);
 			};
 
-			static color3b mediumorchid()
+			static Color3b mediumorchid()
 			{
-				return color3b(186, 85, 211);
+				return Color3b(186, 85, 211);
 			};
 
-			static color3b mediumpurple()
+			static Color3b mediumpurple()
 			{
-				return color3b(147, 112, 219);
+				return Color3b(147, 112, 219);
 			};
 
-			static color3b mediumseagreen()
+			static Color3b mediumseagreen()
 			{
-				return color3b(60, 179, 113);
+				return Color3b(60, 179, 113);
 			};
 
-			static color3b mediumslateblue()
+			static Color3b mediumslateblue()
 			{
-				return color3b(123, 104, 238);
+				return Color3b(123, 104, 238);
 			};
 
-			static color3b mediumspringgreen()
+			static Color3b mediumspringgreen()
 			{
-				return color3b(0, 250, 154);
+				return Color3b(0, 250, 154);
 			};
 
-			static color3b mediumturquoise()
+			static Color3b mediumturquoise()
 			{
-				return color3b(72, 209, 204);
+				return Color3b(72, 209, 204);
 			};
 
-			static color3b mediumvioletred()
+			static Color3b mediumvioletred()
 			{
-				return color3b(199, 21, 133);
+				return Color3b(199, 21, 133);
 			};
 
-			static color3b midnightblue()
+			static Color3b midnightblue()
 			{
-				return color3b(25, 25, 112);
+				return Color3b(25, 25, 112);
 			};
 
-			static color3b mintcream()
+			static Color3b mintcream()
 			{
-				return color3b(245, 255, 250);
+				return Color3b(245, 255, 250);
 			};
 
-			static color3b mistyrose()
+			static Color3b mistyrose()
 			{
-				return color3b(255, 228, 225);
+				return Color3b(255, 228, 225);
 			};
 
-			static color3b moccasin()
+			static Color3b moccasin()
 			{
-				return color3b(255, 228, 181);
+				return Color3b(255, 228, 181);
 			};
 
-			static color3b navajowhite()
+			static Color3b navajowhite()
 			{
-				return color3b(255, 222, 173);
+				return Color3b(255, 222, 173);
 			};
 
-			static color3b navy()
+			static Color3b navy()
 			{
-				return color3b(0, 0, 128);
+				return Color3b(0, 0, 128);
 			};
 
-			static color3b oldlace()
+			static Color3b oldlace()
 			{
-				return color3b(253, 245, 230);
+				return Color3b(253, 245, 230);
 			};
 
-			static color3b olive()
+			static Color3b olive()
 			{
-				return color3b(128, 128, 0);
+				return Color3b(128, 128, 0);
 			};
 
-			static color3b olivedrab()
+			static Color3b olivedrab()
 			{
-				return color3b(107, 142, 35);
+				return Color3b(107, 142, 35);
 			};
 
-			static color3b orange()
+			static Color3b orange()
 			{
-				return color3b(255, 165, 0);
+				return Color3b(255, 165, 0);
 			};
 
-			static color3b orangered()
+			static Color3b orangered()
 			{
-				return color3b(255, 69, 0);
+				return Color3b(255, 69, 0);
 			};
 
-			static color3b orchid()
+			static Color3b orchid()
 			{
-				return color3b(218, 112, 214);
+				return Color3b(218, 112, 214);
 			};
 
-			static color3b palegoldenrod()
+			static Color3b palegoldenrod()
 			{
-				return color3b(238, 232, 170);
+				return Color3b(238, 232, 170);
 			};
 
-			static color3b palegreen()
+			static Color3b palegreen()
 			{
-				return color3b(152, 251, 152);
+				return Color3b(152, 251, 152);
 			};
 
-			static color3b paleturquoise()
+			static Color3b paleturquoise()
 			{
-				return color3b(175, 238, 238);
+				return Color3b(175, 238, 238);
 			};
 
-			static color3b palevioletred()
+			static Color3b palevioletred()
 			{
-				return color3b(219, 112, 147);
+				return Color3b(219, 112, 147);
 			};
 
-			static color3b papayawhip()
+			static Color3b papayawhip()
 			{
-				return color3b(255, 239, 213);
+				return Color3b(255, 239, 213);
 			};
 
-			static color3b peachpuff()
+			static Color3b peachpuff()
 			{
-				return color3b(255, 218, 185);
+				return Color3b(255, 218, 185);
 			};
 
-			static color3b peru()
+			static Color3b peru()
 			{
-				return color3b(205, 133, 63);
+				return Color3b(205, 133, 63);
 			};
 
-			static color3b pink()
+			static Color3b pink()
 			{
-				return color3b(255, 192, 203);
+				return Color3b(255, 192, 203);
 			};
 
-			static color3b plum()
+			static Color3b plum()
 			{
-				return color3b(221, 160, 221);
+				return Color3b(221, 160, 221);
 			};
 
-			static color3b powderblue()
+			static Color3b powderblue()
 			{
-				return color3b(176, 224, 230);
+				return Color3b(176, 224, 230);
 			};
 
-			static color3b purple()
+			static Color3b purple()
 			{
-				return color3b(128, 0, 128);
+				return Color3b(128, 0, 128);
 			};
 
-			static color3b red()
+			static Color3b red()
 			{
-				return color3b(255, 0, 0);
+				return Color3b(255, 0, 0);
 			};
 
-			static color3b rosybrown()
+			static Color3b rosybrown()
 			{
-				return color3b(188, 143, 143);
+				return Color3b(188, 143, 143);
 			};
 
-			static color3b royalblue()
+			static Color3b royalblue()
 			{
-				return color3b(65, 105, 225);
+				return Color3b(65, 105, 225);
 			};
 
-			static color3b saddlebrown()
+			static Color3b saddlebrown()
 			{
-				return color3b(139, 69, 19);
+				return Color3b(139, 69, 19);
 			};
 
-			static color3b salmon()
+			static Color3b salmon()
 			{
-				return color3b(250, 128, 114);
+				return Color3b(250, 128, 114);
 			};
 
-			static color3b sandybrown()
+			static Color3b sandybrown()
 			{
-				return color3b(244, 164, 96);
+				return Color3b(244, 164, 96);
 			};
 
-			static color3b seagreen()
+			static Color3b seagreen()
 			{
-				return color3b(46, 139, 87);
+				return Color3b(46, 139, 87);
 			};
 
-			static color3b seashell()
+			static Color3b seashell()
 			{
-				return color3b(255, 245, 238);
+				return Color3b(255, 245, 238);
 			};
 
-			static color3b sienna()
+			static Color3b sienna()
 			{
-				return color3b(160, 82, 45);
+				return Color3b(160, 82, 45);
 			};
 
-			static color3b silver()
+			static Color3b silver()
 			{
-				return color3b(192, 192, 192);
+				return Color3b(192, 192, 192);
 			};
 
-			static color3b skyblue()
+			static Color3b skyblue()
 			{
-				return color3b(135, 206, 235);
+				return Color3b(135, 206, 235);
 			};
 
-			static color3b slateblue()
+			static Color3b slateblue()
 			{
-				return color3b(106, 90, 205);
+				return Color3b(106, 90, 205);
 			};
 
-			static color3b slategray()
+			static Color3b slategray()
 			{
-				return color3b(112, 128, 144);
+				return Color3b(112, 128, 144);
 			};
 
-			static color3b snow()
+			static Color3b snow()
 			{
-				return color3b(255, 250, 250);
+				return Color3b(255, 250, 250);
 			};
 
-			static color3b springgreen()
+			static Color3b springgreen()
 			{
-				return color3b(0, 255, 127);
+				return Color3b(0, 255, 127);
 			};
 
-			static color3b steelblue()
+			static Color3b steelblue()
 			{
-				return color3b(70, 130, 180);
+				return Color3b(70, 130, 180);
 			};
 
-			static color3b tan()
+			static Color3b tan()
 			{
-				return color3b(210, 180, 140);
+				return Color3b(210, 180, 140);
 			};
 
-			static color3b teal()
+			static Color3b teal()
 			{
-				return color3b(0, 128, 128);
+				return Color3b(0, 128, 128);
 			};
 
-			static color3b thistle()
+			static Color3b thistle()
 			{
-				return color3b(216, 191, 216);
+				return Color3b(216, 191, 216);
 			};
 
-			static color3b tomato()
+			static Color3b tomato()
 			{
-				return color3b(255, 99, 71);
+				return Color3b(255, 99, 71);
 			};
 
-			static color3b turquoise()
+			static Color3b turquoise()
 			{
-				return color3b(64, 224, 208);
+				return Color3b(64, 224, 208);
 			};
 
-			static color3b violet()
+			static Color3b violet()
 			{
-				return color3b(238, 130, 238);
+				return Color3b(238, 130, 238);
 			};
 
-			static color3b wheat()
+			static Color3b wheat()
 			{
-				return color3b(245, 222, 179);
+				return Color3b(245, 222, 179);
 			};
 
-			static color3b white()
+			static Color3b white()
 			{
-				return color3b(255, 255, 255);
+				return Color3b(255, 255, 255);
 			};
 
-			static color3b whitesmoke()
+			static Color3b whitesmoke()
 			{
-				return color3b(245, 245, 245);
+				return Color3b(245, 245, 245);
 			};
 
-			static color3b yellow()
+			static Color3b yellow()
 			{
-				return color3b(255, 255, 0);
+				return Color3b(255, 255, 0);
 			};
 
-			static color3b yellowgreen()
+			static Color3b yellowgreen()
 			{
-				return color3b(154, 205, 50);
+				return Color3b(154, 205, 50);
 			};
 		};
 
-		typedef colorConstants<color3f> colorConstants3f;
-		typedef colorConstants<color4f> colorConstants4f;
+		template <>
+		struct ColorConstants<Color4b> {
+			static Color4b aliceBlue() {
+				return Color4b(240, 248, 255, 255);
+			};
+
+			static Color4b antiqueWhite() {
+				return Color4b(250, 235, 215, 255);
+			};
+
+			static Color4b aqua() {
+				return Color4b(0, 255, 255, 255);
+			};
+
+			static Color4b aquaMarine() {
+				return Color4b(127, 255, 212, 255);
+			};
+
+			static Color4b azure() {
+				return Color4b(240, 255, 255, 255);
+			};
+
+			static Color4b beige() {
+				return Color4b(245, 245, 220, 255);
+			};
+
+			static Color4b bisque() {
+				return Color4b(255, 228, 196, 255);
+			};
+
+			static Color4b black() {
+				return Color4b(0, 0, 0, 255);
+			};
+
+			static Color4b blanchedalmond() {
+				return Color4b(255, 235, 205, 255);
+			};
+
+			static Color4b blue() {
+				return Color4b(0, 0, 255, 255);
+			};
+
+			static Color4b blueViolet() {
+				return Color4b(138, 43, 226, 255);
+			};
+
+			static Color4b brown() {
+				return Color4b(165, 42, 42, 255);
+			};
+
+			static Color4b burlywood() {
+				return Color4b(222, 184, 135, 255);
+			};
+
+			static Color4b cadetBlue() {
+				return Color4b(95, 158, 160, 255);
+			};
+
+			static Color4b chartreuse() {
+				return Color4b(127, 255, 0, 255);
+			};
+
+			static Color4b chocolate() {
+				return Color4b(210, 105, 30, 255);
+			};
+
+			static Color4b coral() {
+				return Color4b(255, 127, 80, 255);
+			};
+
+			static Color4b cornflowerblue() {
+				return Color4b(100, 149, 237, 255);
+			};
+
+			static Color4b cornsilk() {
+				return Color4b(255, 248, 220, 255);
+			};
+
+			static Color4b crimson() {
+				return Color4b(220, 20, 60, 255);
+			};
+
+			static Color4b cyan() {
+				return Color4b(0, 255, 255, 255);
+			};
+
+			static Color4b darkOlivegreen() {
+				return Color4b(85, 107, 47, 255);
+			};
+
+			static Color4b darkblue() {
+				return Color4b(0, 0, 139, 255);
+			};
+
+			static Color4b darkcyan() {
+				return Color4b(0, 139, 139, 255);
+			};
+
+			static Color4b darkgoldenrod() {
+				return Color4b(184, 134, 11, 255);
+			};
+
+			static Color4b darkgray() {
+				return Color4b(169, 169, 169, 255);
+			};
+
+			static Color4b darkgreen() {
+				return Color4b(0, 100, 0, 255);
+			};
+
+			static Color4b darkkhaki() {
+				return Color4b(189, 183, 107, 255);
+			};
+
+			static Color4b darkmagenta() {
+				return Color4b(139, 0, 139, 255);
+			};
+
+			static Color4b darkorange() {
+				return Color4b(255, 140, 0, 255);
+			};
+
+			static Color4b darkorchid() {
+				return Color4b(153, 50, 204, 255);
+			};
+
+			static Color4b darkRed() {
+				return Color4b(139, 0, 0, 255);
+			};
+
+			static Color4b darksalmon() {
+				return Color4b(233, 150, 122, 255);
+			};
+
+			static Color4b darkseagreen() {
+				return Color4b(143, 188, 143, 255);
+			};
+
+			static Color4b darkslateblue() {
+				return Color4b(72, 61, 139, 255);
+			};
+
+			static Color4b darkslategray() {
+				return Color4b(47, 79, 79, 255);
+			};
+
+			static Color4b darkturquoise() {
+				return Color4b(0, 206, 209, 255);
+			};
+
+			static Color4b darkviolet() {
+				return Color4b(148, 0, 211, 255);
+			};
+
+			static Color4b deeppink() {
+				return Color4b(255, 20, 147, 255);
+			};
+
+			static Color4b deepskyblue() {
+				return Color4b(0, 191, 255, 255);
+			};
+
+			static Color4b dimgray() {
+				return Color4b(105, 105, 105, 255);
+			};
+
+			static Color4b dodgerblue() {
+				return Color4b(30, 144, 255, 255);
+			};
+
+			static Color4b firebrick() {
+				return Color4b(178, 34, 34, 255);
+			};
+
+			static Color4b floralwhite() {
+				return Color4b(255, 250, 240, 255);
+			};
+
+			static Color4b forestgreen() {
+				return Color4b(34, 139, 34, 255);
+			};
+
+			static Color4b fuchsia() {
+				return Color4b(255, 0, 255, 255);
+			};
+
+			static Color4b gainsboro() {
+				return Color4b(220, 220, 220, 255);
+			};
+
+			static Color4b ghostwhite() {
+				return Color4b(248, 248, 255, 255);
+			};
+
+			static Color4b gold() {
+				return Color4b(255, 215, 0, 255);
+			};
+
+			static Color4b goldenrod() {
+				return Color4b(218, 165, 32, 255);
+			};
+
+			static Color4b gray() {
+				return Color4b(128, 128, 128, 255);
+			};
+
+			static Color4b green() {
+				return Color4b(0, 128, 0, 255);
+			};
+
+			static Color4b greenyellow() {
+				return Color4b(173, 255, 47, 255);
+			};
+
+			static Color4b honeydew() {
+				return Color4b(240, 255, 240, 255);
+			};
+
+			static Color4b hotpink() {
+				return Color4b(255, 105, 180, 255);
+			};
+
+			static Color4b indianred() {
+				return Color4b(205, 92, 92, 255);
+			};
+
+			static Color4b indigo() {
+				return Color4b(75, 0, 130, 255);
+			};
+
+			static Color4b ivory() {
+				return Color4b(255, 255, 240, 255);
+			};
+
+			static Color4b khaki() {
+				return Color4b(240, 230, 140, 255);
+			};
+
+			static Color4b lavender() {
+				return Color4b(230, 230, 250, 255);
+			};
+
+			static Color4b lavenderblush() {
+				return Color4b(255, 240, 245, 255);
+			};
+
+			static Color4b lawngreen() {
+				return Color4b(124, 252, 0, 255);
+			};
+
+			static Color4b lemonchiffon() {
+				return Color4b(255, 250, 205, 255);
+			};
+
+			static Color4b lightblue() {
+				return Color4b(173, 216, 230, 255);
+			};
+
+			static Color4b lightcoral() {
+				return Color4b(240, 128, 128, 255);
+			};
+
+			static Color4b lightcyan() {
+				return Color4b(224, 255, 255, 255);
+			};
+
+			static Color4b lightgoldenrodyellow() {
+				return Color4b(250, 250, 210, 255);
+			};
+
+			static Color4b lightgreen() {
+				return Color4b(144, 238, 144, 255);
+			};
+
+			static Color4b lightgrey() {
+				return Color4b(211, 211, 211, 255);
+			};
+
+			static Color4b lightpink() {
+				return Color4b(255, 182, 193, 255);
+			};
+
+			static Color4b lightsalmon() {
+				return Color4b(255, 160, 122, 255);
+			};
+
+			static Color4b lightseagreen() {
+				return Color4b(32, 178, 170, 255);
+			};
+
+			static Color4b lightskyblue() {
+				return Color4b(135, 206, 250, 255);
+			};
+
+			static Color4b lightslategray() {
+				return Color4b(119, 136, 153, 255);
+			};
+
+			static Color4b lightsteelblue() {
+				return Color4b(176, 196, 222, 255);
+			};
+
+			static Color4b lightyellow() {
+				return Color4b(255, 255, 224, 255);
+			};
+
+			static Color4b lime() {
+				return Color4b(0, 255, 0, 255);
+			};
+
+			static Color4b limegreen() {
+				return Color4b(50, 205, 50, 255);
+			};
+
+			static Color4b linen() {
+				return Color4b(250, 240, 230, 255);
+			};
+
+			static Color4b magenta() {
+				return Color4b(255, 0, 255, 255);
+			};
+
+			static Color4b maroon() {
+				return Color4b(128, 0, 0, 255);
+			};
+
+			static Color4b mediumaquamarine() {
+				return Color4b(102, 205, 170, 255);
+			};
+
+			static Color4b mediumblue() {
+				return Color4b(0, 0, 205, 255);
+			};
+
+			static Color4b mediumorchid() {
+				return Color4b(186, 85, 211, 255);
+			};
+
+			static Color4b mediumpurple() {
+				return Color4b(147, 112, 219, 255);
+			};
+
+			static Color4b mediumseagreen() {
+				return Color4b(60, 179, 113, 255);
+			};
+
+			static Color4b mediumslateblue() {
+				return Color4b(123, 104, 238, 255);
+			};
+
+			static Color4b mediumspringgreen() {
+				return Color4b(0, 250, 154, 255);
+			};
+
+			static Color4b mediumturquoise() {
+				return Color4b(72, 209, 204, 255);
+			};
+
+			static Color4b mediumvioletred() {
+				return Color4b(199, 21, 133, 255);
+			};
+
+			static Color4b midnightblue() {
+				return Color4b(25, 25, 112, 255);
+			};
+
+			static Color4b mintcream() {
+				return Color4b(245, 255, 250, 255);
+			};
+
+			static Color4b mistyrose() {
+				return Color4b(255, 228, 225, 255);
+			};
+
+			static Color4b moccasin() {
+				return Color4b(255, 228, 181, 255);
+			};
+
+			static Color4b navajowhite() {
+				return Color4b(255, 222, 173, 255);
+			};
+
+			static Color4b navy() {
+				return Color4b(0, 0, 128, 255);
+			};
+
+			static Color4b oldlace() {
+				return Color4b(253, 245, 230, 255);
+			};
+
+			static Color4b olive() {
+				return Color4b(128, 128, 0, 255);
+			};
+
+			static Color4b olivedrab() {
+				return Color4b(107, 142, 35, 255);
+			};
+
+			static Color4b orange() {
+				return Color4b(255, 165, 0, 255);
+			};
+
+			static Color4b orangered() {
+				return Color4b(255, 69, 0, 255);
+			};
+
+			static Color4b orchid() {
+				return Color4b(218, 112, 214, 255);
+			};
+
+			static Color4b palegoldenrod() {
+				return Color4b(238, 232, 170, 255);
+			};
+
+			static Color4b palegreen() {
+				return Color4b(152, 251, 152, 255);
+			};
+
+			static Color4b paleturquoise() {
+				return Color4b(175, 238, 238, 255);
+			};
+
+			static Color4b palevioletred() {
+				return Color4b(219, 112, 147, 255);
+			};
+
+			static Color4b papayawhip() {
+				return Color4b(255, 239, 213, 255);
+			};
+
+			static Color4b peachpuff() {
+				return Color4b(255, 218, 185, 255);
+			};
+
+			static Color4b peru() {
+				return Color4b(205, 133, 63, 255);
+			};
+
+			static Color4b pink() {
+				return Color4b(255, 192, 203, 255);
+			};
+
+			static Color4b plum() {
+				return Color4b(221, 160, 221, 255);
+			};
+
+			static Color4b powderblue() {
+				return Color4b(176, 224, 230, 255);
+			};
+
+			static Color4b purple() {
+				return Color4b(128, 0, 128, 255);
+			};
+
+			static Color4b red() {
+				return Color4b(255, 0, 0, 255);
+			};
+
+			static Color4b rosybrown() {
+				return Color4b(188, 143, 143, 255);
+			};
+
+			static Color4b royalblue() {
+				return Color4b(65, 105, 225, 255);
+			};
+
+			static Color4b saddlebrown() {
+				return Color4b(139, 69, 19, 255);
+			};
+
+			static Color4b salmon() {
+				return Color4b(250, 128, 114, 255);
+			};
+
+			static Color4b sandybrown() {
+				return Color4b(244, 164, 96, 255);
+			};
+
+			static Color4b seagreen() {
+				return Color4b(46, 139, 87, 255);
+			};
+
+			static Color4b seashell() {
+				return Color4b(255, 245, 238, 255);
+			};
+
+			static Color4b sienna() {
+				return Color4b(160, 82, 45, 255);
+			};
+
+			static Color4b silver() {
+				return Color4b(192, 192, 192, 255);
+			};
+
+			static Color4b skyblue() {
+				return Color4b(135, 206, 235, 255);
+			};
+
+			static Color4b slateblue() {
+				return Color4b(106, 90, 205, 255);
+			};
+
+			static Color4b slategray() {
+				return Color4b(112, 128, 144, 255);
+			};
+
+			static Color4b snow() {
+				return Color4b(255, 250, 250, 255);
+			};
+
+			static Color4b springgreen() {
+				return Color4b(0, 255, 127, 255);
+			};
+
+			static Color4b steelblue() {
+				return Color4b(70, 130, 180, 255);
+			};
+
+			static Color4b tan() {
+				return Color4b(210, 180, 140, 255);
+			};
+
+			static Color4b teal() {
+				return Color4b(0, 128, 128, 255);
+			};
+
+			static Color4b thistle() {
+				return Color4b(216, 191, 216, 255);
+			};
+
+			static Color4b tomato() {
+				return Color4b(255, 99, 71, 255);
+			};
+
+			static Color4b turquoise() {
+				return Color4b(64, 224, 208, 255);
+			};
+
+			static Color4b violet() {
+				return Color4b(238, 130, 238, 255);
+			};
+
+			static Color4b wheat() {
+				return Color4b(245, 222, 179, 255);
+			};
+
+			static Color4b white() {
+				return Color4b(255, 255, 255, 255);
+			};
+
+			static Color4b whitesmoke() {
+				return Color4b(245, 245, 245, 255);
+			};
+
+			static Color4b yellow() {
+				return Color4b(255, 255, 0, 255);
+			};
+
+			static Color4b yellowgreen() {
+				return Color4b(154, 205, 50, 255);
+			};
+		};
+
+
+		typedef ColorConstants<Color3f> ColorConstants3f;
+		typedef ColorConstants<Color4f> ColorConstants4f;
+		typedef ColorConstants<Color3b> ColorConstants3b;
+		typedef ColorConstants<Color4b> ColorConstants4b;
 	} // end namespace ImageProcessing
 } // end namespace BlueFramework
 
 namespace buw
 {
-	using BlueFramework::ImageProcessing::colorConstants;
-	using BlueFramework::ImageProcessing::colorConstants3f;
-	using BlueFramework::ImageProcessing::colorConstants4f;
-}
+	using BlueFramework::ImageProcessing::ColorConstants;
+	using BlueFramework::ImageProcessing::ColorConstants3f;
+	using BlueFramework::ImageProcessing::ColorConstants4f;
+	using BlueFramework::ImageProcessing::ColorConstants4b;
+	using BlueFramework::ImageProcessing::ColorConstants4b;
+} // namespace buw
 
 #endif // end define BlueFramework_ImageProcessing_ColorConstants_e730a33d_4053_4c52_bd16_ecf1fba26816_h
