@@ -172,6 +172,12 @@ void D3D11Texture2D::createStagingTexture(bool cpuReadable, bool cpuWriteable)
 	desc.CPUAccessFlags = (isCPUReadable_ ? D3D11_CPU_ACCESS_READ : 0) | (isCPUWriteable_ ? D3D11_CPU_ACCESS_WRITE : 0);
 	desc.MiscFlags = 0;
 
+	if (renderSystem_->getMSAAEnabled() && msaa_)
+	{
+		desc.SampleDesc.Count = renderSystem_->getSampleCount();
+		desc.SampleDesc.Quality = renderSystem_->getSampleQuality();
+	}
+
 	renderSystem_->getDevice()->CreateTexture2D(&desc, nullptr, stagingTexture_.GetAddressOf());
 }
 

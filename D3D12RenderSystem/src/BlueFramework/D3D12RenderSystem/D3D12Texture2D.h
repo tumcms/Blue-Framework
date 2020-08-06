@@ -77,7 +77,7 @@ public:
 
 	bool isCPUWriteable() const override { return cpuWriteable_; }
 	bool isCPUReadable() const override { return cpuReadable_; }
-    const bool isMultisampled() const { return multisampled_; }
+    bool isMultisampled() const override { return multisampled_; }
 
     void makeCPUReadable() override;
 	void makeCPUWriteable() override;
