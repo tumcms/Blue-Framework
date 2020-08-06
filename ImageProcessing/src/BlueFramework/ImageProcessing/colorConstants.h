@@ -30,7 +30,7 @@ namespace BlueFramework
 	{
 		// Implements different color constants.
 		template<typename ColorType>
-		struct colorConstants
+		struct ColorConstants
 		{
 			static ColorType aliceBlue()
 			{
@@ -734,7 +734,7 @@ namespace BlueFramework
 		};
 
 		template<>
-		struct colorConstants<Color3f>
+		struct ColorConstants<Color3f>
 		{
 			static Color3f aliceBlue()
 			{
@@ -1593,7 +1593,7 @@ namespace BlueFramework
 		};
 
 		template<>
-		struct colorConstants<Color4f>
+		struct ColorConstants<Color4f>
 		{
 			static Color4f black()
 			{
@@ -1607,7 +1607,7 @@ namespace BlueFramework
 		};
 
 		template<>
-		struct colorConstants<Color3b>
+		struct ColorConstants<Color3b>
 		{
 			static Color3b aliceBlue()
 			{
@@ -2311,7 +2311,7 @@ namespace BlueFramework
 		};
 
 		template <>
-		struct colorConstants<Color4b> {
+		struct ColorConstants<Color4b> {
 			static Color4b aliceBlue() {
 				return Color4b(240, 248, 255, 255);
 			};
@@ -2874,16 +2874,20 @@ namespace BlueFramework
 		};
 
 
-		typedef colorConstants<Color3f> colorConstants3f;
-		typedef colorConstants<Color4f> colorConstants4f;
+		typedef ColorConstants<Color3f> ColorConstants3f;
+		typedef ColorConstants<Color4f> ColorConstants4f;
+		typedef ColorConstants<Color3b> ColorConstants3b;
+		typedef ColorConstants<Color4b> ColorConstants4b;
 	} // end namespace ImageProcessing
 } // end namespace BlueFramework
 
 namespace buw
 {
-	using BlueFramework::ImageProcessing::colorConstants;
-	using BlueFramework::ImageProcessing::colorConstants3f;
-	using BlueFramework::ImageProcessing::colorConstants4f;
-}
+	using BlueFramework::ImageProcessing::ColorConstants;
+	using BlueFramework::ImageProcessing::ColorConstants3f;
+	using BlueFramework::ImageProcessing::ColorConstants4f;
+	using BlueFramework::ImageProcessing::ColorConstants4b;
+	using BlueFramework::ImageProcessing::ColorConstants4b;
+} // namespace buw
 
 #endif // end define BlueFramework_ImageProcessing_ColorConstants_e730a33d_4053_4c52_bd16_ecf1fba26816_h
