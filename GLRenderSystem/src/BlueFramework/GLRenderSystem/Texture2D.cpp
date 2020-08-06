@@ -203,4 +203,8 @@ void Texture2D::resize(buw::texture2DDescription const& td)
 	}
 }
 
+bool Texture2D::isMultisampled() const {
+	throw buw::NotImplementedYetException("The method or operation is not implemented.");
+}
+
 BLUE_NAMESPACE_BLUEFRAMEWORK_GLRENDERSYSTEM_END

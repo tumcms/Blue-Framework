@@ -52,6 +52,7 @@ public:
 
 	bool isCPUWriteable() const override;
 	void makeCPUWriteable() override;
+	bool isMultisampled() const override;
 };
 
 BLUE_NAMESPACE_BLUEFRAMEWORK_GLRENDERSYSTEM_END

@@ -125,4 +125,8 @@ void BackBufferRenderTarget::makeCPUWriteable()
 	throw buw::NotImplementedYetException("The method or operation is not implemented.");
 }
 
+bool BackBufferRenderTarget::isMultisampled() const {
+	throw buw::NotImplementedYetException("The method or operation is not implemented.");
+}
+
 BLUE_NAMESPACE_BLUEFRAMEWORK_GLRENDERSYSTEM_END

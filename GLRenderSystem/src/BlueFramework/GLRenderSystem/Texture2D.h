@@ -52,6 +52,7 @@ public:
     buw::eTextureFormat const getFormat() const override;
 
 	void resize(buw::texture2DDescription const& td) override;
+	bool isMultisampled() const override;
 };
 
 BLUE_NAMESPACE_BLUEFRAMEWORK_GLRENDERSYSTEM_END
