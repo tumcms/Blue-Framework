@@ -218,8 +218,6 @@ public:
 
 	void setViewDirection(const buw::Vector3f &dir);
 
-	void setViewDirection(const eViewDirection &direction);
-
 	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max);
 	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin);
 
@@ -232,9 +230,10 @@ public:
 
 	const bool isCameraMoving() const;
 
+	static buw::Vector3f getViewDirectionVector(const eViewDirection &direction);
+
 private:
 	void startInterpolation(float duration, const CameraTransformation &target);
-	static buw::Vector3f getViewDirectionVector(const eViewDirection &direction);
 
 private:
 	buw::ReferenceCounted<Camera> camera_;

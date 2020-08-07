@@ -520,9 +520,6 @@ buw::Vector3f CameraController::getViewDirectionVector(const buw::eViewDirection
 	return viewDirection;
 }
 
-void CameraController::setViewDirection(const buw::eViewDirection &direction) {
-	setViewDirection(getViewDirectionVector(direction));
-}
 
 void CameraController::fitToView(const buw::Vector3f &min, const buw::Vector3f &max) {
 	CameraTransformation target = camera_->transformation();
