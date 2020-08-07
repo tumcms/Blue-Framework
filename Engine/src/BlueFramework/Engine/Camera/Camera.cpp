@@ -1,7 +1,7 @@
 /*
     This file is part of BlueFramework, a simple 3D engine.
-	Copyright (c) 2019 Technical University of Munich
-	Chair of Computational Modeling and Simulation.
+    Copyright (c) 2019 Technical University of Munich
+    Chair of Computational Modeling and Simulation.
 
     BlueFramework is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License Version 3
@@ -16,8 +16,8 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "BlueFramework/Core/Diagnostics/log.h"
 #include "Camera.h"
+#include "BlueFramework/Core/Diagnostics/log.h"
 
 #include <map>
 
@@ -26,8 +26,7 @@ BLUEFRAMEWORK_ENGINE_NAMESPACE_BEGIN
 CameraTransformation::CameraTransformation() : translation_(0, 0, 0), rotation_(0, 0, 0), offset_(0) {
 }
 
-buw::Vector3f CameraTransformation::viewDirectionToRotation(const buw::Vector3f & dir)
-{
+buw::Vector3f CameraTransformation::viewDirectionToRotation(const buw::Vector3f &dir) {
 	float l = buw::Vector2f(dir.x(), dir.z()).norm();
 
 	float yaw = 0;
@@ -41,7 +40,7 @@ buw::Vector3f CameraTransformation::viewDirectionToRotation(const buw::Vector3f 
 }
 
 CameraTransformation::CameraTransformation(const buw::Vector3f &translation, const buw::Vector3f &rotation, const float offset)
-	: translation_(translation), rotation_(rotation), offset_(offset) {
+    : translation_(translation), rotation_(rotation), offset_(offset) {
 }
 
 const buw::Vector3f &CameraTransformation::translation() const {
@@ -119,7 +118,7 @@ float mod(const float &a, const float &n) {
 
 float angleDiff(const float &a, const float &b) {
 	float c = a - b;
-	c = mod((c + PI), 2 * PI) - PI;
+	c = mod(c + PI, 2 * PI) - PI;
 	return c;
 }
 
@@ -184,7 +183,6 @@ void CameraTransformation::normalize() {
 	operator/=(length());
 }
 
-
 buw::Matrix44f CameraTransformation::rotationMatrix() const {
 	return buw::createRotationMatrixY(yaw()) * buw::createRotationMatrixX(pitch()) * buw::createRotationMatrixZ(roll());
 }
@@ -195,7 +193,7 @@ buw::Matrix44f CameraTransformation::viewMatrix() const {
 	return transformationMatrix().inverse();
 }
 
-void CameraTransformation::setViewDirection(const buw::Vector3f & dir) {
+void CameraTransformation::setViewDirection(const buw::Vector3f &dir) {
 	/*float l = buw::Vector2f(dir.x(), dir.z()).norm();
 
 	float pitch = atan(dir.y() / l);
@@ -210,7 +208,7 @@ void CameraTransformation::setViewDirection(const buw::Vector3f & dir) {
 	rotation_ = viewDirectionToRotation(dir);
 }
 
-void CameraTransformation::fitToView(const buw::Vector3f& min, const buw::Vector3f& max, float fieldOfView) {
+void CameraTransformation::fitToView(const buw::Vector3f &min, const buw::Vector3f &max, float fieldOfView) {
 	buw::Vector3f center = (min + max) / 2.f;
 
 	buw::Vector3f d1, d2;
@@ -227,18 +225,16 @@ void CameraTransformation::fitToView(const buw::Vector3f& min, const buw::Vector
 	offset_ = offset;
 }
 
-void CameraTransformation::lookAt(const buw::Vector3f & target, const buw::Vector3f & origin) {
+void CameraTransformation::lookAt(const buw::Vector3f &target, const buw::Vector3f &origin) {
 	float yaw = 0;
 	float pitch = 0;
 	float roll = 0;
 
 	buw::Vector3f v = target - origin;
 
-	if (v.norm() > 0)
-	{
+	if (v.norm() > 0) {
 		buw::Vector3f v1(v.x(), 0, v.z()), v2;
-		if (v1.norm() > 0)
-		{
+		if (v1.norm() > 0) {
 			v1 = v1.normalized();
 			v2 = v.normalized();
 
@@ -246,13 +242,11 @@ void CameraTransformation::lookAt(const buw::Vector3f & target, const buw::Vecto
 
 			if (v.y() != 0)
 				pitch = acos(std::max(-1.f, std::min(v1.dot(v2), 1.f)));
-		}
-		else
+		} else
 			pitch = buw::constantsf::pi_over_2();
 
 		if (v.y() > 0)
 			pitch *= -1;
-
 	}
 
 	translation_ = target;
@@ -261,7 +255,6 @@ void CameraTransformation::lookAt(const buw::Vector3f & target, const buw::Vecto
 	rotation_.z() = roll;
 	offset_ = v.norm();
 }
-
 
 Camera::Camera() : frustum_(16, 9, 0.1f, 1000, eProjectionType::Perspective) {
 }
@@ -386,18 +379,15 @@ void Camera::setOffset(float offset) {
 	transformation().offset() = (oldPos - newCenter).norm();
 }
 
-void Camera::setViewDirection(const buw::Vector3f & dir)
-{
+void Camera::setViewDirection(const buw::Vector3f &dir) {
 	transformation().setViewDirection(dir);
 }
 
-void Camera::fitToView(const buw::Vector3f & min, const buw::Vector3f & max)
-{
+void Camera::fitToView(const buw::Vector3f &min, const buw::Vector3f &max) {
 	transformation().fitToView(min, max, frustum().fieldOfView());
 }
 
-void Camera::lookAt(const buw::Vector3f &target, const buw::Vector3f& origin)
-{
+void Camera::lookAt(const buw::Vector3f &target, const buw::Vector3f &origin) {
 	transformation().lookAt(target, origin);
 }
 
@@ -406,35 +396,35 @@ void Camera::tick(const float delta) {
 }
 
 CameraFrustum::CameraFrustum(float left,
-	float right,
-	float bottom,
-	float top,
-	float near,
-	float far,
-	eProjectionType projectionType,
-	float fieldOfView /*= (float)M_PI / 4.f*/,
-	float scaling /*= 0*/)
-	: leftPlane_(left)
-	, rightPlane_(right)
-	, bottomPlane_(bottom)
-	, topPlane_(top)
-	, nearPlane_(near)
-	, farPlane_(far)
-	, projectionType_(projectionType)
-	, fieldOfView_(fieldOfView)
-	, scaling_(scaling) {
+                             float right,
+                             float bottom,
+                             float top,
+                             float near,
+                             float far,
+                             eProjectionType projectionType,
+                             float fieldOfView /*= (float)M_PI / 4.f*/,
+                             float scaling /*= 0*/)
+    : leftPlane_(left)
+    , rightPlane_(right)
+    , bottomPlane_(bottom)
+    , topPlane_(top)
+    , nearPlane_(near)
+    , farPlane_(far)
+    , projectionType_(projectionType)
+    , fieldOfView_(fieldOfView)
+    , scaling_(scaling) {
 }
 
 CameraFrustum::CameraFrustum(float width, float height, float near, float far, eProjectionType projectionType, float fieldOfView /*= (float)M_PI / 4.f*/, float scaling /*= 0*/)
-	: leftPlane_(-width / 2.f)
-	, rightPlane_(width / 2.f)
-	, bottomPlane_(-height / 2.f)
-	, topPlane_(height / 2.f)
-	, nearPlane_(near)
-	, farPlane_(far)
-	, projectionType_(projectionType)
-	, fieldOfView_(fieldOfView)
-	, scaling_(scaling) {
+    : leftPlane_(-width / 2.f)
+    , rightPlane_(width / 2.f)
+    , bottomPlane_(-height / 2.f)
+    , topPlane_(height / 2.f)
+    , nearPlane_(near)
+    , farPlane_(far)
+    , projectionType_(projectionType)
+    , fieldOfView_(fieldOfView)
+    , scaling_(scaling) {
 }
 
 float CameraFrustum::width() const {
@@ -475,19 +465,11 @@ buw::Matrix44f CameraFrustum::projectionMatrix() const {
 	}
 }
 
-CameraController::CameraController() :
-	state_(eState::Orbiting),
-	bInterpolating_(false),
-	moveDirection_(0, 0, 0),
-	velocity_(5) {
+CameraController::CameraController() : state_(eState::Orbiting), bInterpolating_(false), moveDirection_(0, 0, 0), velocity_(5) {
 	camera_ = buw::makeReferenceCounted<Camera>();
 }
-CameraController::CameraController(buw::ReferenceCounted<Camera> camera) :
-	camera_(camera),
-	state_(eState::Orbiting),
-	bInterpolating_(false),
-	moveDirection_(0, 0, 0),
-	velocity_(5) {
+CameraController::CameraController(buw::ReferenceCounted<Camera> camera)
+    : camera_(camera), state_(eState::Orbiting), bInterpolating_(false), moveDirection_(0, 0, 0), velocity_(5) {
 }
 
 void CameraController::setState(eState state) {
@@ -500,8 +482,7 @@ void CameraController::setState(eState state) {
 	state_ = state;
 }
 
-CameraController::eState CameraController::getState()
-{
+CameraController::eState CameraController::getState() {
 	return state_;
 }
 
@@ -512,12 +493,10 @@ void CameraController::tick(const float delta) {
 			camera_->transformation() = target_;
 			camera_->velocity() *= 0;
 			bInterpolating_ = false;
-        }
-        else {
-            startInterpolation(std::max(duration_ - delta, delta), target_);
-        }
-	}
-	else {
+		} else {
+			startInterpolation(std::max(duration_ - delta, delta), target_);
+		}
+	} else {
 		buw::Vector3f vel(0, 0, 0);
 		if (velocity_ > 0 && moveDirection_.norm() > 0)
 			vel = moveDirection_.normalized() * velocity_;
@@ -533,6 +512,18 @@ void CameraController::setViewDirection(const buw::Vector3f &dir) {
 	startInterpolation(0.5f, target);
 }
 
+buw::Vector3f CameraController::getViewDirectionVector(const buw::eViewDirection &direction) {
+	buw::Vector3f viewDirection;
+	viewDirection[1] = (direction & eViewDirection::Top) > 0 ? 1.0f : (direction & eViewDirection::Bottom) > 0 ? -1.0f : 0.0f;
+	viewDirection[2] = (direction & eViewDirection::Right) > 0 ? -1.0f : (direction & eViewDirection::Left) > 0 ? 1.0f : 0.0f;
+	viewDirection[0] = (direction & eViewDirection::Front) > 0 ? 1.0f : (direction & eViewDirection::Back) > 0 ? -1.0f : 0.0f;
+	return viewDirection;
+}
+
+void CameraController::setViewDirection(const buw::eViewDirection &direction) {
+	setViewDirection(getViewDirectionVector(direction));
+}
+
 void CameraController::fitToView(const buw::Vector3f &min, const buw::Vector3f &max) {
 	CameraTransformation target = camera_->transformation();
 	target.fitToView(min, max, camera_->frustum().fieldOfView());
@@ -541,7 +532,7 @@ void CameraController::fitToView(const buw::Vector3f &min, const buw::Vector3f &
 	startInterpolation(1, target);
 }
 
-void CameraController::lookAt(const buw::Vector3f& target, const buw::Vector3f& origin) {
+void CameraController::lookAt(const buw::Vector3f &target, const buw::Vector3f &origin) {
 	CameraTransformation targetTransformation = camera_->transformation();
 	targetTransformation.lookAt(target, origin);
 
@@ -550,7 +541,7 @@ void CameraController::lookAt(const buw::Vector3f& target, const buw::Vector3f& 
 }
 
 void CameraController::startInterpolation(float duration, const CameraTransformation &target) {
-    duration_ = duration;
+	duration_ = duration;
 	target_ = target;
 	auto diff = target_ - camera_->transformation();
 
@@ -558,30 +549,22 @@ void CameraController::startInterpolation(float duration, const CameraTransforma
 	bInterpolating_ = true;
 }
 
-
 const std::map<CameraController::eKey, buw::Vector3f> key2MoveDirection = {
-	{ CameraController::eKey::MoveForward,	buw::Vector3f(0, 0, 1) },
-	{ CameraController::eKey::MoveBackward,	buw::Vector3f(0, 0, -1) },
-	{ CameraController::eKey::MoveRight,	buw::Vector3f(1, 0, 0) },
-	{ CameraController::eKey::MoveLeft,		buw::Vector3f(-1, 0, 0) },
-	{ CameraController::eKey::MoveUp,		buw::Vector3f(0, 1, 0) },
-	{ CameraController::eKey::MoveDown,		buw::Vector3f(0, -1, 0) },
+  {CameraController::eKey::MoveForward, buw::Vector3f(0, 0, 1)}, {CameraController::eKey::MoveBackward, buw::Vector3f(0, 0, -1)},
+  {CameraController::eKey::MoveRight, buw::Vector3f(1, 0, 0)},   {CameraController::eKey::MoveLeft, buw::Vector3f(-1, 0, 0)},
+  {CameraController::eKey::MoveUp, buw::Vector3f(0, 1, 0)},      {CameraController::eKey::MoveDown, buw::Vector3f(0, -1, 0)},
 };
 
 const std::map<CameraController::eKey, buw::Vector3f> key2ViewDirection = {
-	{ CameraController::eKey::ViewForward,	buw::Vector3f(0, 0, 1) },
-	{ CameraController::eKey::ViewBackward,	buw::Vector3f(0, 0, -1) },
-	{ CameraController::eKey::ViewRight,	buw::Vector3f(1, 0, 0) },
-	{ CameraController::eKey::ViewLeft,		buw::Vector3f(-1, 0, 0) },
-	{ CameraController::eKey::ViewUp,		buw::Vector3f(0, 1, 0) },
-	{ CameraController::eKey::ViewDown,		buw::Vector3f(0, -1, 0) },
+  {CameraController::eKey::ViewForward, buw::Vector3f(0, 0, 1)}, {CameraController::eKey::ViewBackward, buw::Vector3f(0, 0, -1)},
+  {CameraController::eKey::ViewRight, buw::Vector3f(1, 0, 0)},   {CameraController::eKey::ViewLeft, buw::Vector3f(-1, 0, 0)},
+  {CameraController::eKey::ViewUp, buw::Vector3f(0, 1, 0)},      {CameraController::eKey::ViewDown, buw::Vector3f(0, -1, 0)},
 };
 
 void CameraController::handleKeyDown(eKey key) {
 	if (state_ == eState::Free && key2MoveDirection.find(key) != key2MoveDirection.end()) {
 		moveDirection_ += key2MoveDirection.at(key);
-	}
-	else if (state_ == eState::Orbiting && key2ViewDirection.find(key) != key2ViewDirection.end()) {
+	} else if (state_ == eState::Orbiting && key2ViewDirection.find(key) != key2ViewDirection.end()) {
 		setViewDirection(key2ViewDirection.at(key));
 	}
 }
@@ -599,13 +582,11 @@ void CameraController::handleWheel(float factor) {
 		camera_->pullCameraOut(factor);
 }
 
-buw::ReferenceCounted<Camera> CameraController::getCamera()
-{
-    return camera_;
+buw::ReferenceCounted<Camera> CameraController::getCamera() {
+	return camera_;
 }
 
-const bool CameraController::isCameraMoving() const
-{
+const bool CameraController::isCameraMoving() const {
 	return camera_->velocity().length() > 0.0f;
 }
 
