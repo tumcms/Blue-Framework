@@ -80,7 +80,7 @@ struct CameraTransformation {
 
 	void setViewDirection(const buw::Vector3f &dir);
 	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max, float fieldOfView);
-	void lookAt(const buw::Vector3f &target, const buw::Vector3f& origin);
+	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin);
 
 private:
 	buw::Vector3f translation_;
@@ -101,13 +101,7 @@ public:
 	              eProjectionType projectionType,
 	              float fieldOfView = buw::constantsf::pi_over_4(),
 	              float scaling = 1);
-	CameraFrustum(float width, 
-				  float height, 
-				  float near, 
-				  float far, 
-				  eProjectionType projectionType, 
-				  float fieldOfView = buw::constantsf::pi_over_4(), 
-				  float scaling = 1);
+	CameraFrustum(float width, float height, float near, float far, eProjectionType projectionType, float fieldOfView = buw::constantsf::pi_over_4(), float scaling = 1);
 
 	float width() const;
 	float height() const;
@@ -171,11 +165,40 @@ public:
 
 	void setViewDirection(const buw::Vector3f &dir);
 	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max);
-	void lookAt(const buw::Vector3f &target, const buw::Vector3f& origin);
+	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin);
 
 private:
 	CameraTransformation transformation_, velocity_;
 	CameraFrustum frustum_;
+};
+
+enum eViewDirection : short {
+	Front = 0b00000001,
+	Back = 0b00000010,
+	Top = 0b00000100,
+	Bottom = 0b00001000,
+	Left = 0b00010000,
+	Right = 0b00100000,
+	TopLeftFront = Top | Front | Left,
+	TopFront = Top | Front,
+	TopFrontRight = Top | Front | Right,
+	FrontLeft = Front | Left,
+	FrontRight = Front | Right,
+	FrontLeftBottom = Front | Left | Bottom,
+	FrontBottom = Front | Bottom,
+	FrontRightBottom = Front | Right | Bottom,
+	TopRight = Top | Right,
+	TopRightBack = Top | Right | Back,
+	RightBack = Right | Back,
+	RightBottom = Right | Bottom,
+	RightBottomBack = Right | Back | Bottom,
+	TopBack = Top | Back,
+	TopLeftBack = Top | Back | Left,
+	BackLeft = Back | Left,
+	BackBottom = Back | Bottom,
+	BackLeftBottom = Back | Bottom | Left,
+	TopLeft = Top | Left,
+	LeftBottom = Bottom | Left
 };
 
 class CameraController {
@@ -194,8 +217,9 @@ public:
 	void tick(const float delta);
 
 	void setViewDirection(const buw::Vector3f &dir);
+
 	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max);
-	void lookAt(const buw::Vector3f &target, const buw::Vector3f& origin);
+	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin);
 
 	void handleKeyDown(eKey key);
 	void handleKeyUp(eKey key);
@@ -203,8 +227,10 @@ public:
 	void handleWheel(float delta);
 
 	buw::ReferenceCounted<Camera> getCamera();
-	
+
 	const bool isCameraMoving() const;
+
+	static buw::Vector3f getViewDirectionVector(const eViewDirection &direction);
 
 private:
 	void startInterpolation(float duration, const CameraTransformation &target);
@@ -228,5 +254,6 @@ BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(eProjectionType)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(CameraFrustum)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(Camera)
 BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(CameraController)
+BLUEFRAMEWORK_ENGINE_EMBED_INTO_BUW_NAMESPACE(eViewDirection)
 
 #endif // end define BlueFramework_Engine_Camera_314cb89d_4dfa_43ee_9443_912135e20ac5_h
