@@ -277,21 +277,24 @@ void D3D11RenderSystem::downloadTexture(buw::ReferenceCounted<buw::ITexture2D> i
 		region.back = 1;
 
 		bool copyAll = itexture->width() == dest.getWidth() && itexture->height() == dest.getHeight() && x == 0 && y == 0;
-		if (!getMSAAEnabled()) {
-			deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, tex.Get(), 0, !copyAll ? &region : nullptr);
+		if (texture->isMultisampled()) {
+			if (getMSAAEnabled()) {
+				const ComPtr<ID3D11Texture2D> msaaStaging = texture->getMSAAStagingTexture();
+
+				deviceContext_->ResolveSubresource(msaaStaging.Get(), 0, tex.Get(), 0, texture_2d_desc.Format);
+				deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, msaaStaging.Get(), 0, !copyAll ? &region : nullptr);
+			} else {
+				BLUE_LOG(error) << "Invalid state: Multisampled texture while MSAA is disabled.";
+			}
 		} else {
-			const ComPtr<ID3D11Texture2D> msaaStaging = texture->getMSAAStagingTexture();
-			
-			deviceContext_->ResolveSubresource(msaaStaging.Get(), 0, tex.Get(), 0, texture_2d_desc.Format);
-			deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, msaaStaging.Get(), 0, !copyAll ? &region : nullptr);
+			deviceContext_->CopySubresourceRegion(staging.Get(), 0, x, y, 0, tex.Get(), 0, !copyAll ? &region : nullptr);
 		}
 
 		D3D11_MAPPED_SUBRESOURCE sub;
 		const auto result = deviceContext_->Map(staging.Get(), 0, D3D11_MAP_READ, 0, &sub);
-		if(FAILED(result)) {
+		if (FAILED(result)) {
 			BLUE_LOG(error) << "Mapping subresource failed. HRESULT: " << getHRESULTErrorText(result);
 		}
-		
 
 		for (int row = 0; row < dest.getHeight(); row++) {
 			void* dst = dest.getData() + row * dest.getWidth();
