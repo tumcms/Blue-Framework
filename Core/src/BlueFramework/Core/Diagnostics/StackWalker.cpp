@@ -309,7 +309,7 @@ public:
           }
         }
 #elif _M_X64
-        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T("ProgramFiles"), szTemp, 4096) > 0) )
+        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T(L"ProgramFiles"), szTemp, 4096) > 0) )
         {
           _tcscat_s(szTemp, _T("\\Debugging Tools for Windows (x64)\\dbghelp.dll"));
           // now check if the file exists:
@@ -330,7 +330,7 @@ public:
         }
 #endif
         // If still not found, try the old directories...
-        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T("ProgramFiles"), szTemp, 4096) > 0) )
+        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T(L"ProgramFiles"), szTemp, 4096) > 0) )
         {
           _tcscat_s(szTemp, _T("\\Debugging Tools for Windows\\dbghelp.dll"));
           // now check if the file exists:
@@ -341,7 +341,7 @@ public:
         }
 #if defined _M_X64 || defined _M_IA64
         // Still not found? Then try to load the (old) 64-Bit version:
-        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T("ProgramFiles"), szTemp, 4096) > 0) )
+        if ( (m_hDbhHelp == NULL) && (GetEnvironmentVariable(_T(L"ProgramFiles"), szTemp, 4096) > 0) )
         {
           _tcscat_s(szTemp, _T("\\Debugging Tools for Windows 64-Bit\\dbghelp.dll"));
           if (GetFileAttributes(szTemp) != INVALID_FILE_ATTRIBUTES)
@@ -353,7 +353,7 @@ public:
       }
     }
     if (m_hDbhHelp == NULL)  // if not already loaded, try to load a default-one
-      m_hDbhHelp = LoadLibrary( _T("dbghelp.dll") );
+      m_hDbhHelp = LoadLibrary( _T(L"dbghelp.dll") );
     if (m_hDbhHelp == NULL)
       return FALSE;
     pSI = (tSI) GetProcAddress(m_hDbhHelp, "SymInitialize" );
@@ -556,8 +556,13 @@ private:
     typedef BOOL (__stdcall *tM32N)(HANDLE hSnapshot, LPMODULEENTRY32 lpme);
 
     // try both dlls...
-    const TCHAR *dllname[] = { _T("kernel32.dll"), _T("tlhelp32.dll") };
-    HINSTANCE hToolhelp = NULL;
+    #ifdef UNICODE
+	const TCHAR *dllname[] = {_T(L"kernel32.dll"), _T(L"tlhelp32.dll")};
+    #elif
+	const TCHAR *dllname[] = {_T("kernel32.dll"), _T("tlhelp32.dll")};
+    #endif
+
+	HINSTANCE hToolhelp = NULL;
     tCT32S pCT32S = NULL;
     tM32F pM32F = NULL;
     tM32N pM32N = NULL;
@@ -641,7 +646,7 @@ private:
     const SIZE_T TTBUFLEN = 8096;
     int cnt = 0;
 
-    hPsapi = LoadLibrary( _T("psapi.dll") );
+    hPsapi = LoadLibrary( _T(L"psapi.dll") );
     if (hPsapi == NULL)
       return FALSE;
 

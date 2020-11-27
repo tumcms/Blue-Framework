@@ -37,6 +37,9 @@ if(MSVC_VERSION EQUAL 1900)
 elseif(MSVC_VERSION GREATER_EQUAL 1910 AND MSVC_VERSION LESS_EQUAL 1919)
 	set(MSVC_VERSION_STRING "vs2017")
 	set(MSVC_VERSION_YEAR "2017")
+elseif(MSVC_VERSION GREATER_EQUAL 1920 AND MSVC_VERSION LESS_EQUAL 1930)
+	set(MSVC_VERSION_STRING "vs2019")
+	set(MSVC_VERSION_YEAR "2019")
 else()
 	message(${MSVC_VERSION})
 	message("Please switch to Visual Studio 14 2015 or Visual Studio 15 2017.")
@@ -81,7 +84,7 @@ else()
   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/MinSizeRel)
 endif()
 
-option(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH "Set to ON to set boost, Eigen and Qt path" ON)
+option(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH "Set to ON to set boost, Eigen and Qt path" OFF)
 
 if(BLUEFRAMEWORK_USE_PREDEFINED_THIRDPARTY_PATH)
     # Try to find Boost, Eigen3, Qt5 and other dependencies without user input
@@ -115,9 +118,9 @@ set(CMAKE_PDB_OUTPUT_DIRECTORY_MINSIZEREL       	${CMAKE_BINARY_DIR}/MinSizeRel)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 
-add_definitions(
-  -DEIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
-  -D_UNICODE # Unicode rules
+add_compile_definitions(
+  -D EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
+  -D UNICODE # Unicode rules
 )
 
 set(CMAKE_DEBUG_POSTFIX "d")
@@ -130,7 +133,7 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.65.1 COMPONENTS log signals system filesystem REQUIRED) # we suggest Boost 1.65.1
+find_package(Boost 1.74.0 COMPONENTS log system filesystem REQUIRED) # we suggest Boost 1.65.1
 
 FetchContent_Declare(
 	eigen
@@ -170,7 +173,7 @@ endif()
 # Qt library (do not switch to earlier versions... meow!)
 cmake_policy(SET CMP0020 NEW)
 
-find_package(Qt5 5.9.0 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
+find_package(Qt5 5.15.0 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
 
 if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
     get_target_property(_qt5_qmake_location Qt5::qmake IMPORTED_LOCATION)
