@@ -4,7 +4,9 @@ make.bat
 Tools/updateVersion.pyo
 build/*
 .vscode
+.vs
 external/log_install_*
 BlueFrameworkConfig.cmake
 BlueFrameworkConfigVersion.cmake
 out
+CMakeSettings.json
