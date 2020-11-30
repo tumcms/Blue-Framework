@@ -15,12 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
-
-#include "BlueFramework/Core/namespace.h"
-
 #pragma once
 #ifndef BlueFramework_Core_Math_util_6b3f6d1c_d23a_4641_b619_b13fbd3aa260_h
 #define BlueFramework_Core_Math_util_6b3f6d1c_d23a_4641_b619_b13fbd3aa260_h
+
+#include "BlueFramework/Core/namespace.h"
+
+#include <limits>
+#include <cmath>
 
 BLUEFRAMEWORK_CORE_MATH_NAMESPACE_BEGIN
 
