@@ -31,6 +31,13 @@ source_group(BlueFramework\\Core\\Math                       FILES ${BlueFramewo
 source_group(BlueFramework\\Core\\UtfConverter               FILES ${BlueFramework_Core_UtfConverter_Source})
 source_group(BlueFramework\\Core                             FILES ${BlueFramework_Core_Source})
 
+FetchContent_Declare(
+	jk_stackwalker
+	GIT_REPOSITORY https://github.com/JochenKalmbach/StackWalker
+	GIT_TAG 1.20
+)
+FetchContent_MakeAvailable(jk_stackwalker)
+
 add_library(BlueFramework.Core SHARED
 	${BlueFramework_Core_Diagnostics_IC_Source}
     ${BlueFramework_Core_Diagnostics_Source}
@@ -51,6 +58,7 @@ target_link_libraries(BlueFramework.Core
 		Boost::boost  
 		Boost::log
 		eigen
+		StackWalker
 )
 
 install(TARGETS BlueFramework.Core
