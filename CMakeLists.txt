@@ -19,7 +19,7 @@
 cmake_minimum_required(VERSION 3.14.3) # Kittens will die if you switch to an earlier version of CMake.
 cmake_policy(VERSION 3.14.3)
  
-project(BlueFramework)
+project(BlueFramework CXX)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake/)
 include(ProjectVersion)
@@ -40,6 +40,7 @@ elseif(MSVC_VERSION GREATER_EQUAL 1910 AND MSVC_VERSION LESS_EQUAL 1919)
 elseif(MSVC_VERSION GREATER_EQUAL 1920 AND MSVC_VERSION LESS_EQUAL 1930)
 	set(MSVC_VERSION_STRING "vs2019")
 	set(MSVC_VERSION_YEAR "2019")
+	set(CMAKE_CXX_STANDARD 20)
 else()
 	message(${MSVC_VERSION})
 	message("Please switch to Visual Studio 14 2015 or Visual Studio 15 2017.")
@@ -120,7 +121,7 @@ set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 
 add_compile_definitions(
   EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
-  UNICODE # Unicode rules
+  #UNICODE # Unicode rules
 )
 
 set(CMAKE_DEBUG_POSTFIX "d")
@@ -133,19 +134,19 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.74.0 COMPONENTS log system filesystem REQUIRED) # we suggest Boost 1.65.1
+find_package(Boost 1.73.0 COMPONENTS log system filesystem REQUIRED) # we suggest Boost 1.65.1
 
 FetchContent_Declare(
 	eigen
 	GIT_REPOSITORY https://github.com/eigenteam/eigen-git-mirror.git
 	GIT_TAG 3.3.7
 )
-  
-FetchContent_GetProperties(eigen)
-if(NOT eigen_POPULATED)
-	FetchContent_Populate(eigen)
-	add_subdirectory(${eigen_SOURCE_DIR} ${eigen_BINARY_DIR} EXCLUDE_FROM_ALL)
-endif()
+FetchContent_MakeAvailable(eigen)
+#FetchContent_GetProperties(eigen)
+#if(NOT eigen_POPULATED)
+#	FetchContent_Populate(eigen)
+#	add_subdirectory(${eigen_SOURCE_DIR} ${eigen_BINARY_DIR} EXCLUDE_FROM_ALL)
+#endif()
 
 
 #find_package(gtest COMPONENTS gtest gtest_main REQUIRED)

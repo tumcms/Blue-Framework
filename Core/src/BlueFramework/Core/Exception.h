@@ -26,7 +26,6 @@
 #define NOMINMAX
 #endif
 
-#include "BlueFramework/Core/Diagnostics/StackWalker.h"
 #include "BlueFramework/Core/assert.h"
 
 #pragma warning(push)
@@ -35,6 +34,7 @@
 #include "BlueFramework/Core/tinyformat.h"
 #pragma warning(pop)
 
+#include <StackWalker.h>
 #include <stdexcept>
 
 BLUEFRAMEWORK_CORE_NAMESPACE_BEGIN

@@ -50,6 +50,7 @@ target_include_directories(BlueFramework.Core
 	PUBLIC
 		${Boost_INCLUDE_DIR}
 		src
+		${jk_stackwalker_SOURCE_DIR}/Main/StackWalker
 )
 
 target_link_libraries(BlueFramework.Core
