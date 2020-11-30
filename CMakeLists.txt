@@ -119,8 +119,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 
 add_compile_definitions(
-  -D EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
-  -D UNICODE # Unicode rules
+  EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
+  UNICODE # Unicode rules
 )
 
 set(CMAKE_DEBUG_POSTFIX "d")

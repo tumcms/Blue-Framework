@@ -16,19 +16,21 @@
 #   along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-add_definitions(-DNOMINMAX)
-add_definitions(-DBLUEFRAMEWORK_EXPORT)
-
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
 # Unicode rules!
-add_definitions(-D_UNICODE -DQT_NO_KEYWORDS)
+add_compile_definitions(
+  NOMINMAX
+  BLUEFRAMEWORK_EXPORT
+  QT_NO_KEYWORDS
+)
+
 if (WIN32)
     # TODO: for now this only works on windows. Change BlueApplication.h to support GCC
-    add_definitions(-DBLUEAPPLICATION_EXPORT)
+    add_compile_definitions(BLUEAPPLICATION_EXPORT)
 endif(WIN32)
 
 file(GLOB BlueFramework_Application_Data_Source                            src/BlueFramework/Application/Data/*.*)
