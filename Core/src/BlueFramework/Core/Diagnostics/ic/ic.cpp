@@ -10,8 +10,14 @@
 
 #include "ic.hpp"
 
+#include <codecvt>
+#include <locale>
+
 namespace ic
 {
+	using convert_type = std::codecvt_utf8<wchar_t>;
+	auto converter = std::wstring_convert<convert_type, wchar_t>();
+
 	const COORD Console::origin = {0, 0};
 
 	Console::Console ()
@@ -312,14 +318,22 @@ namespace ic
 		const int MAX_TITLE_LEN = 64 * 1024; // 64K, see MSDN
 
 		WCHAR title [MAX_TITLE_LEN];
+#ifdef UNICODE
 		GetConsoleTitle(title, MAX_TITLE_LEN);
+#else
+		GetConsoleTitle(converter.to_bytes(title).data(), MAX_TITLE_LEN);
+#endif
 		
 		return title;
 	}
 
 	void Console::setTitle (const std::wstring& title)
 	{
+#ifdef UNICODE
 		SetConsoleTitle(title.c_str());
+#else
+		SetConsoleTitle(converter.to_bytes(title).c_str());
+#endif
 	}
 
 	CONSOLE_CURSOR_INFO Console::getCCI () const
