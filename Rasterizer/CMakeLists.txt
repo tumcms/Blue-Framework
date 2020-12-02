@@ -23,10 +23,16 @@ file(GLOB_RECURSE BlueFramework_Rasterizer_Headers				   src/BlueFramework/Raste
 source_group(BlueFramework\\Rasterizer\\Resources                  FILES ${BlueFramework_Rasterizer_Resources_Source})
 source_group(BlueFramework\\Rasterizer                             FILES ${BlueFramework_Rasterizer_Source})
 
+
 add_library(BlueFramework.Rasterizer SHARED
     ${BlueFramework_Rasterizer_Descriptions_Source}
     ${BlueFramework_Rasterizer_Resources_Source}
     ${BlueFramework_Rasterizer_Source}
+)
+
+target_compile_definitions(BlueFramework.Rasterizer
+	PUBLIC
+		UNICODE
 )
 
 target_include_directories(BlueFramework.Rasterizer
