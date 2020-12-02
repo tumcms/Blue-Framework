@@ -906,7 +906,7 @@ inline Color<T, N> clamp(const Color<T, N>& c, const T min, const T max) {
 	Color<T, N> col;
 
 	for (size_t i = 0; i < N; ++i)
-		col[i] = buw::clamp(c[i], min, max);
+		col[i] = clamp(c[i], min, max);
 
 	return col;
 }
