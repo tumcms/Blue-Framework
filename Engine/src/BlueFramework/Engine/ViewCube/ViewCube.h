@@ -92,8 +92,7 @@ public:
 
 		viewCubeDescription(){};
 
-        void saveToFile(QString filename);
-	};
+        void saveToFile(QString filename);	};
 
 	enum class eRegionType : int { Border = 0, Tile = 1, Center = 2 };
 
@@ -164,11 +163,12 @@ private:
 
 	const buw::Vector3f getViewDirection(eViewCubeOrientation orientation) const;
 
-	ViewCubeEffect::DescriptionBuffer convert(viewCubeDescription desc);
+	void updateEffectDescription(const viewCubeDescription& desc);
 
 private:
 	viewCubeDescription desc_;
 	ViewCubeEffect effect_;
+	ViewCubeEffect::DescriptionBuffer buffer_;
 	// static std::multimap<unsigned int, std::pair<buw::Vector2i, eViewCubeOrientation>>	mapping;
 	buw::ReferenceCounted<buw::CameraController> cameraController_;
 	boost::signals2::connection connection_;
