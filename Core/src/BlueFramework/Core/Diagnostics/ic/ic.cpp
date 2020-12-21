@@ -13,6 +13,8 @@
 #include <codecvt>
 #include <locale>
 
+#include <algorithm>
+
 namespace ic
 {
 	using convert_type = std::codecvt_utf8<wchar_t>;
