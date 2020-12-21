@@ -75,7 +75,7 @@ public:
 	bool isValid() const {
 		for (size_t i = 0; i < N; ++i) {
 			T value = comp_[i];
-			int cl = boost::math::fpclassify(value);
+			const int cl = boost::math::fpclassify(value);
 
 			if (value < 0 || cl == FP_INFINITE || cl == FP_NAN)
 				return false;
@@ -210,7 +210,8 @@ struct Color<T, 1> {
 //
 
 template <typename T>
-struct Color<T, 3> {
+class Color<T, 3> {
+public:
 	// Value type and number of components.
 	typedef T ValueType;
 	static const size_t Components = 3;
@@ -251,24 +252,20 @@ struct Color<T, 3> {
 	}
 
 	// other color spaces
-	double getAlpha() const {
+    static double getAlpha() {
 		return -1.0;
 	}
 
-	double getBeta() const {
+    static double getBeta() {
 		return -1.0;
 	}
 
-	double getHue() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-		double max = std::max(std::max(r, g), b);
-		double min = std::min(std::min(r, g), b);
+	double getHue() const {
+		const double r = red() / 255.0;
+		const double g = green() / 255.0;
+		const double b = blue() / 255.0;
+		const double max = std::max({r, g, b});
+		const double min = std::min({r, g, b});
 
 		if (max == min) {
 			return 0;
@@ -282,38 +279,22 @@ struct Color<T, 3> {
 	}
 
 	double getSaturation() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-		double max = std::max(std::max(r, g), b);
-		double min = std::min(std::min(r, g), b);
+		const double max = std::max({red(), green(), blue()}) / 255.0;
+		const double min = std::min({red(), green(), blue()}) / 255.0;
 
 		if (max == 0) {
 			return 0;
-		} else {
-			return (max - min) / max;
 		}
+		return (max - min) / max;
 	}
 
 	double getBrightness() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-
-		return std::max(std::max(r, g), b);
+		return std::max({red(), green(), blue()}) / 255.0;
 	}
 
 	// needed for conversion from XYZ to sRGB
 	// does not need to be accessible for the user
-	double gammaEncoding(double t) {
+	double gammaEncoding(double t) const {
 		if (t > 0.0031308) {
 			return 1.055 * pow(t, 1.0 / 2.4) - 0.055;
 		} else {
@@ -323,7 +304,7 @@ struct Color<T, 3> {
 
 	// needed for conversion from sRGB to XYZ
 	// does not need to be accessible for the user
-	double inverseGammaEncoding(double t) {
+	double inverseGammaEncoding(double t) const {
 		if (t > 0.04045) {
 			return pow((t + 0.055) / 1.055, 2.4);
 		} else {
@@ -333,43 +314,43 @@ struct Color<T, 3> {
 
 	// get the X-Value of XYZ from sRGB value
 	double getXYZ_X() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.4124564 * r + 0.3575761 * g + 0.1804375 * b;
 	}
 
 	// get the Y-Value of XYZ from sRGB value
 	double getXYZ_Y() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.2126729 * r + 0.7151522 * g + 0.0721750 * b;
 	}
 
 	// get the Z-Value of XYZ from sRGB value
 	double getXYZ_Z() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.0193339 * r + 0.1191920 * g + 0.9503041 * b;
 	}
 
 	// just a helper function that's needed for the L*ab-conversion
 	// needn't to be accessible for the user
-	double LAB_helperFunction(double t) {
+	double LAB_helperFunction(double t) const {
 		if (t > 0.008856) {
 			return pow(t, 1.0 / 3.0);
 		} else {
@@ -379,38 +360,25 @@ struct Color<T, 3> {
 
 	// get the L-value of L*ab from sRGB value
 	double getLAB_L() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double Y = getXYZ_Y(red, green, blue);
-		std::cout << Y << std::endl;
+		const double Y = getXYZ_Y();
 		return 116 * LAB_helperFunction(Y) - 16;
 	}
 
 	// get the a-value of L*ab from sRGB value
 	double getLAB_a(double x, double y) {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
 		const double Yn = 1;
 		const double Xn = x * (Yn / y);
-		double X = getXYZ_X(red, green, blue);
-		double Y = getXYZ_Y(red, green, blue);
+		const double X = getXYZ_X();
+		const double Y = getXYZ_Y();
 		return 500 * (LAB_helperFunction(X / Xn) - LAB_helperFunction(Y / Yn));
 	}
 
 	// get the b-value of L*ab from sRGB value
 	double getLAB_b(double x, double y) {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
 		const double Yn = 1;
 		const double Zn = (1 - x - y) * (Yn / y);
-		double Z = getXYZ_Z(red, green, blue);
-		double Y = getXYZ_Y(red, green, blue);
+		const double Z = getXYZ_Z();
+		const double Y = getXYZ_Y();
 		return 200 * (LAB_helperFunction(Y / Yn) - LAB_helperFunction(Z / Zn));
 	}
 
@@ -418,7 +386,7 @@ struct Color<T, 3> {
 	bool isValid() const {
 		for (int i = 0; i < 3; ++i) {
 			T value = (*this)[i];
-			int cl = boost::math::fpclassify(value);
+			const int cl = boost::math::fpclassify(value);
 
 			if (value < 0 || cl == FP_INFINITE || cl == FP_NAN)
 				return false;
@@ -441,7 +409,8 @@ struct Color<T, 3> {
 //
 
 template <typename T>
-struct Color<T, 4> {
+class Color<T, 4> {
+public:
 	// Value type and number of components.
 	typedef T ValueType;
 	static const size_t Components = 4;
@@ -453,7 +422,8 @@ struct Color<T, 4> {
 	Color();                              // leave all components uninitialized
 	explicit Color(const ValueType* rhs); // initialize with array of 4 scalars
 	explicit Color(const ValueType val);  // set all components to 'val'
-	Color(const Color<T, 3>& rgb, const ValueType a);
+	Color(const Color<T, 3>& rgb, const ValueType a) : r(rgb.r), g(rgb.g), b(rgb.b), a(a){};
+
 	Color( // set individual components
 	  const ValueType r,
 	  const ValueType g,
@@ -499,24 +469,24 @@ struct Color<T, 4> {
 	}
 
 	// other color spaces
-	double getAlpha() const {
+        static double getAlpha() {
 		return -1.0;
 	}
 
-	double getBeta() const {
+        static double getBeta() {
 		return -1.0;
 	}
 
 	double getHue() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-		double max = std::max(std::max(r, g), b);
-		double min = std::min(std::min(r, g), b);
+		const double r = static_cast<double>(red) / 255.0;
+		const double g = static_cast<double>(green) / 255.0;
+		const double b = static_cast<double>(blue) / 255.0;
+		const double max = std::max(std::max(r, g), b);
+		const double min = std::min(std::min(r, g), b);
 
 		if (max == min) {
 			return 0;
@@ -530,15 +500,15 @@ struct Color<T, 4> {
 	}
 
 	double getSaturation() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-		double max = std::max(std::max(r, g), b);
-		double min = std::min(std::min(r, g), b);
+		const double r = static_cast<double>(red) / 255;
+		const double g = static_cast<double>(green) / 255;
+		const double b = static_cast<double>(blue) / 255;
+		const double max = std::max(std::max(r, g), b);
+		const double min = std::min(std::min(r, g), b);
 
 		if (max == 0) {
 			return 0;
@@ -548,20 +518,12 @@ struct Color<T, 4> {
 	}
 
 	double getBrightness() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double r = (double)red / 255;
-		double g = (double)green / 255;
-		double b = (double)blue / 255;
-
-		return std::max(std::max(r, g), b);
+		return std::max({red(), green(), blue()}) / 255;
 	}
 
 	// needed for conversion from XYZ to sRGB
 	// does not need to be accessable for the user
-	double gammaEncoding(double t) {
+	double gammaEncoding(double t) const {
 		if (t > 0.0031308) {
 			return 1.055 * pow(t, 1.0 / 2.4) - 0.055;
 		} else {
@@ -571,7 +533,7 @@ struct Color<T, 4> {
 
 	// needed for conversion from sRGB to XYZ
 	// does not need to be accessable for the user
-	double inverseGammaEncoding(double t) {
+	double inverseGammaEncoding(double t) const {
 		if (t > 0.04045) {
 			return pow((t + 0.055) / 1.055, 2.4);
 		} else {
@@ -581,43 +543,43 @@ struct Color<T, 4> {
 
 	// get the X-Value of XYZ from sRGB value
 	double getXYZ_X() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.4124564 * r + 0.3575761 * g + 0.1804375 * b;
 	}
 
 	// get the Y-Value of XYZ from sRGB value
 	double getXYZ_Y() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.2126729 * r + 0.7151522 * g + 0.0721750 * b;
 	}
 
 	// get the Z-Value of XYZ from sRGB value
 	double getXYZ_Z() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
+		const int red = (*this)[0];
+		const int green = (*this)[1];
+		const int blue = (*this)[2];
 
-		double r = inverseGammaEncoding((double)red / 255);
-		double g = inverseGammaEncoding((double)green / 255);
-		double b = inverseGammaEncoding((double)blue / 255);
+		const double r = inverseGammaEncoding(static_cast<double>(red) / 255);
+		const double g = inverseGammaEncoding(static_cast<double>(green) / 255);
+		const double b = inverseGammaEncoding(static_cast<double>(blue) / 255);
 		return 0.0193339 * r + 0.1191920 * g + 0.9503041 * b;
 	}
 
 	// just a helper function that's needed for the L*ab-conversion
 	// needn't to be accessable for the user
-	double LAB_helperFunction(double t) {
+	double LAB_helperFunction(double t) const {
 		if (t > 0.008856) {
 			return pow(t, 1.0 / 3.0);
 		} else {
@@ -627,38 +589,25 @@ struct Color<T, 4> {
 
 	// get the L-value of L*ab from sRGB value
 	double getLAB_L() {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
-		double Y = getXYZ_Y(red, green, blue);
-		std::cout << Y << std::endl;
+		const double Y = getXYZ_Y();
 		return 116 * LAB_helperFunction(Y) - 16;
 	}
 
 	// get the a-value of L*ab from sRGB value
 	double getLAB_a(double x, double y) {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
 		const double Yn = 1;
 		const double Xn = x * (Yn / y);
-		double X = getXYZ_X(red, green, blue);
-		double Y = getXYZ_Y(red, green, blue);
+		const double X = getXYZ_X();
+		const double Y = getXYZ_Y();
 		return 500 * (LAB_helperFunction(X / Xn) - LAB_helperFunction(Y / Yn));
 	}
 
 	// get the b-value of L*ab from sRGB value
 	double getLAB_b(double x, double y) {
-		int red = (*this)[0];
-		int green = (*this)[1];
-		int blue = (*this)[2];
-
 		const double Yn = 1;
 		const double Zn = (1 - x - y) * (Yn / y);
-		double Z = getXYZ_Z(red, green, blue);
-		double Y = getXYZ_Y(red, green, blue);
+		const double Z = getXYZ_Z();
+		const double Y = getXYZ_Y();
 		return 200 * (LAB_helperFunction(Y / Yn) - LAB_helperFunction(Z / Zn));
 	}
 
@@ -1131,10 +1080,6 @@ inline Color<T, 4>::Color(const ValueType val) : r(val), g(val), b(val), a(val) 
 }
 
 template <typename T>
-inline Color<T, 4>::Color(const Color<T, 3>& rgb, const ValueType a_) : r(rgb.r), g(rgb.g), b(rgb.b), a(a_) {
-}
-
-template <typename T>
 inline Color<T, 4>::Color(const ValueType r_, const ValueType g_, const ValueType b_, const ValueType a_) : r(r_), g(g_), b(b_), a(a_) {
 }
 
@@ -1199,37 +1144,6 @@ inline std::ostream& operator<<(std::ostream& os, const Color<ElementType, Size>
 }
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_END
-
-//
-// Overload std::min() and std::max() for component-wise min/max operations on colors.
-//
-
-// namespace std
-//{
-//
-// template <typename T, size_t N>
-// inline foundation::Color<T, N> min(const foundation::Color<T, N>& lhs, const foundation::Color<T, N>& rhs)
-//{
-//    foundation::Color<T, N> col;
-//
-//    for (size_t i = 0; i < N; ++i)
-//        col[i] = min(lhs[i], rhs[i]);
-//
-//    return col;
-//}
-//
-// template <typename T, size_t N>
-// inline foundation::Color<T, N> max(const foundation::Color<T, N>& lhs, const foundation::Color<T, N>& rhs)
-//{
-//    foundation::Color<T, N> col;
-//
-//    for (size_t i = 0; i < N; ++i)
-//        col[i] = max(lhs[i], rhs[i]);
-//
-//    return col;
-//}
-//
-//}       // namespace std
 
 BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(Color)
 BLUE_BLUEFRAMEWORK_IMAGEPROCESSING_EMBED_INTO_BUW_NAMESPACE(Color1b)

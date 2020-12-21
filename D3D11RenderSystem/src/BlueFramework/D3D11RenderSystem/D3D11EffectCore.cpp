@@ -323,7 +323,8 @@ D3D11PipelineState::D3D11PipelineState(D3D11RenderSystem* renderSystem, const bu
 	rd.MultisampleEnable = renderSystem->getMSAAEnabled();
 	rd.AntialiasedLineEnable = false;
 
-	renderSystem_->getDevice()->CreateBlendState(&getD3D11BlendDesc(psd.blendStateDesc), &blendState_);
+	const auto blendStateDesc = getD3D11BlendDesc(psd.blendStateDesc);
+	renderSystem_->getDevice()->CreateBlendState(&blendStateDesc, &blendState_);
 	renderSystem_->getDevice()->CreateRasterizerState(&rd, rasterizerState_.GetAddressOf());
 }
 D3D11PipelineState::~D3D11PipelineState() {

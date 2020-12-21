@@ -38,6 +38,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(jk_stackwalker)
 
+FetchContent_Declare(
+	c42f_tinyformat
+	GIT_REPOSITORY https://github.com/c42f/tinyformat
+	GIT_TAG v2.3.0
+)
+FetchContent_MakeAvailable(c42f_tinyformat)
+
 add_library(BlueFramework.Core SHARED
 	${BlueFramework_Core_Diagnostics_IC_Source}
     ${BlueFramework_Core_Diagnostics_Source}
@@ -51,6 +58,7 @@ target_include_directories(BlueFramework.Core
 		${Boost_INCLUDE_DIR}
 		src
 		${jk_stackwalker_SOURCE_DIR}/Main/StackWalker
+		${c42f_tinyformat_SOURCE_DIR}
 )
 
 target_link_libraries(BlueFramework.Core

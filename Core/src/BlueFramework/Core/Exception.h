@@ -31,9 +31,9 @@
 #pragma warning(push)
 #pragma warning(disable : 4702)
 #pragma warning(disable : 4127)
-#include "BlueFramework/Core/tinyformat.h"
 #pragma warning(pop)
 
+#include <tinyformat.h>
 #include <StackWalker.h>
 #include <stdexcept>
 

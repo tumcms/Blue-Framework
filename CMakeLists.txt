@@ -121,6 +121,7 @@ set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 
 add_compile_definitions(
   EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
+  NOMINMAX
   #UNICODE # Unicode rules
 )
 
