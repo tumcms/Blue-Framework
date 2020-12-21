@@ -171,7 +171,7 @@ private:
 void runTexture1DUnitTest(const buw::eRenderAPI renderAPI)
 {
 	int argc = 1;
-	char* argv[] = { "Texture1D.exe" };
+	char* argv[] = { const_cast<char*>("Texture1D.exe") };
 	QApplication app(argc, argv);
 
 	buw::loadWebResources("Data/resources.xml");

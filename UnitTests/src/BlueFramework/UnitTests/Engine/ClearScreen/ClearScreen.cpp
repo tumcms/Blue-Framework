@@ -82,7 +82,7 @@ private:
 
 void runClearScreenUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = { "ClearScreen.exe" };
+	char* argv[] = {const_cast<char*>("ClearScreen.exe")};
 	QApplication app(argc, argv);
 
 	Viewport v(renderAPI);

@@ -234,7 +234,7 @@ private:
 
 void runPixelToasterUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = { "PixelToaster.exe" };
+	char* argv[] = {const_cast<char*>("PixelToaster.exe")};
 	QApplication app(argc, argv);
 
 	Viewport v(renderAPI);

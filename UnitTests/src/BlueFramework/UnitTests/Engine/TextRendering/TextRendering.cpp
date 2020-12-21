@@ -212,7 +212,7 @@ public:
 		lastTick_ = current;
 	}
 
-	void Viewport::updateWorldBuffer() {
+	void updateWorldBuffer() {
 		WorldBuffer world;
 		world.viewProjection = camera_->viewProjectionMatrix();
 		world.projection = camera_->frustum().projectionMatrix();
@@ -330,7 +330,7 @@ private:
 void runTextRenderingUnitTest(const buw::eRenderAPI renderAPI)
 {
 	int argc = 1;
-	char *argv[] = { "TextRenderingTest.exe" };
+	char *argv[] = {const_cast<char *>("TextRenderingTest.exe")};
 	QApplication app(argc, argv);
 
 	//buw::loadWebResources("Data/resources.xml");

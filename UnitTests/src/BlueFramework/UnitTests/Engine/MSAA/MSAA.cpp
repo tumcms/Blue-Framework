@@ -160,7 +160,7 @@ private:
 void runMSAAUnitTest(const buw::eRenderAPI renderAPI)
 {
 	int argc = 1;
-	char* argv[] = { "MSAA.exe" };
+	char* argv[] = {const_cast<char*>("MSAA.exe")};
 	QApplication app(argc, argv);
 
 	Viewport v(renderAPI);
