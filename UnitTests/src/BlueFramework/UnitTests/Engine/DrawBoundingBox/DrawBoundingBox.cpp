@@ -286,7 +286,7 @@ public:
 		renderSystem_->present();
 	}
 
-	void Viewport::updateWorldBuffer()
+	void updateWorldBuffer()
 	{
 		WorldBuffer world;
 		world.viewProjection = camera_->viewProjectionMatrix();
@@ -413,7 +413,7 @@ private:
 void runDrawBoundingBoxUnitTest(const buw::eRenderAPI renderAPI)
 {
 	int argc = 1;
-	char *argv[] = { "DrawBoundingBox.exe" };
+	char *argv[] = { const_cast<char*>("DrawBoundingBox.exe") };
 	QApplication app(argc, argv);
 		
 	BlueFramework::Core::initializeLogSystem(false, false);
