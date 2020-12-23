@@ -136,7 +136,7 @@ endif (WIN32)
 
 # remember the Kittens... do not switch to earlier versions...
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.73.0 COMPONENTS log system filesystem REQUIRED) # we suggest Boost 1.65.1
+find_package(Boost 1.75.0 COMPONENTS log system filesystem REQUIRED) # we suggest Boost 1.75.0
 
 FetchContent_Declare(
 	eigen
