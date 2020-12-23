@@ -37,6 +37,7 @@ if(MSVC_VERSION EQUAL 1900)
 elseif(MSVC_VERSION GREATER_EQUAL 1910 AND MSVC_VERSION LESS_EQUAL 1919)
 	set(MSVC_VERSION_STRING "vs2017")
 	set(MSVC_VERSION_YEAR "2017")
+	set(CMAKE_CXX_STANDARD 17)
 elseif(MSVC_VERSION GREATER_EQUAL 1920 AND MSVC_VERSION LESS_EQUAL 1930)
 	set(MSVC_VERSION_STRING "vs2019")
 	set(MSVC_VERSION_YEAR "2019")
@@ -167,15 +168,10 @@ endif()
 
 # find_package(Vulkan REQUIRED)
 
-# We suggest boost 1.64.0 - but 1.63.0 is also fine
-if(${Boost_MAJOR_VERSION} EQUAL 1 AND ${Boost_MINOR_VERSION} EQUAL 63 ) 
-    message("Please consider to switch to Boost 1.64.0 or newer")
-endif()
-
 # Qt library (do not switch to earlier versions... meow!)
 cmake_policy(SET CMP0020 NEW)
 
-find_package(Qt5 5.15.0 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
+find_package(Qt5 5.14.2 COMPONENTS Core Widgets Xml XmlPatterns REQUIRED)
 
 if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
     get_target_property(_qt5_qmake_location Qt5::qmake IMPORTED_LOCATION)

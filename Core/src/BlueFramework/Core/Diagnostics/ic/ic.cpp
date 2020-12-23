@@ -13,6 +13,10 @@
 #include <codecvt>
 #include <locale>
 
+#if _MSVC_LANG < 202000L
+#include <algorithm>
+#endif
+
 namespace ic
 {
 	using convert_type = std::codecvt_utf8<wchar_t>;
