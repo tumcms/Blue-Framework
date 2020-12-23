@@ -123,7 +123,7 @@ set_property(GLOBAL PROPERTY AUTOGEN_TARGETS_FOLDER AutoMoc)
 add_compile_definitions(
   EIGEN_MPL2_ONLY # Use only MP2 licenced code of Eigen
   NOMINMAX
-  #UNICODE # Unicode rules
+  _UNICODE # Unicode rules https://docs.microsoft.com/en-us/cpp/text/unicode-programming-summary?view=msvc-160
 )
 
 set(CMAKE_DEBUG_POSTFIX "d")

@@ -38,6 +38,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(jk_stackwalker)
 
+target_compile_definitions(StackWalker PUBLIC _UNICODE)
+
 FetchContent_Declare(
 	c42f_tinyformat
 	GIT_REPOSITORY https://github.com/c42f/tinyformat
