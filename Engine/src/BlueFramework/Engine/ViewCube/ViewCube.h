@@ -90,9 +90,10 @@ public:
 
 		std::string getFaceTexturePath(eFaceId face);
 
-		viewCubeDescription(){};
+		viewCubeDescription() = default;
 
-        void saveToFile(QString filename);	};
+        void saveToFile(QString filename);
+	};
 
 	enum class eRegionType : int { Border = 0, Tile = 1, Center = 2 };
 
