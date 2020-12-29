@@ -41,6 +41,8 @@
 #include <cstddef>
 #include <iostream>
 
+#include <BlueFramework/Core/Math/util.h>
+
 #include "BlueFramework/ImageProcessing/namespace.h"
 
 BLUEFRAMEWORK_IMAGEPROCESSING_NAMESPACE_BEGIN
@@ -282,7 +284,7 @@ public:
 		const double max = std::max({red(), green(), blue()}) / 255.0;
 		const double min = std::min({red(), green(), blue()}) / 255.0;
 
-		if (max == 0) {
+		if (buw::doubleEqual(max, 0.0)) {
 			return 0;
 		}
 		return (max - min) / max;
@@ -313,7 +315,7 @@ public:
 	}
 
 	// get the X-Value of XYZ from sRGB value
-	double getXYZ_X() {
+	double getXYZ_X() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -325,7 +327,7 @@ public:
 	}
 
 	// get the Y-Value of XYZ from sRGB value
-	double getXYZ_Y() {
+	double getXYZ_Y() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -337,7 +339,7 @@ public:
 	}
 
 	// get the Z-Value of XYZ from sRGB value
-	double getXYZ_Z() {
+	double getXYZ_Z() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -359,13 +361,13 @@ public:
 	}
 
 	// get the L-value of L*ab from sRGB value
-	double getLAB_L() {
+	double getLAB_L() const {
 		const double Y = getXYZ_Y();
 		return 116 * LAB_helperFunction(Y) - 16;
 	}
 
 	// get the a-value of L*ab from sRGB value
-	double getLAB_a(double x, double y) {
+	double getLAB_a(double x, double y) const {
 		const double Yn = 1;
 		const double Xn = x * (Yn / y);
 		const double X = getXYZ_X();
@@ -374,7 +376,7 @@ public:
 	}
 
 	// get the b-value of L*ab from sRGB value
-	double getLAB_b(double x, double y) {
+	double getLAB_b(double x, double y) const {
 		const double Yn = 1;
 		const double Zn = (1 - x - y) * (Yn / y);
 		const double Z = getXYZ_Z();
@@ -477,7 +479,7 @@ public:
 		return -1.0;
 	}
 
-	double getHue() {
+	double getHue() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -488,7 +490,7 @@ public:
 		const double max = std::max(std::max(r, g), b);
 		const double min = std::min(std::min(r, g), b);
 
-		if (max == min) {
+		if (buw::doubleEqual(max,min)) {
 			return 0;
 		} else if (max == r) {
 			return 60 * ((g - b) / (max - min));
@@ -499,7 +501,7 @@ public:
 		}
 	}
 
-	double getSaturation() {
+	double getSaturation() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -510,14 +512,14 @@ public:
 		const double max = std::max(std::max(r, g), b);
 		const double min = std::min(std::min(r, g), b);
 
-		if (max == 0) {
+		if (buw::doubleEqual(max, 0.0)) {
 			return 0;
 		} else {
 			return (max - min) / max;
 		}
 	}
 
-	double getBrightness() {
+	double getBrightness() const {
 		return std::max({red(), green(), blue()}) / 255;
 	}
 
@@ -542,7 +544,7 @@ public:
 	}
 
 	// get the X-Value of XYZ from sRGB value
-	double getXYZ_X() {
+	double getXYZ_X() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -554,7 +556,7 @@ public:
 	}
 
 	// get the Y-Value of XYZ from sRGB value
-	double getXYZ_Y() {
+	double getXYZ_Y() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -566,7 +568,7 @@ public:
 	}
 
 	// get the Z-Value of XYZ from sRGB value
-	double getXYZ_Z() {
+	double getXYZ_Z() const {
 		const int red = (*this)[0];
 		const int green = (*this)[1];
 		const int blue = (*this)[2];
@@ -588,13 +590,13 @@ public:
 	}
 
 	// get the L-value of L*ab from sRGB value
-	double getLAB_L() {
+	double getLAB_L() const {
 		const double Y = getXYZ_Y();
 		return 116 * LAB_helperFunction(Y) - 16;
 	}
 
 	// get the a-value of L*ab from sRGB value
-	double getLAB_a(double x, double y) {
+	double getLAB_a(const double x, const double y) const {
 		const double Yn = 1;
 		const double Xn = x * (Yn / y);
 		const double X = getXYZ_X();
@@ -603,7 +605,7 @@ public:
 	}
 
 	// get the b-value of L*ab from sRGB value
-	double getLAB_b(double x, double y) {
+	double getLAB_b(double x, double y) const {
 		const double Yn = 1;
 		const double Zn = (1 - x - y) * (Yn / y);
 		const double Z = getXYZ_Z();
