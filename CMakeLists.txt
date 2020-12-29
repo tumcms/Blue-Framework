@@ -144,15 +144,7 @@ FetchContent_Declare(
 	GIT_TAG 3.3.7
 )
 FetchContent_MakeAvailable(eigen)
-#FetchContent_GetProperties(eigen)
-#if(NOT eigen_POPULATED)
-#	FetchContent_Populate(eigen)
-#	add_subdirectory(${eigen_SOURCE_DIR} ${eigen_BINARY_DIR} EXCLUDE_FROM_ALL)
-#endif()
 
-
-#find_package(gtest COMPONENTS gtest gtest_main REQUIRED)
-#find_package(TinyXML2 REQUIRED)
 FetchContent_Declare(
 	tinyxml2
 	GIT_REPOSITORY https://github.com/leethomason/tinyxml2.git

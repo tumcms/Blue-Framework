@@ -30,11 +30,6 @@ add_library(BlueFramework.Rasterizer SHARED
     ${BlueFramework_Rasterizer_Source}
 )
 
-target_compile_definitions(BlueFramework.Rasterizer
-	PUBLIC
-		UNICODE
-)
-
 target_include_directories(BlueFramework.Rasterizer
 	PUBLIC
 		src

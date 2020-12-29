@@ -23,7 +23,6 @@ set(CMAKE_AUTOMOC ON)
 
 # Unicode rules!
 add_compile_definitions(
-  NOMINMAX
   BLUEFRAMEWORK_EXPORT
   QT_NO_KEYWORDS
 )
