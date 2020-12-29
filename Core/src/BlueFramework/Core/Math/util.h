@@ -124,6 +124,11 @@ double round(const double val, const int precision);
 
 double factorial(const int n);
 
+// see https://stackoverflow.com/questions/17333/what-is-the-most-effective-way-for-float-and-double-comparison
+inline bool doubleEqual(const double a, const double b, const double epsilon = DBL_EPSILON) {
+	return fabs(a - b) <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+}
+
 BLUEFRAMEWORK_CORE_MATH_NAMESPACE_END
 
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(radianf)
@@ -141,5 +146,6 @@ BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(degreeToRadian)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(radianToDegree)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(round)
 BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(factorial)
+BLUEFRAMEWORK_CORE_MATH_EMBED_INTO_BUW_NAMESPACE(doubleEqual)
 
 #endif // end define BlueFramework_Core_Math_util_6b3f6d1c_d23a_4641_b619_b13fbd3aa260_h
