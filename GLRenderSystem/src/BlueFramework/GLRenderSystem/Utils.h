@@ -37,7 +37,7 @@ void throwWithMessage(
 	std::string const& sstrMsg,
 	DWORD const nWinErrCode = ERROR_SUCCESS,
 	GLenum const nGLErrCode = GL_NO_ERROR,
-	GLenum const nGLEWErrCode = GLEW_OK) throw(...);
+    GLenum const nGLEWErrCode = GLEW_OK) noexcept(false);
 
 void glClearError();
 

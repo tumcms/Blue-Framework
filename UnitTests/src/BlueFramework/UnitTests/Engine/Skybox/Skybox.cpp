@@ -244,7 +244,7 @@ public:
 		return nullptr;
 	}
 
-	void Viewport::updateWorldBuffer() {
+	void updateWorldBuffer() {
 		WorldBuffer world;
 		world.viewProjection = camera_->viewProjectionMatrix();
 		world.projection = camera_->frustum().projectionMatrix();
@@ -291,7 +291,7 @@ private:
 
 void runSkyboxUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = {"Skybox.exe"};
+	char* argv[] = {const_cast<char*>("Skybox.exe")};
 	QApplication app(argc, argv);
 
 	buw::loadWebResources("Data/resources.xml");

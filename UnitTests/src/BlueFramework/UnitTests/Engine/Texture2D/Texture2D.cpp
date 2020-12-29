@@ -184,7 +184,7 @@ private:
 
 void runTexture2DUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = { "Texture2D.exe" };
+	char* argv[] = { const_cast<char*>("Texture2D.exe") };
 	QApplication app(argc, argv);
 
 	buw::loadWebResources("Data/resources.xml");

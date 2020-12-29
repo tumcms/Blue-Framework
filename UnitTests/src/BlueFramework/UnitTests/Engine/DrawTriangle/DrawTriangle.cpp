@@ -152,7 +152,7 @@ private:
 
 void runDrawTriangleUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = { "DrawTriangle.exe" };
+	char* argv[] = {const_cast<char*>("DrawTriangle.exe")};
 	QApplication app(argc, argv);
 
 	Viewport v(renderAPI);

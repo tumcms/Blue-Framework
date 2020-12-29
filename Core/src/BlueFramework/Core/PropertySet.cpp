@@ -142,6 +142,8 @@ struct determine_type : public boost::static_visitor<buw::ePropertyType> {
 	buw::ePropertyType operator()(const buw::Vector4d& /*value*/) const {
 		return ePropertyType::Vector4d;
 	}
+
+	determine_type() = default;
 };
 
 ePropertyType PropertySet::getPropertyType(const std::string& name) const {

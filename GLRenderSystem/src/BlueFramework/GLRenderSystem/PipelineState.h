@@ -37,7 +37,7 @@ class RenderSystem;
 class PipelineState : public buw::IPipelineState, public std::enable_shared_from_this<PipelineState>
 {
 public:
-	explicit PipelineState(RenderSystem* rs, buw::pipelineStateDescription const& psd) throw(...);
+	explicit PipelineState(RenderSystem* rs, buw::pipelineStateDescription const& psd) noexcept(false);
 	virtual ~PipelineState();
 
 	void setActive();

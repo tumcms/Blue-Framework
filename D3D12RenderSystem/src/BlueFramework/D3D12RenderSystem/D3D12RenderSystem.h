@@ -36,7 +36,9 @@
 #include "BlueFramework/D3D12RenderSystem/namespace.h"
 #include "BlueFramework/Rasterizer/IRenderSystem.h"
 #include "BlueFramework/ImageProcessing/Image.h"
+
 #include <list>
+#include <array>
 
 BLUEFRAMEWORK_D3D12RENDERSYSTEM_NAMESPACE_BEGIN
 

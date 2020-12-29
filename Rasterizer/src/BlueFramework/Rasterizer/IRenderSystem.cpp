@@ -22,7 +22,7 @@
 BLUEFRAMEWORK_RASTERIZER_NAMESPACE_BEGIN
 
 buw::ReferenceCounted<IRenderSystem> createRenderSystem(const buw::renderSystemDescription& rsd) {
-	wchar_t* filename = nullptr;
+	const wchar_t* filename = nullptr;
 
 	switch (rsd.renderAPI) {
 #ifdef _DEBUG

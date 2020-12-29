@@ -10,8 +10,18 @@
 
 #include "ic.hpp"
 
+#include <codecvt>
+#include <locale>
+
+#if _MSVC_LANG < 202000L
+#include <algorithm>
+#endif
+
 namespace ic
 {
+	using convert_type = std::codecvt_utf8<wchar_t>;
+	auto converter = std::wstring_convert<convert_type, wchar_t>();
+
 	const COORD Console::origin = {0, 0};
 
 	Console::Console ()
@@ -236,8 +246,8 @@ namespace ic
 	void Console::setWindowSize (int width, int height)
 	{
 		// Make sure the screen buffer is at least as large as the window
-		int newBufferWidth = max(width, getBufferWidth());
-		int newBufferHeight = max(height, getBufferHeight());
+		int newBufferWidth = std::max(width, getBufferWidth());
+		int newBufferHeight = std::max(height, getBufferHeight());
 		setBufferSizeNoModeCheck(newBufferWidth, newBufferHeight);
 
 		SMALL_RECT rect;
@@ -281,8 +291,8 @@ namespace ic
 
 		// Make sure to stay within the bounds of the screen buffer
 		SMALL_RECT rect;
-		rect.Bottom = static_cast<SHORT>(min(y + height, getBufferHeight()) - 1);
-		rect.Right = static_cast<SHORT>(min(x + width, getBufferWidth()) - 1);
+		rect.Bottom = static_cast<SHORT>(std::min(y + height, getBufferHeight()) - 1);
+		rect.Right = static_cast<SHORT>(std::min(x + width, getBufferWidth()) - 1);
 		rect.Left = static_cast<SHORT>(rect.Right - width + 1);
 		rect.Top = static_cast<SHORT>(rect.Bottom - height + 1);
 		SetConsoleWindowInfo(hConsoleOutput, TRUE, &rect);
@@ -312,14 +322,22 @@ namespace ic
 		const int MAX_TITLE_LEN = 64 * 1024; // 64K, see MSDN
 
 		WCHAR title [MAX_TITLE_LEN];
+#ifdef UNICODE
 		GetConsoleTitle(title, MAX_TITLE_LEN);
+#else
+		GetConsoleTitle(converter.to_bytes(title).data(), MAX_TITLE_LEN);
+#endif
 		
 		return title;
 	}
 
 	void Console::setTitle (const std::wstring& title)
 	{
+#ifdef UNICODE
 		SetConsoleTitle(title.c_str());
+#else
+		SetConsoleTitle(converter.to_bytes(title).c_str());
+#endif
 	}
 
 	CONSOLE_CURSOR_INFO Console::getCCI () const

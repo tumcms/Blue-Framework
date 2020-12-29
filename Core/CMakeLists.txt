@@ -31,6 +31,22 @@ source_group(BlueFramework\\Core\\Math                       FILES ${BlueFramewo
 source_group(BlueFramework\\Core\\UtfConverter               FILES ${BlueFramework_Core_UtfConverter_Source})
 source_group(BlueFramework\\Core                             FILES ${BlueFramework_Core_Source})
 
+FetchContent_Declare(
+	jk_stackwalker
+	GIT_REPOSITORY https://github.com/JochenKalmbach/StackWalker
+	GIT_TAG 1.20
+)
+FetchContent_MakeAvailable(jk_stackwalker)
+
+target_compile_definitions(StackWalker PUBLIC _UNICODE)
+
+FetchContent_Declare(
+	c42f_tinyformat
+	GIT_REPOSITORY https://github.com/c42f/tinyformat
+	GIT_TAG v2.3.0
+)
+FetchContent_MakeAvailable(c42f_tinyformat)
+
 add_library(BlueFramework.Core SHARED
 	${BlueFramework_Core_Diagnostics_IC_Source}
     ${BlueFramework_Core_Diagnostics_Source}
@@ -43,6 +59,8 @@ target_include_directories(BlueFramework.Core
 	PUBLIC
 		${Boost_INCLUDE_DIR}
 		src
+		${jk_stackwalker_SOURCE_DIR}/Main/StackWalker
+		${c42f_tinyformat_SOURCE_DIR}
 )
 
 target_link_libraries(BlueFramework.Core
@@ -51,6 +69,7 @@ target_link_libraries(BlueFramework.Core
 		Boost::boost  
 		Boost::log
 		eigen
+		StackWalker
 )
 
 install(TARGETS BlueFramework.Core

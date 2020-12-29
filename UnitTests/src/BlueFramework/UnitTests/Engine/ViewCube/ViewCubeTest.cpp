@@ -179,7 +179,7 @@ public:
 		lastTick_ = current;
 	}
 
-	void Viewport::updateWorldBuffer() {
+	void updateWorldBuffer() {
 		WorldBuffer world;
 		world.viewProjection = camera_->viewProjectionMatrix();
 		world.projection = camera_->frustum().projectionMatrix();
@@ -317,7 +317,7 @@ private:
 void runViewCubeUnitTest(const buw::eRenderAPI renderAPI)
 {
 	int argc = 1;
-	char *argv[] = { "ViewCube.exe" };
+	char *argv[] = {const_cast<char *> ("ViewCube.exe")};
 	QApplication app(argc, argv);
 
 	buw::loadWebResources("Data/resources.xml");

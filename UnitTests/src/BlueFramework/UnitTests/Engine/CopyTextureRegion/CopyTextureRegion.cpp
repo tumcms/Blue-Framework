@@ -261,7 +261,7 @@ private:
 
 void runCopyTextureRegionUnitTest(const buw::eRenderAPI renderAPI) {
 	int argc = 1;
-	char* argv[] = { "CopyTextureRegion.exe" };
+	char* argv[] = { const_cast<char*>("CopyTextureRegion.exe") };
 	BlueFramework::Core::initializeLogSystem(false, true);
 
 	QApplication app(argc, argv);

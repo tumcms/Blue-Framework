@@ -136,30 +136,35 @@ void BlueFramework::Engine::ViewCube::setPickIdBuffer(buw::ReferenceCounted<buw:
 void BlueFramework::Engine::ViewCube::updateBorderColor(const QColor & color)
 {
 	desc_.bindingColor = buw::Vector3f(color.redF(), color.greenF(), color.blueF()).cast<float>();
-	effect_.updateDescriptionBuffer(convert(desc_));
+	updateEffectDescription(desc_);
+	effect_.updateDescriptionBuffer(buffer_);
 }
 
 void BlueFramework::Engine::ViewCube::updateTextColor(const QColor & color)
 {
 	desc_.textColor = buw::Vector3f(color.redF(), color.greenF(), color.blueF()).cast<float>();
-	effect_.updateDescriptionBuffer(convert(desc_));
+	updateEffectDescription(desc_);
+	effect_.updateDescriptionBuffer(buffer_);
 }
 
 void BlueFramework::Engine::ViewCube::updateHighlightColor(const QColor & color)
 {
 	desc_.highlightColor = buw::Vector3f(color.redF(), color.greenF(), color.blueF()).cast<float>();
-	effect_.updateDescriptionBuffer(convert(desc_));
+	updateEffectDescription(desc_);
+	effect_.updateDescriptionBuffer(buffer_);
 }
 
 void BlueFramework::Engine::ViewCube::updateSize(const float & size)
 {
 	desc_.size = size;
-	effect_.updateDescriptionBuffer(convert(desc_));
+	updateEffectDescription(desc_);
+	effect_.updateDescriptionBuffer(buffer_);
 }
 
 void BlueFramework::Engine::ViewCube::updateFaceColor(const QColor &color) {
 	desc_.faceColor = buw::Vector3f(color.redF(), color.greenF(), color.blueF()).cast<float>();
-	effect_.updateDescriptionBuffer(convert(desc_));
+	updateEffectDescription(desc_);
+	effect_.updateDescriptionBuffer(buffer_);
 }
 
 buw::Vector3f mapToColor(QString from) {
@@ -394,6 +399,7 @@ void BlueFramework::Engine::ViewCube::viewCubeDescription::saveToFile(QString fi
 	ofstream.close();
 }
 
+
 Description readDescription(QJsonObject from) {
 	Description desc;
 
@@ -459,16 +465,17 @@ void BlueFramework::Engine::ViewCube::setDescription(Description desc) {
 	effect_.createCompassBuffers(vertices_compass, indices_compass);
 
 	/*Pass the description on to the effect for rendering.*/
-	ViewCubeEffect::DescriptionBuffer buffer;
+	/*ViewCubeEffect::DescriptionBuffer buffer;
 	buffer.size[0] = desc_.size;
 	buffer.bindingColor = desc_.bindingColor;
 	buffer.faceColor = desc_.faceColor;
 	buffer.highlightColor = desc_.highlightColor;
 	buffer.selectedId = 0;
 	buffer.textColor = desc_.textColor;
-	buffer.textureRange = desc_.outerBoundWidth + desc_.innerBoundHeight + 2.0f * desc_.innerBoundWidth;
+	buffer.textureRange = desc_.outerBoundWidth + desc_.innerBoundHeight + 2.0f * desc_.innerBoundWidth;*/
+	updateEffectDescription(desc_);
 
-	effect_.updateDescriptionBuffer(convert(desc_));
+	effect_.updateDescriptionBuffer(buffer_);
 
 	/*Iterate over all faces and load the corresponding textures from the files specified in the description.*/
 	for(int face = 0; face < 6; ++face) {
@@ -531,16 +538,14 @@ const buw::Vector3f BlueFramework::Engine::ViewCube::getViewDirection(eViewCubeO
 }
 
 /*Convert description from format used by ViewCube class to the one used by ViewCubeEffect.*/
-BlueFramework::Engine::ViewCubeEffect::DescriptionBuffer BlueFramework::Engine::ViewCube::convert(Description desc) {
-	ViewCubeEffect::DescriptionBuffer buffer;
-	buffer.size[0] = desc.size;
-	buffer.bindingColor = desc.bindingColor;
-	buffer.faceColor = desc.faceColor;
-	buffer.highlightColor = desc.highlightColor;
-	buffer.selectedId = effect_.getLastPickId();
-	buffer.textColor = desc.textColor;
-	buffer.textureRange = desc.outerBoundWidth + desc.innerBoundHeight + 2.0f * desc.innerBoundWidth;
-	return buffer;
+void BlueFramework::Engine::ViewCube::updateEffectDescription(const Description& desc) {
+	buffer_.size[0] = desc.size;
+	buffer_.bindingColor = desc.bindingColor;
+	buffer_.faceColor = desc.faceColor;
+	buffer_.highlightColor = desc.highlightColor;
+	buffer_.selectedId = effect_.getLastPickId();
+	buffer_.textColor = desc.textColor;
+	buffer_.textureRange = desc.outerBoundWidth + desc.innerBoundHeight + 2.0f * desc.innerBoundWidth;
 }
 
 /*Load a description from file.*/
