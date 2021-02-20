@@ -217,9 +217,10 @@ public:
 	void tick(const float delta);
 
 	void setViewDirection(const buw::Vector3f &dir);
+	void setViewDirection(const buw::Vector3f &dir, const float duration);
 
-	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max);
-	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin);
+	void fitToView(const buw::Vector3f &min, const buw::Vector3f &max, const float duration = 1.0f);
+	void lookAt(const buw::Vector3f &target, const buw::Vector3f &origin, const float duration = 1.0f);
 
 	void handleKeyDown(eKey key);
 	void handleKeyUp(eKey key);
