@@ -506,10 +506,14 @@ void CameraController::tick(const float delta) {
 }
 
 void CameraController::setViewDirection(const buw::Vector3f &dir) {
+	setViewDirection(dir, 0.5f);
+}
+
+void CameraController::setViewDirection(const buw::Vector3f &dir, const float duration) {
 	auto target = camera_->transformation();
 	target.setViewDirection(dir);
 
-	startInterpolation(0.5f, target);
+	startInterpolation(duration, target);
 }
 
 buw::Vector3f CameraController::getViewDirectionVector(const buw::eViewDirection &direction) {
@@ -521,20 +525,20 @@ buw::Vector3f CameraController::getViewDirectionVector(const buw::eViewDirection
 }
 
 
-void CameraController::fitToView(const buw::Vector3f &min, const buw::Vector3f &max) {
+void CameraController::fitToView(const buw::Vector3f &min, const buw::Vector3f &max, const float duration /*= 1.0f*/) {
 	CameraTransformation target = camera_->transformation();
 	target.fitToView(min, max, camera_->frustum().fieldOfView());
 
 	state_ = eState::Orbiting;
-	startInterpolation(1, target);
+	startInterpolation(duration, target);
 }
 
-void CameraController::lookAt(const buw::Vector3f &target, const buw::Vector3f &origin) {
+void CameraController::lookAt(const buw::Vector3f &target, const buw::Vector3f &origin, const float duration /*= 1.0f*/) {
 	CameraTransformation targetTransformation = camera_->transformation();
 	targetTransformation.lookAt(target, origin);
 
 	state_ = eState::Orbiting;
-	startInterpolation(1, targetTransformation);
+	startInterpolation(duration, targetTransformation);
 }
 
 void CameraController::startInterpolation(float duration, const CameraTransformation &target) {
