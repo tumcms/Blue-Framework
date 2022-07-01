@@ -1,7 +1,7 @@
 #
 #   This file is part of BlueFramework, a simple 3D engine.
-#	Copyright (c) 2019 Technical University of Munich
-#	Chair of Computational Modeling and Simulation.
+#	  Copyright (c) 2019 Technical University of Munich
+#	  Chair of Computational Modeling and Simulation.
 #   
 #   BlueFramework is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License Version 3
