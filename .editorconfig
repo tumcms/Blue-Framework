@@ -1,7 +1,7 @@
 #
 #   This file is part of BlueFramework, a simple 3D engine.
 #   Copyright (c) 2023 Technical University of Munich
-#   Chair of Computational Modeling and Simulation.
+#	Chair of Computational Modeling and Simulation.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -16,4 +16,8 @@
 #   limitations under the License.
 #
 
-CreateEngineUnitTest("Skybox")
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
